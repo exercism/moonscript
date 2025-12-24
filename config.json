@@ -64,6 +64,14 @@
         "difficulty": 2
       },
       {
+        "slug": "difference-of-squares",
+        "name": "Difference of Squares",
+        "uuid": "fe0d1922-3f7e-4fe6-baba-c5a8a495a3c7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "eliuds-eggs",
         "name": "Eliud's Eggs",
         "uuid": "3c321816-b49c-45bd-a52d-f0b4e1f289b7",

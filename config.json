@@ -174,6 +174,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 2
+      },
+      {
+        "slug": "two-fer",
+        "name": "Two-Fer",
+        "uuid": "677295c3-9ee4-418d-89cb-f8f016228062",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
       }
     ]
   },

@@ -1,0 +1,4 @@
+{
+  label: (...) ->
+    error 'Implement me'
+}

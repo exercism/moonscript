@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "armstrong_numbers.moon"
+    ],
+    "test": [
+      "armstrong_numbers_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Determine if a number is an Armstrong number.",
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Narcissistic_number"
+}

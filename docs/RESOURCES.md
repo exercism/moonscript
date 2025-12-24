@@ -1,13 +1,22 @@
-# Resources
+# MoonScript Resources
 
-<!-- TODO: write document
+* [Official MoonScript Language Guide][guide]:
+    The definitive resource for learning the language, covering its syntax and features in detail.
+    It's best if you have some basic Lua familiarity.
 
-  This document should link to useful resources.
+* [Learn MoonScript in Y Minutes][xiny]:
+    For a quick, high-level introduction to the language's core features.
 
-  Feel free to link to any good resources you know, whether they
-  be websites, videos, mailing lists, etc.
+* MoonScript [Online Compiler][onlin]:
+    Allows you to experiment with MoonScript code directly in your browser without any installation.
 
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/resources`.
+* [GitHub Repository][github]:
+    The source code and community hub for MoonScript.
 
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+If MoonScript intrigues you, you might want to follow up with [YueScript][yuescript] which is based on MoonScript and extends it.
+
+[guide]: https://moonscript.org/
+[xiny]: https://learnxinyminutes.com/docs/moonscript/
+[online]: https://moonscript.org/compiler/
+[github]: https://github.com/leafo/moonscript
+[yuescript]: https://yuescript.org

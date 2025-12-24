@@ -1,13 +1,10 @@
-# Learning
+# How to Learn MoonScript
 
-<!-- TODO: write document
+Read [An Overview of MoonScript][leafo] by Leafo, MoonScript's creator.
+This is a great starting point if you're new to both MoonScript and Lua, explaining fundamental concepts.
 
-  This document should link to learning resources.
+The primary spot for Learning Resources is [the MoonScript website][learn].
+It assumes you are already familiar with Lua.
 
-  Feel free to link to any good learning resources you know, whether they
-  be websites, blogs, books, videos or courses.
-
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/learning`.
-
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+[leafo]: https://leafo.net/posts/An_overview_of_MoonScript.html
+[learn]: https://moonscript.org/#learning

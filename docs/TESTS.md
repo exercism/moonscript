@@ -1,15 +1,27 @@
-# Tests
+# Testing on the MoonScript Track
 
-<!-- TODO: write document
+Testing on the MoonScript track is exactly like [testing on the Lua track][lua-tests].
+From an exercise directory, enter:
 
-  This document should describe everything related to running tests in the track.
+```console
+$ busted
+```
 
-  If your track uses skipped tests, this document can explain why thet is used and
-  how to unskip tests.
+## Pending tests
 
-  This document can also link to the testing framework documentation.
+This track follows Exercism's [Test-Driven Development][tdd] methodology.
+You are given a complete test suite, but only the first test is "active".
 
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/tests`.
+To enable the tests, change a test's command from `pending` to `it`.
 
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+For those of you that like to run all the tests all the time, you can use a command-line tool to change them all at once.
+Here's an example using perl (which is installed just about everywhere):
+
+```console
+$ perl -i -pe 's/^\s+\Kpending\b/it/' two_fer_spec.moon
+```
+
+When you are working in the online editor, the test runner will automatically run all the tests.
+
+[lua-tests]: https://exercism.org/docs/tracks/lua/tests
+[tdd]: https://exercism.org/docs/using/solving-exercises/tdd

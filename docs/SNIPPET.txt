@@ -1,1 +1,5 @@
-TODO: add snippet
+class Greet
+  new: (@who) =>
+  __tostring: => "Hello, #{@who}!"
+
+print Greet thing for thing in *{'Me', 'You', 'World'}

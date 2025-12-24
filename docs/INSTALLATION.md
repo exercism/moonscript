@@ -1,15 +1,11 @@
-# Installation
+# Installing MoonScript
 
-<!-- TODO: write document
+First, follow the installation instructions on [the Lua track][lua-install] to install Lua and busted.
 
-  This document should describe what the student needs to install
-  to allow working on the track on their local system using the CLI.
+Then, install MoonScript with
 
-  You can include the installation instructions in this document, but
-  usually it is better to link to a resource with the official installation
-  instructions, to prevent the instructions from becoming outdated.
+```console
+$ luarocks install --local moonscript
+```
 
-  The contents of this document are displayed on the track's documentation
-  page at `https://exercism.org/docs/tracks/<track>/installation`.
-
-  See https://exercism.org/docs/building/tracks/docs for more information. -->
+[lua-install]: https://exercism.org/docs/tracks/lua/installation

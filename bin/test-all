@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+start=$SECONDS
+
+unset CDPATH
+
+script_dir=$(realpath "$(dirname "$0")")
+
+cd "${script_dir}/../exercises/practice" || exit 4
+result=0
+count=0
+
+for exercise in *; do
+    [[ -d $exercise ]] || continue
+
+    "$script_dir"/test-one "$exercise" || (( ++result ))
+    (( ++count ))
+done
+
+echo
+echo "$count exercises tested in $(( SECONDS - start )) seconds."
+
+exit $result

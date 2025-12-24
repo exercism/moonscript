@@ -20,7 +20,7 @@ help_and_exit() {
     echo >&2 "Scaffold the files for a new practice exercise."
     echo >&2 "Usage: ${scriptname} [-h] [-a author] [-d difficulty] <exercise-slug>"
     echo >&2 "Where: author is the GitHub username of the exercise creator."
-    echo >&2 "Where: difficulty is between 1 (easiest) to 10 (hardest)."
+    echo >&2 "     : difficulty is between 1 (easiest) to 10 (hardest)."
     exit 1
 }
 
@@ -37,6 +37,7 @@ require_files_template() {
 }
 
 required_tool jq
+required_tool curl
 
 require_files_template "solution"
 require_files_template "test"
@@ -45,7 +46,7 @@ require_files_template "example"
 [[ -f ./bin/fetch-configlet ]] || die "Run this script from the repo's root directory."
 
 author=''
-difficulty='1'
+difficulty='4'
 while getopts :ha:d: opt; do
     case $opt in
         h) help_and_exit ;;
@@ -59,6 +60,7 @@ shift "$((OPTIND - 1))"
 (( $# >= 1 )) || help_and_exit
 
 slug="${1}"
+snake_slug=${1//-/_}
 
 if [[ -z "${author}" ]]; then
     read -rp 'Your GitHub username: ' author
@@ -67,18 +69,71 @@ fi
 ./bin/fetch-configlet
 ./bin/configlet create --practice-exercise "${slug}" --author "${author}" --difficulty "${difficulty}"
 
+filter='.exercises.practice |= sort_by(.difficulty, (.name|ascii_upcase))'
+jq "${filter}" config.json > config.sorted && mv config.sorted config.json
+
 exercise_dir="exercises/practice/${slug}"
-files=$(jq -r --arg dir "${exercise_dir}" '.files | to_entries | map({key: .key, value: (.value | map("'"'"'" + $dir + "/" + . + "'"'"'") | join(" and "))}) | from_entries' "${exercise_dir}/.meta/config.json")
+files=$(
+    jq -r --arg dir "${exercise_dir}" --arg q "'" '
+        .files
+        | to_entries
+        | map({key: .key, value: (.value | map($q + $dir + "/" + . + $q) | join(" and "))})
+        | from_entries
+    ' "${exercise_dir}/.meta/config.json"
+)
+
+cp exercises/practice/hello-world/.busted "exercises/practice/${slug}/.busted"
+
+mkdir -p canonical-data
+github="https://raw.githubusercontent.com/exercism/problem-specifications/refs/heads/main/exercises/${slug}/canonical-data.json"
+
+curl -s -o "canonical-data/${slug}.json" "$github"
+
+
+camel_slug=$(perl -pe 's/(?:^|-)([a-z])/\u$1/g' <<< "$slug")
+cat << SPEC_GENERATOR > exercises/practice/${slug}/.meta/spec_generator.moon
+{
+  module_name: '${camel_slug}',
+  -- or, module_imports: {'func1', 'func2', ...},
+
+  -- optional:
+  test_helpers: [[
+  A block of code here, indented 2 spaces
+]]
+
+  generate_test: (case, level) ->
+    local lines
+    -- you may want to "switch case.property" here
+    lines = {
+      "result = ${camel_slug}.#{case.property} #{case.input}",
+      "expected = #{quote case.expected}",
+      "assert.are.equal expected, result"
+    }
+    table.concat [indent line, level for line in *lines], '\n'
+}
+SPEC_GENERATOR
+
 
 cat << NEXT_STEPS
 
 Your next steps are:
-- Create the test suite in $(jq -r '.test' <<< "${files}")
-  - The tests should be based on the canonical data at 'https://github.com/exercism/problem-specifications/blob/main/exercises/${slug}/canonical-data.json'
-  - Any test cases you don't implement, mark them in 'exercises/practice/${slug}/.meta/tests.toml' with "include = false"
-- Create the example solution in $(jq -r '.example' <<< "${files}")
-- Verify the example solution passes the tests by running 'bin/verify-exercises ${slug}'
-- Create the stub solution in $(jq -r '.solution' <<< "${files}")
-- Update the 'difficulty' value for the exercise's entry in the 'config.json' file in the repo's root
-- Validate CI using 'bin/configlet lint' and 'bin/configlet fmt'
+
+1.  Create the test suite ==>  $(jq -r '.test' <<< "${files}")
+
+    - A stub test generator awaits you -->  'exercises/practice/${slug}/.meta/spec_generator.moon'
+        - If you don't want it, delete it.
+        - Otherwise, populate it and run it -->  $ bin/generate-spec ${slug}
+
+    - The tests should be based on the canonical data -->  ./canonical-data/${slug}.json
+    - Any test cases you don't implement, mark them in 'exercises/practice/${slug}/.meta/tests.toml' with "include = false"
+
+2.  Create the example solution ==>  $(jq -r '.example' <<< "${files}")
+
+3.  Verify the example solution passes the tests ==>  $ bin/test-one ${slug}
+
+4.  Create the stub solution ==>  $(jq -r '.solution' <<< "${files}")
+
+5.  Update the 'difficulty' value for the exercise's entry in the 'config.json' file in the repo's root
+
+6.  Validate CI using 'bin/configlet lint' and 'bin/configlet fmt'
 NEXT_STEPS

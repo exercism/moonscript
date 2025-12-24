@@ -1,39 +1,28 @@
-# This workflow will verify the exercises in the repository.
-#
-# Requires scripts:
-# - bin/verify-exercises
-
 name: Test
 
 on:
   push:
-    branches: [main]
-  pull_request:
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  verify_exercises:
-    # TODO: replace with another image if required to run the tests (optional)
+  test:
     runs-on: ubuntu-24.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
 
-      # TODO: setup any tooling that is required to run the tests (optional)
-      # E.g. install a specific version of a programming language
-      # E.g. install packages via apt/apk/yum/etc.
-      # Find GitHub Actions to setup tooling here:
-      # - https://github.com/actions/?q=setup&type=&language=
-      # - https://github.com/actions/starter-workflows/tree/main/ci
-      # - https://github.com/marketplace?type=actions&query=setup
-      # - name: Use <setup tooling>
-      #   uses: <action to setup tooling>
+      - uses: leafo/gh-actions-lua@8c9e175e7a3d77e21f809eefbee34a19b858641b
+        with:
+          luaVersion: 5.4
 
-      # TODO: install any dependencies (optional)
-      # E.g. npm install, bundle install, etc.
-      # - name: Install project dependencies
-      #   run: <install dependencies>
+      - uses: leafo/gh-actions-luarocks@97053c556d6ce2c8e26eb7ac93743437c7af7248
 
-      - name: Verify all exercises
-        run: bin/verify-exercises
+      - name: build
+        run: |
+          luarocks install busted
+          luarocks install moonscript
+
+      - name: test
+        run: |
+          bin/test-all

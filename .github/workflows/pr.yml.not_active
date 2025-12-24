@@ -1,0 +1,36 @@
+name: PR
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
+
+      - uses: leafo/gh-actions-lua@8c9e175e7a3d77e21f809eefbee34a19b858641b
+        with:
+          luaVersion: 5.4
+
+      - uses: leafo/gh-actions-luarocks@97053c556d6ce2c8e26eb7ac93743437c7af7248
+
+      - name: build
+        run: |
+          luarocks install busted
+          luarocks install moonscript
+
+      - name: Run tests for changed/added exercises
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pr_endpoint=$(jq -r '"repos/\(.repository.full_name)/pulls/\(.pull_request.number)"' "$GITHUB_EVENT_PATH")
+          gh api "$pr_endpoint/files" --paginate --jq '
+              map(
+                select(.filename | match("\\.odin$")) |
+                .filename |
+                match("exercises/practice/([^/]+)/") |
+                .captures[0].string
+              ) | unique[]
+          ' | xargs -r -L1 bin/test-one

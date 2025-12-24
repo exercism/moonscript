@@ -1,0 +1,128 @@
+#!/usr/bin/env moon
+-- ref: https://github.com/exercism/lua/blob/main/bin/generate-spec
+
+require 'moonscript'
+json = (require 'dkjson').use_lpeg!
+-- import p from require 'moon'
+
+local exercise_name, exercise_directory, spec_generator, included_tests -- forward declarations
+
+
+file_exists = (path) ->
+  f = io.open path, 'r'
+  if f
+    f\close!
+    true
+  else
+    false
+
+
+read_file = (path) ->
+  f = assert io.open path, 'r'
+  contents = f\read '*a'
+  f\close!
+  contents
+
+
+write_file = (path, contents) ->
+  f = assert io.open path, 'w'
+  f\write contents
+  f\close!
+
+
+included_tests_from_toml = (path) ->
+  included = {}
+  local uuid, last_uuid
+  line_no = 0
+
+  for line in io.lines(path)
+    line_no += 1
+    for uuid in line\gmatch('%[([%x%-]+)%]')
+      last_uuid = uuid
+      included[uuid] = true
+
+    if line\match('^include%s*=%s*false')
+      included[last_uuid] = nil
+
+  included
+
+
+export indent, quote -- mark as global so spec_generators can see them
+
+indent = (text, level) -> string.rep('  ', level) .. text
+
+quote = (str) ->
+  if str\find "'"
+    "\"#{str\gsub '"', '\\"'}\""
+  else
+    "'#{str}'"
+
+
+test_cmd = 'it'
+
+process = (node, level=0) ->
+  if node.cases
+    output = {}
+
+    if node.description
+      table.insert output, indent("describe #{quote node.description}, ->", level)
+    else
+      table.insert output, indent("describe '#{exercise_name}', ->", level)
+
+      if spec_generator.test_helpers
+        table.insert output, spec_generator.test_helpers
+
+    cases = {}
+    for case in *node.cases
+      if not case.uuid or included_tests[case.uuid]
+        table.insert cases, process(case, level + 1)
+
+    table.insert output, table.concat(cases, '\n')
+
+    return table.concat output, '\n'
+
+  else -- no "cases" member
+    test = "#{test_cmd} #{quote node.description}, ->\n#{spec_generator.generate_test(node, level + 1)}\n"
+    test_cmd = 'pending'
+    return indent test, level
+
+-- ----------------------------------------------------------
+-- "main"
+-- ----------------------------------------------------------
+exercise_name = arg[1]
+snake_name = exercise_name\gsub("-", "_")
+
+-- to differentiate from the lua rock "say" required by busted.
+if snake_name == 'say'
+  snake_name = './say'
+
+exercise_directory = 'exercises/practice/' .. exercise_name
+
+canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{exercise_name}/canonical-data.json"
+canonical_data_path = "canonical-data/#{exercise_name}.json"
+
+assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
+assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
+
+canonical_data = json.decode read_file canonical_data_path
+
+tests_toml_path = exercise_directory .. '/.meta/tests.toml'
+included_tests = included_tests_from_toml tests_toml_path
+
+package.moonpath = "#{exercise_directory}/.meta/?.moon;#{package.moonpath}"
+spec_generator = require 'spec_generator'
+
+local spec
+if spec_generator.module_name
+  spec = "#{spec_generator.module_name} = require '#{snake_name}'"
+elseif spec_generator.module_imports
+  spec = "import #{table.concat spec_generator.module_imports, ', '} from require '#{snake_name}'"
+else
+  error 'spec_generator is missing both "module_name" and "module_imports"'
+
+spec ..= "\n\n" .. process(canonical_data)
+
+spec_path = exercise_directory .. '/' .. snake_name .. '_spec.moon'
+write_file spec_path, spec
+
+print "Created #{spec_path}"

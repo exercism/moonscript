@@ -41,6 +41,38 @@
       }
     ]
   },
+  "key_features": [
+    {
+      "title": "Concise, Readable Code",
+      "content": "MoonScript's expressive syntax means cleaner, more readable code with less boilerplate than Lua.",
+      "icon": "expressive"
+    },
+    {
+      "title": "Seamlessly Integrate",
+      "content": "Compiles to Lua, making it easy to embed into apps, games, or services.",
+      "icon": "embeddable"
+    },
+    {
+      "title": "High Performance",
+      "content": "Benefits from Lua's fast VM (and LuaJIT), ensuring rapid execution of your compiled code.",
+      "icon": "fast"
+    },
+    {
+      "title": "Lightweight Footprint",
+      "content": "Like Lua, it's small. The compiler is light, and generated code is efficient.",
+      "icon": "small"
+    },
+    {
+      "title": "Functional Paradigm",
+      "content": "Supports functional programming with features like comprehensions and implicit returns.",
+      "icon": "functional"
+    },
+    {
+      "title": "Increased Productivity",
+      "content": "Concise syntax and powerful features boost developer productivity for rapid iteration.",
+      "icon": "productive"
+    }
+  ],
   "tags": [
     "execution_mode/interpreted",
     "paradigm/imperative",

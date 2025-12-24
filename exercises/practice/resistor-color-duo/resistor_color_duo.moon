@@ -1,0 +1,4 @@
+{
+  value: (...) ->
+    error 'Implement me'
+}

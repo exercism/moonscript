@@ -238,6 +238,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 3
+      },
+      {
+        "slug": "dnd-character",
+        "name": "D&D Character",
+        "uuid": "4857b012-eb5d-4538-b17e-8a1eb2206285",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
       }
     ]
   },

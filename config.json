@@ -350,6 +350,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 4
+      },
+      {
+        "slug": "linked-list",
+        "name": "Linked List",
+        "uuid": "e4d7413a-6429-4d6e-bcfd-580c9a449d4e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
       }
     ]
   },

@@ -28,9 +28,9 @@ jobs:
           pr_endpoint=$(jq -r '"repos/\(.repository.full_name)/pulls/\(.pull_request.number)"' "$GITHUB_EVENT_PATH")
           gh api "$pr_endpoint/files" --paginate --jq '
               map(
-                select(.filename | match("\\.moon$")) |
-                .filename |
-                match("exercises/practice/([^/]+)/") |
-                .captures[0].string
+                .filename
+                | select(match("\\.moon$"))
+                | match("exercises/practice/([^/]+)/")
+                | .captures[0].string
               ) | unique[]
           ' | xargs -r -L1 bin/test-one

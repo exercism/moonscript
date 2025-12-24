@@ -40,5 +40,21 @@
         "difficulty": 1
       }
     ]
-  }
+  },
+  "tags": [
+    "execution_mode/interpreted",
+    "paradigm/imperative",
+    "paradigm/object_oriented",
+    "paradigm/procedural",
+    "platform/linux",
+    "platform/mac",
+    "platform/windows",
+    "runtime/language_specific",
+    "typing/dynamic",
+    "used_for/backends",
+    "used_for/cross_platform_development",
+    "used_for/embedded_systems",
+    "used_for/games",
+    "used_for/scripts"
+  ]
 }

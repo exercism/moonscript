@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "micro_blog.moon"
+    ],
+    "test": [
+      "micro_blog_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Given an input string, truncate it to 5 characters."
+}

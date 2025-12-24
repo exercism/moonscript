@@ -262,6 +262,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 3
+      },
+      {
+        "slug": "prime-factors",
+        "name": "Prime Factors",
+        "uuid": "67791652-2799-4f16-b4b8-2694234a953a",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
       }
     ]
   },

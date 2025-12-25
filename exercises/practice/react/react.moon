@@ -1,0 +1,2 @@
+-- This exercise is rated "difficult".
+-- You are expected to code what is needed by the tests.

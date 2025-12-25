@@ -510,6 +510,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 8
+      },
+      {
+        "slug": "react",
+        "name": "React",
+        "uuid": "ea4b0ade-0c71-44b2-99ec-9321fffe19ff",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
       }
     ]
   },

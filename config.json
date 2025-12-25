@@ -486,6 +486,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 6
+      },
+      {
+        "slug": "say",
+        "name": "Say",
+        "uuid": "c1c9b94f-abbb-4356-b35b-8cff366e9415",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
       }
     ]
   },

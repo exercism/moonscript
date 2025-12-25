@@ -422,6 +422,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 4
+      },
+      {
+        "slug": "word-count",
+        "name": "Word Count",
+        "uuid": "4b927a16-b0f2-4b71-980f-4d4f36288814",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
       }
     ]
   },

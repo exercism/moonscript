@@ -470,6 +470,14 @@
         "practices": [],
         "prerequisites": [],
         "difficulty": 6
+      },
+      {
+        "slug": "complex-numbers",
+        "name": "Complex Numbers",
+        "uuid": "29567d07-2cf5-444b-aa82-5cbd6a9820d0",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
       }
     ]
   },

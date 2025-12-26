@@ -496,6 +496,14 @@
         "difficulty": 6
       },
       {
+        "slug": "book-store",
+        "name": "Book Store",
+        "uuid": "5cda9fbb-709f-44c0-bddf-5cf2652eff01",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "satellite",
         "name": "Satellite",
         "uuid": "689501f5-1404-4358-b1f2-aea7798352c9",

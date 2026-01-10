@@ -11,16 +11,36 @@
 # Example: verify single exercise in Docker
 # bin/verify-exercises-in-docker two-fer
 
-set -eo pipefail
+set -euo pipefail
+
+image="exercism/moonscript-test-runner"
+
+usage() {
+    echo "Run exercise tests in the $image docker image."
+    echo "Specify an exercise slug to test that one, otherwise test all."
+    echo
+    echo "usage: $(basename "$0") [-h] [-L] [exercise-slug]"
+    echo "where:"
+    echo "  -L  Use a locally built image; default is to pull from a docker registry."
+    echo "      See https://github.com/$image"
+}
 
 die() { echo "$*" >&2; exit 1; }
 
-required_tool() {
-    command -v "${1}" >/dev/null 2>&1 ||
-        die "${1} is required but not installed. Please install it and make sure it's in your PATH."
-}
+docker_local=false
+while getopts ":hL" opt; do
+    case $opt in
+        h) usage; exit ;;
+        L) docker_local=true ;;
+        ?) die "Unknown option -$OPTARG" ;;
+    esac
+done
+shift $((OPTIND - 1))
 
-required_tool docker
+required_tool() {
+    command -v "${1}" >/dev/null 2>&1 \
+    || die "${1} is required but not installed. Please install it and make sure it's in your PATH."
+}
 
 copy_example_or_examplar_to_solution() {
     jq -c '[.files.solution, .files.exemplar // .files.example] | transpose | map({src: .[1], dst: .[0]}) | .[]' .meta/config.json \
@@ -30,8 +50,15 @@ copy_example_or_examplar_to_solution() {
 }
 
 pull_docker_image() {
-    docker pull exercism/moonscript-test-runner ||
-        die $'Could not find the `exercism/moonscript-test-runner` Docker image.\nCheck the test runner docs at https://exercism.org/docs/building/tooling/test-runners for more information.'
+    if $docker_local && docker image inspect "$image" >/dev/null 2>&1; then
+        echo "Using local image"
+        docker image ls "$image"
+    else
+        if ! docker pull "$image"; then
+            die "Could not find the '$image' Docker image.
+Check the test runner docs at https://exercism.org/docs/building/tooling/test-runners for more information."
+        fi
+    fi
 }
 
 run_tests() {
@@ -82,6 +109,9 @@ verify_exercises() {
     done
     ((count > 0)) || die 'no matching exercises found!'
 }
+
+required_tool docker
+required_tool jq
 
 pull_docker_image
 

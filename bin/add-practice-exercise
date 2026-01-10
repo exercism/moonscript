@@ -129,7 +129,7 @@ Your next steps are:
 
 2.  Create the example solution ==>  $(jq -r '.example' <<< "${files}")
 
-3.  Verify the example solution passes the tests ==>  $ bin/test-one ${slug}
+3.  Verify the example solution passes the tests ==>  $ bin/verify-exercises ${slug}
 
 4.  Create the stub solution ==>  $(jq -r '.solution' <<< "${files}")
 

@@ -92,7 +92,7 @@
 1. Test it with
 
     ```sh
-    bin/test-one ${slug_name}
+    bin/verify-exercises ${slug_name}
     ```
 
 1. When you're satisfied with the solution, create the stub file `${slug_name}.moon`.

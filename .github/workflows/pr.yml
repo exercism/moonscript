@@ -33,4 +33,4 @@ jobs:
                 | match("exercises/practice/([^/]+)/")
                 | .captures[0].string
               ) | unique[]
-          ' | xargs -r -L1 bin/test-one
+          ' | xargs -r -L1 bin/verify-exercises

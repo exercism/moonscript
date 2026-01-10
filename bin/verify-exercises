@@ -78,5 +78,7 @@ required_tool jq
 required_tool perl
 required_tool busted
 
+cd "$(dirname "$(realpath "$0")")/.."
+
 exercise_slug="${1:-*}"
 verify_exercises "${exercise_slug}"

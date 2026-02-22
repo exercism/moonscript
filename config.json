@@ -379,6 +379,14 @@
         "difficulty": 4
       },
       {
+        "slug": "prism",
+        "name": "Prism",
+        "uuid": "a7b1dec7-9fd6-4c1b-8a55-4c3619d944d6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "robot-simulator",
         "name": "Robot Simulator",
         "uuid": "55452cf4-0037-4bf5-a518-c16fb5d1da83",

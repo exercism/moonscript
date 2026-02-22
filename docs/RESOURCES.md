@@ -7,7 +7,7 @@
 * [Learn MoonScript in Y Minutes][xiny]:
     For a quick, high-level introduction to the language's core features.
 
-* MoonScript [Online Compiler][onlin]:
+* MoonScript [Online Compiler][online]:
     Allows you to experiment with MoonScript code directly in your browser without any installation.
 
 * [GitHub Repository][github]:

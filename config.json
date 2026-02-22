@@ -443,6 +443,14 @@
         "difficulty": 4
       },
       {
+        "slug": "camicia",
+        "name": "Camicia",
+        "uuid": "e524f384-e51f-4fdd-b06b-5ff8b3b21c83",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "matching-brackets",
         "name": "Matching Brackets",
         "uuid": "34ca14e4-31a6-4da6-a5ce-44da523bfb12",

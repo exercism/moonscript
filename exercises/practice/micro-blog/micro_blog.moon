@@ -1,4 +1,4 @@
-truncate: (str) ->
+truncate = (str) ->
   error 'Implement me'
 
 { :truncate }

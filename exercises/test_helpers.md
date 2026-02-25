@@ -123,5 +123,5 @@ Useful for generating pretty tables mostly.
 
 - dnd-character: `assert.between value, min, max`
 - space-age: `assert.approx_equal #{case.expected}, result`
-- word-count: `assert.has.same_kv table1, table2`:x
+- word-count: `assert.has.same_kv result, expected`
 

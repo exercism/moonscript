@@ -7,7 +7,7 @@
     if #case.input.garden == 0
       table.insert lines, "garden = {}"
     else
-      table.insert(lines, "gard en = {")
+      table.insert(lines, "garden = {")
       for row in *case.input.garden
         table.insert(lines, "  #{quote row}")
       table.insert(lines, "}")

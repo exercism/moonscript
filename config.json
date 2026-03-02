@@ -427,6 +427,14 @@
         "difficulty": 4
       },
       {
+        "slug": "split-second-stopwatch",
+        "name": "Split-Second Stopwatch",
+        "uuid": "60b4f51a-005b-4ea8-9606-17ad7613aa06",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "twelve-days",
         "name": "Twelve Days",
         "uuid": "69322771-7756-42a9-a79b-8700ce877700",

@@ -91,6 +91,14 @@
         "difficulty": 2
       },
       {
+        "slug": "gigasecond",
+        "name": "Gigasecond",
+        "uuid": "349cb8e8-06e8-486f-9e18-16172edfe205",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "hamming",
         "name": "Hamming",
         "uuid": "03f299a8-2f01-4c77-90a0-4bcc972e2559",

@@ -91,6 +91,14 @@
         "difficulty": 2
       },
       {
+        "slug": "etl",
+        "name": "ETL",
+        "uuid": "2c772f04-f65d-48f8-a19b-efaa84a5226d",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 2
+      },
+      {
         "slug": "hamming",
         "name": "Hamming",
         "uuid": "03f299a8-2f01-4c77-90a0-4bcc972e2559",

@@ -33,4 +33,4 @@ describe 'grains', ->
       assert.has.errors -> Grains.square 65, 'square must be between 1 and 64'
 
   pending 'returns the total number of grains on the board', ->
-    assert.are.equal 18446744073709551616, Grains.total!
+    assert.are.equal 18446744073709551615, Grains.total!

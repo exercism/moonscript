@@ -107,7 +107,7 @@ describe 'circular-buffer', ->
     buffer = CircularBuffer 2
     ok = buffer\write 1
     assert.is_true ok
-    buffer\overwrite 2
+    buffer\write 2, overwrite: true
     value, ok = buffer\read!
     assert.is_true ok
     assert.are.equal 1, value
@@ -121,7 +121,7 @@ describe 'circular-buffer', ->
     assert.is_true ok
     ok = buffer\write 2
     assert.is_true ok
-    buffer\overwrite 3
+    buffer\write 3, overwrite: true
     value, ok = buffer\read!
     assert.is_true ok
     assert.are.equal 2, value
@@ -142,7 +142,7 @@ describe 'circular-buffer', ->
     assert.are.equal 1, value
     ok = buffer\write 4
     assert.is_true ok
-    buffer\overwrite 5
+    buffer\write 5, overwrite: true
     value, ok = buffer\read!
     assert.is_true ok
     assert.are.equal 3, value
@@ -160,8 +160,8 @@ describe 'circular-buffer', ->
     assert.is_true ok
     ok = buffer\write 2
     assert.is_true ok
-    buffer\overwrite 3
-    buffer\overwrite 4
+    buffer\write 3, overwrite: true
+    buffer\write 4, overwrite: true
     value, ok = buffer\read!
     assert.is_true ok
     assert.are.equal 3, value

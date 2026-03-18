@@ -11,8 +11,5 @@ class CircularBuffer
   clear: =>
     error 'Implement the clear method'
 
-  overwrite: (item) =>
-    error 'Implement the overwrite method'
-
 
 CircularBuffer

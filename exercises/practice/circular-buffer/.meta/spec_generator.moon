@@ -19,7 +19,7 @@
           table.insert lines, 'buffer\\clear!'
 
         when 'overwrite'
-          table.insert lines, "buffer\\overwrite #{op.item}"
+          table.insert lines, "buffer\\write #{op.item}, overwrite: true"
 
     table.concat [indent line, level for line in *lines], '\n'
 }

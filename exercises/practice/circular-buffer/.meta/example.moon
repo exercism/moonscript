@@ -11,8 +11,13 @@ class CircularBuffer
     @count -= 1
     item, true
 
-  write: (item) =>
-    return false if @count == @size
+  write: (item, options={}) =>
+    if @count == @size
+      if options.overwrite
+        @read!
+      else
+        return false
+
     @buff[@idx.w] = item
     @idx.w = @idx.w == @size and 1 or @idx.w + 1
     @count += 1
@@ -21,10 +26,6 @@ class CircularBuffer
   clear: =>
     @count = 0
     @idx.r = @idx.w
-
-  overwrite: (item) =>
-    @read! if @count == @size
-    @write item
 
 
 CircularBuffer

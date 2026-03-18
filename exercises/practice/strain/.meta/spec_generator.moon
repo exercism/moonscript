@@ -1,16 +1,27 @@
 format_predicate = (pred) ->
-  p = pred\gsub "fn%(x%) %-> ", "(x) -> "
-  p = p\gsub "contains%(x, 5%)", "contains x, 5"
-  p = p\gsub "starts_with%(x, 'z'%)", "starts_with x, 'z'"
-  p
+  switch pred
+    when "fn(x) -> true"
+      "(_) -> true"
+    when "fn(x) -> false"
+      "(_) -> false"
+    when "fn(x) -> x % 2 == 1"
+      "(num) -> num % 2 == 1"
+    when "fn(x) -> x % 2 == 0"
+      "(num) -> num % 2 == 0"
+    when "fn(x) -> contains(x, 5)"
+      "(list) -> contains list, 5"
+    when "fn(x) -> starts_with(x, 'z')"
+      "(str) -> starts_with str, 'z'"
+    else
+      pred
 
 format_list = (list) ->
   if #list == 0
-    return "{}"
+    "{}"
   elseif type(list[1]) == 'string'
-    return "{" .. table.concat([quote(elem) for elem in *list], ', ') .. "}"
+    "{" .. table.concat([quote(elem) for elem in *list], ', ') .. "}"
   else
-    return "{" .. table.concat(list, ', ') .. "}"
+    "{" .. table.concat(list, ', ') .. "}"
 
 format_value = (val, level) ->
   if #val == 0
@@ -27,7 +38,6 @@ format_value = (val, level) ->
   module_name: 'Strain'
 
   test_helpers: [[
-  local starts_with, contains
 
   starts_with = (str, prefix) ->
     str\sub(1, #prefix) == prefix

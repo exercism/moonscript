@@ -1,8 +1,6 @@
 Strain = require 'strain'
 
 describe 'strain', ->
-  local starts_with, contains
-
   starts_with = (str, prefix) ->
     str\sub(1, #prefix) == prefix
 
@@ -13,32 +11,32 @@ describe 'strain', ->
     false
 
   it 'keep on empty list returns empty list', ->
-    result = Strain.keep {}, (x) -> true
+    result = Strain.keep {}, (_) -> true
     expected = {}
     assert.are.same expected, result
 
   pending 'keeps everything', ->
-    result = Strain.keep {1, 3, 5}, (x) -> true
+    result = Strain.keep {1, 3, 5}, (_) -> true
     expected = {1, 3, 5}
     assert.are.same expected, result
 
   pending 'keeps nothing', ->
-    result = Strain.keep {1, 3, 5}, (x) -> false
+    result = Strain.keep {1, 3, 5}, (_) -> false
     expected = {}
     assert.are.same expected, result
 
   pending 'keeps first and last', ->
-    result = Strain.keep {1, 2, 3}, (x) -> x % 2 == 1
+    result = Strain.keep {1, 2, 3}, (num) -> num % 2 == 1
     expected = {1, 3}
     assert.are.same expected, result
 
   pending 'keeps neither first nor last', ->
-    result = Strain.keep {1, 2, 3}, (x) -> x % 2 == 0
+    result = Strain.keep {1, 2, 3}, (num) -> num % 2 == 0
     expected = {2}
     assert.are.same expected, result
 
   pending 'keeps strings', ->
-    result = Strain.keep {'apple', 'zebra', 'banana', 'zombies', 'cherimoya', 'zealot'}, (x) -> starts_with x, 'z'
+    result = Strain.keep {'apple', 'zebra', 'banana', 'zombies', 'cherimoya', 'zealot'}, (str) -> starts_with str, 'z'
     expected = {'zebra', 'zombies', 'zealot'}
     assert.are.same expected, result
 
@@ -51,7 +49,7 @@ describe 'strain', ->
       {1, 5, 2}
       {2, 2, 1}
       {1, 2, 5}
-    }, (x) -> contains x, 5
+    }, (list) -> contains list, 5
     expected = {
       {5, 5, 5}
       {5, 1, 2}
@@ -61,32 +59,32 @@ describe 'strain', ->
     assert.are.same expected, result
 
   pending 'discard on empty list returns empty list', ->
-    result = Strain.discard {}, (x) -> true
+    result = Strain.discard {}, (_) -> true
     expected = {}
     assert.are.same expected, result
 
   pending 'discards everything', ->
-    result = Strain.discard {1, 3, 5}, (x) -> true
+    result = Strain.discard {1, 3, 5}, (_) -> true
     expected = {}
     assert.are.same expected, result
 
   pending 'discards nothing', ->
-    result = Strain.discard {1, 3, 5}, (x) -> false
+    result = Strain.discard {1, 3, 5}, (_) -> false
     expected = {1, 3, 5}
     assert.are.same expected, result
 
   pending 'discards first and last', ->
-    result = Strain.discard {1, 2, 3}, (x) -> x % 2 == 1
+    result = Strain.discard {1, 2, 3}, (num) -> num % 2 == 1
     expected = {2}
     assert.are.same expected, result
 
   pending 'discards neither first nor last', ->
-    result = Strain.discard {1, 2, 3}, (x) -> x % 2 == 0
+    result = Strain.discard {1, 2, 3}, (num) -> num % 2 == 0
     expected = {1, 3}
     assert.are.same expected, result
 
   pending 'discards strings', ->
-    result = Strain.discard {'apple', 'zebra', 'banana', 'zombies', 'cherimoya', 'zealot'}, (x) -> starts_with x, 'z'
+    result = Strain.discard {'apple', 'zebra', 'banana', 'zombies', 'cherimoya', 'zealot'}, (str) -> starts_with str, 'z'
     expected = {'apple', 'banana', 'cherimoya'}
     assert.are.same expected, result
 
@@ -99,7 +97,7 @@ describe 'strain', ->
       {1, 5, 2}
       {2, 2, 1}
       {1, 2, 5}
-    }, (x) -> contains x, 5
+    }, (list) -> contains list, 5
     expected = {
       {1, 2, 3}
       {2, 1, 2}

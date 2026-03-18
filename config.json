@@ -395,6 +395,14 @@
         "difficulty": 4
       },
       {
+        "slug": "flatten-array",
+        "name": "Flatten Array",
+        "uuid": "9f9b0efb-3bd0-4dc5-8df7-1edaf68ea046",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "isbn-verifier",
         "name": "ISBN Verifier",
         "uuid": "ea44facf-a0d2-499e-8837-06ee3fea896e",

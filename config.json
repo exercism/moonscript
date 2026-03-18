@@ -179,14 +179,6 @@
         "difficulty": 2
       },
       {
-        "slug": "rotational-cipher",
-        "name": "Rotational Cipher",
-        "uuid": "365fb81f-c059-4231-954b-bac1878e2a0c",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 3
-      },
-      {
         "slug": "rna-transcription",
         "name": "RNA Transcription",
         "uuid": "f0c2aca7-00a9-47df-a927-b9d7df578bd0",
@@ -347,9 +339,25 @@
         "difficulty": 3
       },
       {
+        "slug": "rotational-cipher",
+        "name": "Rotational Cipher",
+        "uuid": "365fb81f-c059-4231-954b-bac1878e2a0c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "scrabble-score",
         "name": "Scrabble Score",
         "uuid": "6c8091e1-01db-4294-8460-ec9296d638c5",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "secret-handshake",
+        "name": "Secret Handshake",
+        "uuid": "cf4561c6-c986-4136-8247-b3318cb54cd2",
         "practices": [],
         "prerequisites": [],
         "difficulty": 3

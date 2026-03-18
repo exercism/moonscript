@@ -531,6 +531,14 @@
         "difficulty": 5
       },
       {
+        "slug": "circular-buffer",
+        "name": "Circular Buffer",
+        "uuid": "1ef26e0a-c4de-4250-999e-0ab72c57f3cf",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "flower-field",
         "name": "Flower Field",
         "uuid": "a7cce1d3-19bc-4bb4-95ea-fef01d542672",

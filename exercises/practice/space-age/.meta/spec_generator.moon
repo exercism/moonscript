@@ -4,6 +4,8 @@
 
   test_helpers: [[
   -- ----------------------------------------
+  -- Why do we need to test "approximately equal"?
+  -- See https://0.30000000000000004.com
   epsilon = 1e-2
   is_close_to = (state, arguments) ->
     {a, b} = arguments

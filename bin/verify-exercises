@@ -60,6 +60,8 @@ verify_exercise() {
 
 verify_exercises() {
     local exercise_slug
+    local start=$SECONDS
+    local errs=0
 
     exercise_slug="${1}"
 
@@ -67,11 +69,15 @@ verify_exercises() {
     count=0
     for exercise_dir in ./exercises/{concept,practice}/${exercise_slug}/; do
         if [[ -d "${exercise_dir}" ]]; then
-            verify_exercise "${exercise_dir}"
+            verify_exercise "${exercise_dir}" || ((++errs))
             ((++count))
         fi
     done
     ((count > 0)) || die 'no matching exercises found!'
+
+    echo
+    echo "$count exercises tested in $((SECONDS - start)) seconds with $errs failures"
+    return $errs
 }
 
 required_tool jq

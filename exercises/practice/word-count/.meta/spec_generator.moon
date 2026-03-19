@@ -2,9 +2,11 @@ json = require 'dkjson'
 
 kv_table = (tbl, level) ->
   lines = {'{'}
-  for k, v in pairs tbl
+  keys = [k for k, _ in pairs tbl]
+  table.sort keys
+  for k in *keys
     key = if k\match('^%a%w*$') then k else "#{quote k}"
-    table.insert lines, indent "#{key}: #{v},", level + 1
+    table.insert lines, indent "#{key}: #{tbl[k]},", level + 1
   table.insert lines, indent '}', level
   table.concat lines, '\n'
 

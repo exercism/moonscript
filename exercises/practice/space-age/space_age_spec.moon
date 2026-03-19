@@ -2,6 +2,8 @@ SpaceAge = require 'space_age'
 
 describe 'space-age', ->
   -- ----------------------------------------
+  -- Why do we need to test "approximately equal"?
+  -- See https://0.30000000000000004.com
   epsilon = 1e-2
   is_close_to = (state, arguments) ->
     {a, b} = arguments
@@ -16,9 +18,6 @@ describe 'space-age', ->
   it 'age on Earth', ->
     result = SpaceAge.age 'Earth', 1000000000
     assert.approx_equal 31.69, result
-
-    -- Why do we need to test "approximately equal"?
-    -- See https://0.30000000000000004.com
 
   pending 'age on Mercury', ->
     result = SpaceAge.age 'Mercury', 2134835688

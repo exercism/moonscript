@@ -46,8 +46,9 @@ included_tests_from_toml = (path) ->
 
   included
 
-
-export indent, quote -- mark as global so spec_generators can see them
+-- ----------------------------------------------------------
+-- functions marked as global so spec_generators can see them
+export indent, quote, is_json_null
 
 indent = (text, level) -> string.rep('  ', level) .. text
 
@@ -56,6 +57,11 @@ quote = (str) ->
     "\"#{str\gsub '"', '\\"'}\""
   else
     "'#{str}'"
+
+-- the dkjson `json.null` value is an empty table
+is_json_null = (value) -> type(value) == 'table' and #value == 0
+
+-- ----------------------------------------------------------
 
 
 test_cmd = 'it'
@@ -104,6 +110,7 @@ canonical_data_path = "canonical-data/#{exercise_name}.json"
 assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
 assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
 
+-- "json.null" ref: https://dkolf.de/dkjson-lua/documentation
 canonical_data = json.decode read_file(canonical_data_path), 1, json.null
 
 tests_toml_path = exercise_directory .. '/.meta/tests.toml'

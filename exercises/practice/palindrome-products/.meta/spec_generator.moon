@@ -3,6 +3,11 @@ int_list = (list) -> "{#{table.concat list, ', '}}"
 int_lists = (lists) ->
   "{#{table.concat [int_list list for list in *lists], ', '}}"
 
+value = (val) -> 
+  if is_json_null val
+    nil
+  else
+    val
 
 {
   module_name: 'PalindromeProducts',
@@ -17,7 +22,7 @@ int_lists = (lists) ->
     else
       lines = {
         "palindrome, factors = PalindromeProducts.#{case.property} #{case.input.min}, #{case.input.max}",
-        "expected_palindrome = #{case.expected.value}",
+        "expected_palindrome = #{value case.expected.value}",
         "expected_factors    = #{int_lists case.expected.factors}",
         "assert.are.equal expected_palindrome, palindrome",
         "assert.are.same  expected_factors, factors",

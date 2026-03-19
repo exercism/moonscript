@@ -7,13 +7,17 @@ string_list = (list) -> "{#{table.concat [quote(v) for v in *list], ', '}}"
     lines = {}
 
     table.insert lines, "legacy = {"
-    for k, v in pairs case.input.legacy
-      table.insert lines, "  #{quote k}: #{string_list v}"
+    keys = [k for k, _ in pairs case.input.legacy]
+    table.sort keys
+    for k in *keys
+      table.insert lines, "  #{quote k}: #{string_list case.input.legacy[k]}"
     table.insert lines, "}"
 
     table.insert lines, "expected = {"
-    for k, v in pairs case.expected
-      table.insert lines, "  #{quote k}: #{v}"
+    keys = [k for k, _ in pairs case.expected]
+    table.sort keys
+    for k in *keys
+      table.insert lines, "  #{quote k}: #{case.expected[k]}"
     table.insert lines, "}"
 
     table.insert lines, "result = Etl.#{case.property} legacy"

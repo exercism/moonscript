@@ -1,7 +1,7 @@
 ResistorColor = require 'resistor_color'
 
 describe 'resistor-color', ->
-  describe 'color codes', ->
+  describe 'Color codes', ->
     it 'Black', ->
       result = ResistorColor.color_code 'black'
       assert.are.equal 0, result

@@ -47,11 +47,11 @@ describe 'flatten-array', ->
     assert.are.same expected, flatten input
 
   pending '6 level nested array with null values', ->
-    input = {0, 2, {{2, 3}, 8, {{100}}, "null", {{}}}, -2}
+    input = {0, 2, {{2, 3}, 8, {{100}}, "null", {{"null"}}}, -2}
     expected = {0, 2, 2, 3, 8, 100, -2}
     assert.are.same expected, flatten input
 
   pending 'all values in nested array are null', ->
-    input = {"null", {{{}}}, "null", "null", {{}}}
+    input = {"null", {{{"null"}}}, "null", "null", {{"null", "null"}, "null"}, "null"}
     expected = {}
     assert.are.same expected, flatten input

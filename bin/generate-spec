@@ -104,7 +104,7 @@ canonical_data_path = "canonical-data/#{exercise_name}.json"
 assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
 assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
 
-canonical_data = json.decode read_file canonical_data_path
+canonical_data = json.decode read_file(canonical_data_path), 1, json.null
 
 tests_toml_path = exercise_directory .. '/.meta/tests.toml'
 included_tests = included_tests_from_toml tests_toml_path

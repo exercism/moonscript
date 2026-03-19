@@ -2,6 +2,9 @@
   "authors": [
     "glennj"
   ],
+  "contributors": [
+    "BNAndras"
+  ],
   "files": {
     "solution": [
       "flatten_array.moon"

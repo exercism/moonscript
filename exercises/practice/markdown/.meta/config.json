@@ -1,0 +1,20 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "markdown.moon"
+    ],
+    "test": [
+      "markdown_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ],
+    "editor": [
+      "markdown.lua"
+    ]
+  },
+  "blurb": "Refactor a Markdown parser."
+}

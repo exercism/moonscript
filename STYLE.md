@@ -1,7 +1,9 @@
 # MoonScript Style Guide
 
 There isn't "one true" style guide.
-But as a language that inherits both from Lua and CoffeeScript, let's take inspiration from both:
+But as a language that inherits both from Lua and CoffeeScript, let's take inspiration from both.
+
+Note that this guide is not comprehensive, it's just a starting point.
 
 ## Lua Style
 

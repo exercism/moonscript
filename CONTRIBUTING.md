@@ -32,7 +32,9 @@
 
 ## **Do you want to add an exercise?**
 
-- **Ensure that someone else isn't already adding it** by searching the [forum](https://forum.exercism.org/c/programming/moonscript) and the repository's [issues](https://github.com/exercism/moonscript/issues) and [pull requests](https://github.com/exercism/moonscript/pulls).
+- **Ensure that someone else isn't already adding it** 
+    - start with the [Practice exercises to implement](https://github.com/exercism/moonscript/issues/102) issue.
+    - also search the [forum](https://forum.exercism.org/c/programming/moonscript) and the repository's [issues](https://github.com/exercism/moonscript/issues) and [pull requests](https://github.com/exercism/moonscript/pulls).
 
 - If nobody is yet adding the exercise, [open a conversation](https://forum.exercism.org/c/programming/moonscript) and indicate you'd like to add the exercise.
 
@@ -88,6 +90,8 @@
             Loop back to the previous step as needed.
 
 1. Create the example solution: `.meta/example.moon`
+
+   * follow the [style guide](./STYLE.md).
 
 1. Test it with
 

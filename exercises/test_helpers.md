@@ -1,5 +1,14 @@
 # Reusable stuff for spec generators
 
+## Functions in generate-spec script
+
+These functions are exported from generate-spec for use in spec_generator modules
+
+- `indent(text, level)` -- provide leading whitespace to the appropriate level.
+- `quote(str)` -- add quotation marks to the string, single or double as appropriate.
+- `is_empty(tbl)` -- predicate: is the table empty
+- `is_json_null(value)` -- predicate: is the value `json.null` from dkjson
+
 ## Helper functions
 
 Useful for generating pretty tables mostly.

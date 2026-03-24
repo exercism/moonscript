@@ -48,7 +48,7 @@ included_tests_from_toml = (path) ->
 
 -- ----------------------------------------------------------
 -- functions marked as global so spec_generators can see them
-export indent, quote, is_json_null
+export indent, quote, is_json_null, is_empty
 
 indent = (text, level) -> string.rep('  ', level) .. text
 
@@ -58,8 +58,10 @@ quote = (str) ->
   else
     "'#{str}'"
 
+is_empty = (t) -> not next t
+
 -- the dkjson `json.null` value is an empty table
-is_json_null = (value) -> type(value) == 'table' and #value == 0
+is_json_null = (value) -> type(value) == 'table' and is_empty(value)
 
 -- ----------------------------------------------------------
 

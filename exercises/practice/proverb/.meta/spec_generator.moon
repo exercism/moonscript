@@ -4,7 +4,7 @@
   generate_test: (case, level) ->
     input = table.concat [quote word for word in *case.input.strings], ', '
     local expected
-    if #case.expected == 0
+    if is_empty case.expected
       expected = "''"
     else
       expected = "[[\n#{table.concat case.expected, '\n'}\n]]"

@@ -1,8 +1,8 @@
 push     = table.insert
 pop      = table.remove
-is_empty = (s) -> #s == 0
+is_empty = (t) -> not next t
 
-opener   = { [']']: '[', ['}']: '{', [')']: '(' }
+opener   = ']':'[', '}':'{', ')':'('
 
 
 {

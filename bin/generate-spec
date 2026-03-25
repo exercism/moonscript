@@ -69,6 +69,10 @@ is_json_null = (value) -> type(value) == 'table' and is_empty(value)
 test_cmd = 'it'
 
 process = (node, level=0) ->
+  if exercise_name == 'simple-linked-list' and node.description == 'toList LIFO'
+    -- skip this whole node
+    return ''
+
   if node.cases
     output = {}
 

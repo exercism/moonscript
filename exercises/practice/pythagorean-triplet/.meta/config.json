@@ -1,0 +1,19 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "pythagorean_triplet.moon"
+    ],
+    "test": [
+      "pythagorean_triplet_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Given an integer N, find all Pythagorean triplets for which a + b + c = N.",
+  "source": "A variation of Problem 9 from Project Euler",
+  "source_url": "https://projecteuler.net/problem=9"
+}

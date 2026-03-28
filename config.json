@@ -427,6 +427,14 @@
         "difficulty": 4
       },
       {
+        "slug": "kindergarten-garden",
+        "name": "Kindergarten Garden",
+        "uuid": "d8ba270e-1fae-4b4c-aa3b-306c83f334f1",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "largest-series-product",
         "name": "Largest Series Product",
         "uuid": "d56c9861-434c-4299-b2ce-aa067a6d965f",

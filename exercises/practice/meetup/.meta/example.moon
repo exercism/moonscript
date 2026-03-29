@@ -1,14 +1,4 @@
-WEEKDAYS = {
-  Sunday: 1
-  Monday: 2
-  Tuesday: 3
-  Wednesday: 4
-  Thursday: 5
-  Friday: 6
-  Saturday: 7
-}
-
-is_teenth = (time) -> 
+is_teenth = (time) ->
   day = tonumber os.date '%d', time
   13 <= day and day <= 19
 

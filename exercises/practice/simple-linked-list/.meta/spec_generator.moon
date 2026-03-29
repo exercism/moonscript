@@ -31,4 +31,8 @@ int_list = (list) -> "{#{table.concat list, ', '}}"
         table.insert lines, "assert.are.same #{int_list op.expected}, result"
 
     table.concat [indent line, level for line in *lines], '\n'
+
+  exclusions: {
+    {key: 'description', value: 'toList LIFO'}
+  }
 }

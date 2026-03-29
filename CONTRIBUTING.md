@@ -56,6 +56,8 @@
 
    If there are, add `include = false` properties in the exercise's `.meta/tests.toml` file.
 
+   If there are whole test groups to exclude, add an "exclusions" property to the spec_generator module (see below).
+
 1. Considering the canonical data, decide if this exercise makes sense to use a test generator.
 
     - If no:
@@ -76,6 +78,8 @@
                 - `case` is the Lua object for the test case
                 - `level`, default value 2, is the indentation level of the body.
             - (optional) `test_helpers`: (string) a block of code that gets added at the top of the top-level `describe` block.
+            - (optional) `exclusions`: (list of tables) identifies things from the canonical data to exclude.
+                - See `simple-linked-list` and `gigasecond` spec generators for examples.
 
             Look to see how it's implemented for other exercises.
             The `space-age` one is interesting: it uses the test_helpers block to register a custom assertion, and has expected errors.

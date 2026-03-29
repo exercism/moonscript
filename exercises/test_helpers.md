@@ -76,6 +76,18 @@ Useful for generating pretty tables mostly.
 
     Used in: word-count
 
+- key-value table as a one-line string
+
+    ```moonscript
+    table.tostring = (t) ->
+      s = [string.format '%s: %q', k, v for k, v in pairs t]
+      "{#{table.concat s, ', '}}"
+    ```
+
+    Reminder: order of keys in indeterminate
+
+    Used in: meetup
+
 - Show strings with escapes, when you want to keep the `\t`, `\n` in the test case.
 
     ```moonscript

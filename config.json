@@ -619,6 +619,14 @@
         "difficulty": 5
       },
       {
+        "slug": "meetup",
+        "name": "Meetup",
+        "uuid": "cd3c3db9-a654-4137-9135-8971b07770b7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "pig-latin",
         "name": "Pig Latin",
         "uuid": "cae7aa86-e805-41b3-9025-82146f585b4c",

@@ -659,6 +659,14 @@
         "difficulty": 5
       },
       {
+        "slug": "swift-scheduling",
+        "name": "Swift Scheduling",
+        "uuid": "c1d0b2a7-d27e-43c9-a82b-73ff892a9ff3",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "change",
         "name": "Change",
         "uuid": "756a79f1-6149-4eef-a365-e3cfcaf9c999",

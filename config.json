@@ -283,6 +283,14 @@
         "difficulty": 3
       },
       {
+        "slug": "gigasecond",
+        "name": "Gigasecond",
+        "uuid": "f870722b-6bfc-4516-92ba-9fb1c2866d34",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "high-scores",
         "name": "High Scores",
         "uuid": "0d067c10-738a-475c-a0a3-3f95b45f3a5f",

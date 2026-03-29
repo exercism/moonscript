@@ -20,6 +20,7 @@ jobs:
         run: |
           luarocks install busted
           luarocks install moonscript
+          luarocks install lua-tz
 
       - name: Run tests for changed/added exercises
         env:

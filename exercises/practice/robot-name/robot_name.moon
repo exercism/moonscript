@@ -8,6 +8,6 @@ class Robot
   reset: =>
     error 'Implement the reset  method'
 
-  name: => @id
+  name: =>
     error 'Implement the names method'
 

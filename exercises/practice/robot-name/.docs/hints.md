@@ -12,4 +12,4 @@
 * A good strategy for assigning names to all the robots is to generate all 676,000 names first and shuffle that list.
   Then, each new robot can simply take the next name from the shuffled list.
 
-[class-var]: https://moonscript.org/reference/#the-language/object-oriented-programming/class-variables
+[class-vars]: https://moonscript.org/reference/#the-language/object-oriented-programming/class-variables

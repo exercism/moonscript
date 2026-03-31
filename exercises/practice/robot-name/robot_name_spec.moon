@@ -1,23 +1,6 @@
-import p from require 'moon'
+import table_size from require './test_helpers'
 
 Robot = require 'robot_name'
-
--- ------------------------------------------------------------
-table_size = (t) ->
-  -- because `#t` is insufficient for non-sequence tables
-  count = 0
-  count += 1 for _ in pairs t
-  count
-
-match = (state, arguments) ->
-  {str, patt} = arguments
-  string.match str, patt
-
-say = require 'say'
-say\set 'assertion.match.positive', 'Expected %s to match pattern %s.'
-say\set 'assertion.match.negative', 'Expected %s not to match pattern %s.'
-assert\register 'assertion', 'match', match, 'assertion.match.positive', 'assertion.match.negative'
--- ------------------------------------------------------------
 
 describe 'robot-name', ->
   describe 'one robot', ->
@@ -45,7 +28,7 @@ describe 'robot-name', ->
         robot\reset!
         robot\name!
       assert.has_no.errors f
-        
+
   describe 'two robots', ->
     pending 'different robots have different names', ->
       r1 = Robot!
@@ -54,37 +37,39 @@ describe 'robot-name', ->
 
     pending 'names must be random not consecutive', ->
       Robot\reset_names!
-      n = 10
       diffs = {}
-      for _ = 1, n
+      for _ = 1, 10
         n1 = Robot!\name!
         n2 = Robot!\name!
         -- a robot name is a valid base-36 number
-        diff = math.abs(tonumber(n1, 36) - tonumber(n2, 36))
-        diffs[diff] = (diffs[diff] or 0) + 1
-
+        diff = tonumber(n1, 36) - tonumber(n2, 36)
+        diffs[diff] = true
       assert.not.equal 1, table_size diffs
 
   describe 'lots of robots', ->
-    pending 'generate lots of robots', ->
-      iterations = 100000
+    pending 'a large number of robots have unique names', ->
+      sample_size = 10000
       seen = {}
-      for i = 1, iterations
+      for i = 1, sample_size
         name = Robot!\name!
-        seen[name] = (seen[name] or 0) + 1
-      distinct_names = [k for k,v in pairs seen when v == 1]
-      assert.is.equal iterations, #distinct_names
+        seen[name] = true
+      assert.is.equal sample_size, table_size seen
 
-    pending 'generate all the robots', ->
-      Robot\reset_names!
-      iterations = 26 * 26 * 1000
-      seen = {}
-      for i = 1, iterations
-        name = Robot!\name!
-        seen[name] = (seen[name] or 0) + 1
-      distinct_names = [k for k,v in pairs seen when v == 1]
-      assert.is.equal iterations, #distinct_names
 
-      -- generate the 676,001st robot
-      f = -> Robot!
-      assert.has_error f, 'out of names'
+    -- The next test is optional.
+    -- Change `test_all_robots` to `true` to run it.
+    -- Check the performance tip in the hints.
+    test_all_robots = false
+
+    if test_all_robots
+      pending 'all the robots and more', ->
+        Robot\reset_names!
+        sample_size = 26 * 26 * 1000
+        seen = {}
+        for i = 1, sample_size
+          name = Robot!\name!
+          seen[name] = true
+        assert.is.equal sample_size, table_size seen
+        -- the 676,001st robot
+        f = -> Robot!
+        assert.has_error f, 'all names taken'

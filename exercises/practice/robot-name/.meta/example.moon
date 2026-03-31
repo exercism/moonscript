@@ -21,7 +21,7 @@ class Robot
   
   reset: =>
     @@idx += 1
-    assert @@idx <= #NAMES, 'out of names'
+    assert @@idx <= #NAMES, 'all names taken'
     @_name = NAMES[@@idx]
 
   name: => @_name

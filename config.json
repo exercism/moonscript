@@ -283,6 +283,14 @@
         "difficulty": 3
       },
       {
+        "slug": "high-scores",
+        "name": "High Scores",
+        "uuid": "0d067c10-738a-475c-a0a3-3f95b45f3a5f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "house",
         "name": "House",
         "uuid": "60a9a9e9-0b19-40cd-8d4c-d8f3af092d55",

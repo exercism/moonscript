@@ -74,28 +74,28 @@ Pick a style that you think is particularly readable for the module you're creat
 * use the `*` operator, not `ipairs`
 
   ```moonscript
-  # Yes
+  -- Yes
   for elem in *array
-  # No
+  -- No
   for _, elem in ipairs array
   ```
 
 * use list comprehensions where possible, unless a multi-line for loop is much more readable.
 
   ```moonscript
-  # Yes
+  -- Yes
   result = [v * 2 for v in *my_list when v % 2 == 0]
 
-  # No
+  -- No
   results = []
   for v in *my_list
     if v % 2 == 0
       table.insert results, v * 2
 
-  # Yes
+  -- Yes
   result = [fn i, j for i = 1, 100 for j = 1, 100]
 
-  # No
+  -- No
   results = []
   for i = 1, 100
     for j = 1, 100
@@ -137,15 +137,14 @@ p is_empty t    -- false
 
 ```
 
-
 ### Other MoonScript Syntactic Sugar
 
 * for no-argument function definitions, omit the arglist
 
   ```moonscript
-  # Yes
+  -- Yes
   f = -> ...
-  # No
+  -- No
   f = () -> ...
   ```
 

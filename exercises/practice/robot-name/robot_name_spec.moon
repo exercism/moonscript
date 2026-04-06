@@ -57,11 +57,11 @@ describe 'robot-name', ->
 
 
     -- The next test is optional.
-    -- Change `test_all_robots` to `true` to run it.
+    -- Set the environment variable ENABLE_OPTIONAL_TESTS to run it:
+    -- For example, in bash run:  ENABLE_OPTIONAL_TESTS=true busted
     -- Check the performance tip in the hints.
-    test_all_robots = false
 
-    if test_all_robots
+    if os.getenv('ENABLE_OPTIONAL_TESTS') == 'true'
       pending 'all the robots and more', ->
         Robot\reset_names!
         sample_size = 26 * 26 * 1000

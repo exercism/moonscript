@@ -110,6 +110,13 @@ cat << SPEC_GENERATOR > exercises/practice/${slug}/.meta/spec_generator.moon
       "assert.are.equal expected, result"
     }
     table.concat [indent line, level for line in *lines], '\n'
+
+  -- optional:
+  bonus: [[
+      pending 'bonus test description', ->
+        "bonus tests are not generated, there are just a block of text"
+        "bonus tests are indented 6 spaces"
+]]
 }
 SPEC_GENERATOR
 

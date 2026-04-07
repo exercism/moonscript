@@ -1,0 +1,18 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "binary_search_tree.moon"
+    ],
+    "test": [
+      "binary_search_tree_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Insert and search for numbers in a binary tree.",
+  "source": "Josh Cheek"
+}

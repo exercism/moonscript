@@ -619,6 +619,14 @@
         "difficulty": 4
       },
       {
+        "slug": "affine-cipher",
+        "name": "Affine Cipher",
+        "uuid": "b9d2eda3-0e01-4f08-b8e3-b5fd19759d5e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "binary-search-tree",
         "name": "Binary Search Tree",
         "uuid": "338954f7-9a12-46fc-9c5f-3345a83baa48",

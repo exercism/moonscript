@@ -91,7 +91,9 @@ curl -s -o "canonical-data/${slug}.json" "$github"
 
 
 camel_slug=$(perl -pe 's/(?:^|-)([a-z])/\u$1/g' <<< "$slug")
-cp -v exercises/shared/templates/spec_generator.moon exercises/practice/${slug}/.meta/spec_generator.moon
+template=$(< exercises/shared/templates/spec_generator.moon)
+template=${template//'${camel_slug}'/"${camel_slug}"}
+echo "$template" > exercises/practice/${slug}/.meta/spec_generator.moon
 
 
 cat << NEXT_STEPS

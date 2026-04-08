@@ -635,6 +635,14 @@
         "difficulty": 5
       },
       {
+        "slug": "custom-set",
+        "name": "Custom Set",
+        "uuid": "142418f9-5d3b-4dd2-8324-3d956faa32e6",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "flower-field",
         "name": "Flower Field",
         "uuid": "a7cce1d3-19bc-4bb4-95ea-fef01d542672",

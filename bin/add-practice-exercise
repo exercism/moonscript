@@ -91,27 +91,7 @@ curl -s -o "canonical-data/${slug}.json" "$github"
 
 
 camel_slug=$(perl -pe 's/(?:^|-)([a-z])/\u$1/g' <<< "$slug")
-cat << SPEC_GENERATOR > exercises/practice/${slug}/.meta/spec_generator.moon
-{
-  module_name: '${camel_slug}',
-  -- or, module_imports: {'func1', 'func2', ...},
-
-  -- optional:
-  test_helpers: [[
-  A block of code here, indented 2 spaces
-]]
-
-  generate_test: (case, level) ->
-    local lines
-    -- you may want to "switch case.property" here
-    lines = {
-      "result = ${camel_slug}.#{case.property} #{case.input}",
-      "expected = #{quote case.expected}",
-      "assert.are.equal expected, result"
-    }
-    table.concat [indent line, level for line in *lines], '\n'
-}
-SPEC_GENERATOR
+cp -v exercises/shared/templates/spec_generator.moon exercises/practice/${slug}/.meta/spec_generator.moon
 
 
 cat << NEXT_STEPS

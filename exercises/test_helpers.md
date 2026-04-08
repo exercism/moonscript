@@ -60,7 +60,7 @@ Useful for generating pretty tables mostly.
     The returned string will be added to another string in the test case body,
     and then that string (without regard to internal newlines) will later be indented.
 
-    Used in: anagram, twelve-days
+    Used in: forth, transpose
 
 - Key-Value list
 

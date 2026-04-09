@@ -56,7 +56,7 @@ describe 'robot-name', ->
       assert.is.equal sample_size, table_size seen
 
 
-    -- The next test is optional.
+    -- The next tests are optional.
     -- Set the environment variable BONUS_TESTS to run it:
     -- For example, in bash run:  BONUS_TESTS=true busted
     -- Check the performance tip in the hints.

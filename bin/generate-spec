@@ -150,10 +150,10 @@ if spec_generator.bonus
 
 
   -- The next tests are optional.
-  -- Set the environment variable ENABLE_OPTIONAL_TESTS to run them:
-  -- For example, in bash run:  ENABLE_OPTIONAL_TESTS=true busted
+  -- Set the environment variable BONUS_TESTS to run them:
+  -- For example, in bash run:  BONUS_TESTS=true busted
 
-  if os.getenv('ENABLE_OPTIONAL_TESTS') == 'true'
+  if os.getenv('BONUS_TESTS') == 'true'
     describe 'Bonus tests', ->
 ]]
   spec ..= spec_generator.bonus

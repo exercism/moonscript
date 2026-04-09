@@ -237,10 +237,10 @@ describe 'custom-set', ->
       assert.is.true result\is_equal expected
 
   -- The next tests are optional.
-  -- Set the environment variable ENABLE_OPTIONAL_TESTS to run them:
-  -- For example, in bash run:  ENABLE_OPTIONAL_TESTS=true busted
+  -- Set the environment variable BONUS_TESTS to run them:
+  -- For example, in bash run:  BONUS_TESTS=true busted
 
-  if os.getenv('ENABLE_OPTIONAL_TESTS') == 'true'
+  if os.getenv('BONUS_TESTS') == 'true'
     describe 'Bonus tests', ->
       pending 'use the equal operator, are equal', ->
         set1 = CustomSet {1, 2, 3, 4}

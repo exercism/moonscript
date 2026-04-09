@@ -739,6 +739,14 @@
         "difficulty": 5
       },
       {
+        "slug": "variable-length-quantity",
+        "name": "Variable Length Quantity",
+        "uuid": "6738a318-df5b-40bb-9877-04af138f11a7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "change",
         "name": "Change",
         "uuid": "756a79f1-6149-4eef-a365-e3cfcaf9c999",

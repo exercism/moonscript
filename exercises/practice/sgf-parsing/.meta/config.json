@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "sgf_parsing.moon"
+    ],
+    "test": [
+      "sgf_parsing_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Parsing a Smart Game Format string."
+}

@@ -819,6 +819,14 @@
         "difficulty": 8
       },
       {
+        "slug": "sgf-parsing",
+        "name": "SGF Parsing",
+        "uuid": "f990927e-2fae-4ac0-ba8f-0cd90d500e62",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "zebra-puzzle",
         "name": "Zebra Puzzle",
         "uuid": "71d0556e-4301-47e7-80c2-d3d215127746",

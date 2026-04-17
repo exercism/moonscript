@@ -747,6 +747,14 @@
         "difficulty": 5
       },
       {
+        "slug": "tournament",
+        "name": "Tournament",
+        "uuid": "559727f9-e07a-4e55-a0b5-8b4bda10287e",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "variable-length-quantity",
         "name": "Variable Length Quantity",
         "uuid": "6738a318-df5b-40bb-9877-04af138f11a7",

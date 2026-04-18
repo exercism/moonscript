@@ -323,6 +323,14 @@
         "difficulty": 3
       },
       {
+        "slug": "perfect-numbers",
+        "name": "Perfect Numbers",
+        "uuid": "ad78ef27-70a9-4625-b432-742f75cae29c",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "phone-number",
         "name": "Phone Number",
         "uuid": "92e71d7e-2f25-4657-9e5d-632f748c831a",

@@ -747,6 +747,14 @@
         "difficulty": 5
       },
       {
+        "slug": "state-of-tic-tac-toe",
+        "name": "State of Tic-Tac-Toe",
+        "uuid": "66bc8184-9054-4493-b730-b96460bd7e12",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "swift-scheduling",
         "name": "Swift Scheduling",
         "uuid": "c1d0b2a7-d27e-43c9-a82b-73ff892a9ff3",

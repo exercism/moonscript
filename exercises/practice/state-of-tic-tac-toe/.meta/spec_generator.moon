@@ -1,0 +1,22 @@
+string_list = (list, level) ->
+  if #list <= 2
+    "{#{table.concat [quote elem for elem in *list], ', '}}"
+  else
+    lines = [indent quote(elem) .. ',', level + 1 for elem in *list]
+    table.insert lines, 1, '{'
+    table.insert lines, indent('}', level)
+    table.concat lines, '\n'
+
+
+{
+  module_imports: {'gamestate'},
+
+  generate_test: (case, level) ->
+    lines = { "board = #{string_list case.input.board, level}" }
+    if case.expected.error
+      table.insert lines, "f = -> #{case.property} board"
+      table.insert lines, "assert.has.error f, #{quote case.expected.error}"
+    else
+      table.insert lines, "assert.are.equal #{quote case.expected}, #{case.property} board"
+    table.concat [indent line, level for line in *lines], '\n'
+}

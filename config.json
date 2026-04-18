@@ -451,6 +451,14 @@
         "difficulty": 4
       },
       {
+        "slug": "food-chain",
+        "name": "Food Chain",
+        "uuid": "e2a50db4-69bd-4d41-9756-5961510aeacc",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "grade-school",
         "name": "Grade School",
         "uuid": "8fb86769-706a-4eae-bdce-51ad5fde5461",

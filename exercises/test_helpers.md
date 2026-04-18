@@ -50,14 +50,14 @@ Used in: anagram
 ### Indented multi-line list of strings
 
 ```moonscript
-instruction_list = (list, level) ->
+string_list = (list, level) ->
   if #list <= 2
     "{#{table.concat [quote elem for elem in *list], ', '}}"
   else
-    instrs = [indent quote(elem) .. ',', level + 1 for elem in *list]
-    table.insert instrs, 1, '{'
-    table.insert instrs, indent('}', level)
-    table.concat instrs, '\n'
+    lines = [indent quote(elem) .. ',', level + 1 for elem in *list]
+    table.insert lines, 1, '{'
+    table.insert lines, indent('}', level)
+    table.concat lines, '\n'
 ```
 The `indent` function is defined in bin/generate-spec
 

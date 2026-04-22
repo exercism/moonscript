@@ -747,6 +747,14 @@
         "difficulty": 5
       },
       {
+        "slug": "simple-cipher",
+        "name": "Simple Cipher",
+        "uuid": "f55d8d06-21cf-4ac4-a6cc-61ed90ff3588",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "simple-linked-list",
         "name": "Simple Linked List",
         "uuid": "e7209464-d13a-4444-93ee-433ac41830ae",

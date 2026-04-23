@@ -1,6 +1,8 @@
 SGFParser = require 'sgf_parsing'
 
 describe 'sgf-parsing', ->
+  assert\set_parameter "TableFormatLevel", 5
+
   it 'empty input', ->
     f = -> SGFParser.parse ""
     assert.has_error f, 'tree missing'

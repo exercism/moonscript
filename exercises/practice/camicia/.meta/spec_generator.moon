@@ -1,12 +1,12 @@
-string_list = (list) -> "{#{table.concat [quote(v) for v in *list], ', '}}"
+import word_list from require 'test_helpers'
 
 {
   module_name: 'Camicia'
 
   generate_test: (case, level) ->
     lines = {
-      "playerA = #{string_list case.input.playerA}"
-      "playerB = #{string_list case.input.playerB}"
+      "playerA = #{word_list case.input.playerA}"
+      "playerB = #{word_list case.input.playerB}"
       "expected = {"
       "  status: #{quote case.expected.status}"
       "  cards: #{case.expected.cards}"

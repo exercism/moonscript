@@ -1,4 +1,4 @@
-string_list = (list) -> "{#{table.concat [quote(v) for v in *list], ', '}}"
+import word_list from require 'test_helpers'
 
 {
   module_name: 'Etl',
@@ -10,7 +10,7 @@ string_list = (list) -> "{#{table.concat [quote(v) for v in *list], ', '}}"
     keys = [k for k, _ in pairs case.input.legacy]
     table.sort keys
     for k in *keys
-      table.insert lines, "  #{quote k}: #{string_list case.input.legacy[k]}"
+      table.insert lines, "  #{quote k}: #{word_list case.input.legacy[k]}"
     table.insert lines, "}"
 
     table.insert lines, "expected = {"

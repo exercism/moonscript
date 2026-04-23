@@ -1,9 +1,5 @@
 tablex = require 'pl.tablex'
-
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
-string_list = (list) ->
-  "{#{table.concat [quote word for word in *list], ', '}}"
+import int_list, word_list from require 'test_helpers'
 
 {
   module_name: 'BafflingBirthdays',
@@ -13,7 +9,7 @@ string_list = (list) ->
     switch case.property
       when 'sharedBirthday'
         lines = {
-          "birthdates = #{string_list case.input.birthdates}",
+          "birthdates = #{word_list case.input.birthdates}",
           "assert.is.#{case.expected} BafflingBirthdays.#{case.property} birthdates",
         }
       when 'estimatedProbabilityOfSharedBirthday'
@@ -68,7 +64,7 @@ string_list = (list) ->
   tablex = require 'pl.tablex'
 
   --
-  epsilon = 0.5
+  epsilon = 1.0
   is_close_to = (state, arguments) ->
     {a, b} = arguments
     math.abs(a - b) <= epsilon

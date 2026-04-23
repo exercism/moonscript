@@ -1,5 +1,8 @@
 json = require 'dkjson'
 
+-- example usage in a spec_generator:
+--    import int_list, word_list from require 'test_helpers'
+
 --- -----------------------------------------------------------------------
 --- List of ints
 int_list = (list) -> "{#{table.concat list, ', '}}"

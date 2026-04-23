@@ -5,9 +5,9 @@ describe 'binary-search-tree', ->
     tree = BinarySearchTree {'4'}
     result = tree\data!
     expected = {
+        left: nil
         right: nil
         data: "4"
-        left: nil
     }
     assert.are.same expected, result
 
@@ -16,13 +16,13 @@ describe 'binary-search-tree', ->
       tree = BinarySearchTree {'4', '2'}
       result = tree\data!
       expected = {
-          right: nil
-          data: "4"
           left: {
+              left: nil
               right: nil
               data: "2"
-              left: nil
           }
+          right: nil
+          data: "4"
       }
       assert.are.same expected, result
 
@@ -30,13 +30,13 @@ describe 'binary-search-tree', ->
       tree = BinarySearchTree {'4', '4'}
       result = tree\data!
       expected = {
-          right: nil
-          data: "4"
           left: {
+              left: nil
               right: nil
               data: "4"
-              left: nil
           }
+          right: nil
+          data: "4"
       }
       assert.are.same expected, result
 
@@ -44,13 +44,13 @@ describe 'binary-search-tree', ->
       tree = BinarySearchTree {'4', '5'}
       result = tree\data!
       expected = {
+          left: nil
           right: {
+              left: nil
               right: nil
               data: "5"
-              left: nil
           }
           data: "4"
-          left: nil
       }
       assert.are.same expected, result
 
@@ -58,33 +58,33 @@ describe 'binary-search-tree', ->
     tree = BinarySearchTree {'4', '2', '6', '1', '3', '5', '7'}
     result = tree\data!
     expected = {
-        right: {
-            right: {
-                right: nil
-                data: "7"
-                left: nil
-            }
-            data: "6"
-            left: {
-                right: nil
-                data: "5"
-                left: nil
-            }
-        }
-        data: "4"
         left: {
-            right: {
-                right: nil
-                data: "3"
-                left: nil
-            }
-            data: "2"
             left: {
+                left: nil
                 right: nil
                 data: "1"
-                left: nil
             }
+            right: {
+                left: nil
+                right: nil
+                data: "3"
+            }
+            data: "2"
         }
+        right: {
+            left: {
+                left: nil
+                right: nil
+                data: "5"
+            }
+            right: {
+                left: nil
+                right: nil
+                data: "7"
+            }
+            data: "6"
+        }
+        data: "4"
     }
     assert.are.same expected, result
 

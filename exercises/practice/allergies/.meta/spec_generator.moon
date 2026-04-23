@@ -1,5 +1,4 @@
-str_list = (list) ->
-  "{#{table.concat [quote word for word in *list], ', '}}"
+import word_list from require 'test_helpers'
 
 {
   module_name: 'Allergies',
@@ -15,7 +14,7 @@ str_list = (list) ->
       when 'list'
         lines = {
           "result = Allergies.list #{case.input.score}",
-          "expected = #{str_list case.expected}",
+          "expected = #{word_list case.expected}",
           "assert.is.same expected, result",
         }
     table.concat [indent line, level for line in *lines], '\n'

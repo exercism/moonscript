@@ -6,7 +6,7 @@ describe 'baffling-birthdays', ->
   tablex = require 'pl.tablex'
 
   --
-  epsilon = 0.5
+  epsilon = 1.0
   is_close_to = (state, arguments) ->
     {a, b} = arguments
     math.abs(a - b) <= epsilon

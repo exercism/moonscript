@@ -1,3 +1,5 @@
+import int_list, word_list from require 'test_helpers'
+
 format_predicate = (pred) ->
   switch pred
     when "fn(x) -> true"
@@ -19,14 +21,14 @@ format_list = (list) ->
   if #list == 0
     "{}"
   elseif type(list[1]) == 'string'
-    "{" .. table.concat([quote(elem) for elem in *list], ', ') .. "}"
+    word_list list
   else
-    "{" .. table.concat(list, ', ') .. "}"
+    int_list list
 
 format_value = (val, level) ->
   if #val == 0
     '{}'
-  elseif type(val[1]) == 'table'
+  elseif type(val[1]) == 'table' -- list of lists
     rows = [indent format_list(row), level + 1 for row in *val]
     table.insert rows, 1, '{'
     table.insert rows, indent('}', level)
@@ -50,11 +52,9 @@ format_value = (val, level) ->
 ]]
 
   generate_test: (case, level) ->
-
-
     lines = {
-      "result = Strain.#{case.property} #{format_value(case.input.list, level)}, #{format_predicate case.input.predicate}"
-      "expected = #{format_value(case.expected, level)}"
+      "result = Strain.#{case.property} #{format_value case.input.list, level }, #{format_predicate case.input.predicate}"
+      "expected = #{format_value case.expected, level }"
       "assert.are.same expected, result"
     }
 

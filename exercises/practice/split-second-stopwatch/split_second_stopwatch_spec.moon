@@ -108,10 +108,10 @@ describe 'split-second-stopwatch', ->
     stopwatch\start!
     stopwatch\advanceTime '00:01:38'
     stopwatch\lap!
-    assert.same { '00:01:38' }, stopwatch\previousLaps!
+    assert.same {'00:01:38'}, stopwatch\previousLaps!
     stopwatch\advanceTime '00:00:44'
     stopwatch\lap!
-    assert.same { '00:01:38', '00:00:44' }, stopwatch\previousLaps!
+    assert.same {'00:01:38', '00:00:44'}, stopwatch\previousLaps!
 
   pending 'lap resets current lap and resumes time tracking', ->
     stopwatch = SplitSecondStopwatch.Stopwatch!
@@ -145,9 +145,9 @@ describe 'split-second-stopwatch', ->
     stopwatch\start!
     stopwatch\advanceTime '00:11:22'
     stopwatch\lap!
-    assert.same { '00:11:22' }, stopwatch\previousLaps!
+    assert.same {'00:11:22'}, stopwatch\previousLaps!
     stopwatch\stop!
-    assert.same { '00:11:22' }, stopwatch\previousLaps!
+    assert.same {'00:11:22'}, stopwatch\previousLaps!
 
   pending 'reset from stopped state changes state to ready', ->
     stopwatch = SplitSecondStopwatch.Stopwatch!
@@ -171,7 +171,7 @@ describe 'split-second-stopwatch', ->
     stopwatch\lap!
     stopwatch\advanceTime '00:00:20'
     stopwatch\lap!
-    assert.same { '00:00:10', '00:00:20' }, stopwatch\previousLaps!
+    assert.same {'00:00:10', '00:00:20'}, stopwatch\previousLaps!
     stopwatch\stop!
     stopwatch\reset!
     assert.same {}, stopwatch\previousLaps!
@@ -191,14 +191,14 @@ describe 'split-second-stopwatch', ->
     stopwatch\advanceTime '01:23:45'
     assert.same '01:23:45', stopwatch\currentLap!
     stopwatch\lap!
-    assert.same { '01:23:45' }, stopwatch\previousLaps!
+    assert.same {'01:23:45'}, stopwatch\previousLaps!
     stopwatch\advanceTime '04:01:40'
     assert.same '04:01:40', stopwatch\currentLap!
     assert.same '05:25:25', stopwatch\total!
     stopwatch\lap!
-    assert.same { '01:23:45', '04:01:40' }, stopwatch\previousLaps!
+    assert.same {'01:23:45', '04:01:40'}, stopwatch\previousLaps!
     stopwatch\advanceTime '08:43:05'
     assert.same '08:43:05', stopwatch\currentLap!
     assert.same '14:08:30', stopwatch\total!
     stopwatch\lap!
-    assert.same { '01:23:45', '04:01:40', '08:43:05' }, stopwatch\previousLaps!
+    assert.same {'01:23:45', '04:01:40', '08:43:05'}, stopwatch\previousLaps!

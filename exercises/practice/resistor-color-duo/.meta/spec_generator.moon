@@ -4,7 +4,7 @@
     input = ["'#{color}'" for color in *case.input.colors]
     lines = {
       "result = ResistorColorDuo.value #{table.concat input, ', '}",
-      "assert.are.same #{case.expected}, result"
+      "assert.are.equal #{case.expected}, result"
     }
     table.concat [indent line, level for line in *lines], '\n'
 }

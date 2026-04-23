@@ -1,13 +1,8 @@
-format_expected = (val) ->
-  if type(val) != 'table'
-    quote val -- for state string
-  elseif #val == 0
-    "{}" -- for empty previous laps
-  else
-    "{ #{table.concat [quote v for v in *val], ', '} }" -- for non-empty previous laps
+import word_list from require 'test_helpers'
 
-camel_case = (str) ->
-  str\gsub "_(%l)", (l) -> l\upper!
+format_expected = (val) -> type(val) == 'table' and word_list(val) or quote(val)
+
+camel_case = (str) -> str\gsub "_(%l)", string.upper
 
 {
   module_name: 'SplitSecondStopwatch'

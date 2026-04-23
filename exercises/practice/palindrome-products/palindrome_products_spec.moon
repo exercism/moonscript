@@ -11,7 +11,10 @@ describe 'palindrome-products', ->
   pending 'find the largest palindrome from single digit factors', ->
     palindrome, factors = PalindromeProducts.largest 1, 9
     expected_palindrome = 9
-    expected_factors    = {{1, 9}, {3, 3}}
+    expected_factors    = {
+      {1, 9},
+      {3, 3},
+    }
     assert.are.equal expected_palindrome, palindrome
     assert.are.same  expected_factors, factors
 

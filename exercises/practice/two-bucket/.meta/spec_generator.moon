@@ -1,16 +1,14 @@
+import table_tostring_ordered from require 'test_helpers'
+
 {
   module_imports: {'measure'},
 
   generate_test: (case, level) ->
-    local lines
     cmd = "measure bucketOne: #{case.input.bucketOne}, bucketTwo: #{case.input.bucketTwo}, goal: #{case.input.goal}, startBucket: '#{case.input.startBucket}'"
-
-    if case.expected.error
-      lines = {
-        "assert.has.errors -> #{cmd}"
-      }
+    lines = if case.expected.error
+      { "assert.has.errors -> #{cmd}" }
     else
-      lines = {
+      {
         "result = #{cmd}",
         "expected = moves: #{case.expected.moves}, goalBucket: '#{case.expected.goalBucket}', otherBucket: #{case.expected.otherBucket}",
         "assert.are.same expected, result"

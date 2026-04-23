@@ -1,5 +1,4 @@
-test_helpers = require 'test_helpers'
-import table_dump from test_helpers
+import table_dump from require 'test_helpers'
 
 {
   module_name: 'RestApi',

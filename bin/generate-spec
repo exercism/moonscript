@@ -51,7 +51,7 @@ included_tests_from_toml = (path) ->
 export indent, quote, is_json_null, is_empty, contains
 
 indent = (text, level) ->
-  assert level, 'Provide the level to `indent`'
+  error 'Provide a level for `indent`', 2 if not level
   string.rep('  ', level) .. text
 
 quote = (str) ->

@@ -1,5 +1,4 @@
-list_of_words = (list) ->
-  "{#{table.concat [quote word for word in *list], ', '}}"
+import word_list from require 'test_helpers'
 
 {
   module_imports: {'slices'},
@@ -15,8 +14,8 @@ list_of_words = (list) ->
       }
     else
       lines = {
-        "result = [s for s in #{cmd}]"
-        "expected = #{list_of_words case.expected}"
+        "result = [slice for slice in #{cmd}]"
+        "expected = #{word_list case.expected}"
         "assert.are.same expected, result"
       }
     table.concat [indent line, level for line in *lines], '\n'

@@ -2,32 +2,32 @@ import slices from require 'series'
 
 describe 'series', ->
   it 'slices of one from one', ->
-    result = [s for s in slices '1', 1]
+    result = [slice for slice in slices '1', 1]
     expected = {'1'}
     assert.are.same expected, result
 
   pending 'slices of one from two', ->
-    result = [s for s in slices '12', 1]
+    result = [slice for slice in slices '12', 1]
     expected = {'1', '2'}
     assert.are.same expected, result
 
   pending 'slices of two', ->
-    result = [s for s in slices '35', 2]
+    result = [slice for slice in slices '35', 2]
     expected = {'35'}
     assert.are.same expected, result
 
   pending 'slices of two overlap', ->
-    result = [s for s in slices '9142', 2]
+    result = [slice for slice in slices '9142', 2]
     expected = {'91', '14', '42'}
     assert.are.same expected, result
 
   pending 'slices can include duplicates', ->
-    result = [s for s in slices '777777', 3]
+    result = [slice for slice in slices '777777', 3]
     expected = {'777', '777', '777', '777'}
     assert.are.same expected, result
 
   pending 'slices of a long series', ->
-    result = [s for s in slices '918493904243', 5]
+    result = [slice for slice in slices '918493904243', 5]
     expected = {'91849', '18493', '84939', '49390', '93904', '39042', '90424', '04243'}
     assert.are.same expected, result
 

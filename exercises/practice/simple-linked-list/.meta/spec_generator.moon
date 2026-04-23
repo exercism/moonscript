@@ -1,4 +1,4 @@
-int_list = (list) -> "{#{table.concat list, ', '}}"
+import int_list from require 'test_helpers'
 
 {
   module_name: 'SimpleLinkedList',

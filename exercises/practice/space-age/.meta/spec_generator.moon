@@ -1,4 +1,3 @@
-
 {
   module_name: 'SpaceAge',
 

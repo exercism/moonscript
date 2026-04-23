@@ -35,10 +35,10 @@ describe 'word-count', ->
   pending 'multiple occurrences of a word', ->
     result = count_words "one fish two fish red fish blue fish"
     expected = {
-      blue: 1,
       fish: 4,
       one: 1,
       red: 1,
+      blue: 1,
       two: 1,
     }
     assert.has.same_kv result, expected
@@ -46,29 +46,29 @@ describe 'word-count', ->
   pending 'handles cramped lists', ->
     result = count_words "one,two,three"
     expected = {
-      one: 1,
-      three: 1,
       two: 1,
+      three: 1,
+      one: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'handles expanded lists', ->
     result = count_words "one,\ntwo,\nthree"
     expected = {
-      one: 1,
-      three: 1,
       two: 1,
+      three: 1,
+      one: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'ignore punctuation', ->
     result = count_words "car: carpet as java: javascript!!&@$%^&"
     expected = {
-      as: 1,
-      car: 1,
       carpet: 1,
-      java: 1,
       javascript: 1,
+      as: 1,
+      java: 1,
+      car: 1,
     }
     assert.has.same_kv result, expected
 
@@ -76,8 +76,8 @@ describe 'word-count', ->
     result = count_words "testing, 1, 2 testing"
     expected = {
       '1': 1,
-      '2': 1,
       testing: 2,
+      '2': 1,
     }
     assert.has.same_kv result, expected
 
@@ -92,64 +92,64 @@ describe 'word-count', ->
   pending 'with apostrophes', ->
     result = count_words "'First: don't laugh. Then: don't cry. You're getting it.'"
     expected = {
-      cry: 1,
-      "don't": 2,
       first: 1,
-      getting: 1,
       it: 1,
       laugh: 1,
-      then: 1,
       "you're": 1,
+      cry: 1,
+      then: 1,
+      getting: 1,
+      "don't": 2,
     }
     assert.has.same_kv result, expected
 
   pending 'with quotations', ->
     result = count_words "Joe can't tell between 'large' and large."
     expected = {
-      and: 1,
-      between: 1,
-      "can't": 1,
-      joe: 1,
-      large: 2,
       tell: 1,
+      and: 1,
+      large: 2,
+      "can't": 1,
+      between: 1,
+      joe: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'substrings from the beginning', ->
     result = count_words "Joe can't tell between app, apple and a."
     expected = {
-      a: 1,
-      and: 1,
       app: 1,
-      apple: 1,
-      between: 1,
-      "can't": 1,
-      joe: 1,
+      a: 1,
       tell: 1,
+      apple: 1,
+      and: 1,
+      "can't": 1,
+      between: 1,
+      joe: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'multiple spaces not detected as a word', ->
     result = count_words " multiple   whitespaces"
     expected = {
-      multiple: 1,
       whitespaces: 1,
+      multiple: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'alternating word separators not detected as a word', ->
     result = count_words ",\n,one,\n ,two \n 'three'"
     expected = {
-      one: 1,
-      three: 1,
       two: 1,
+      three: 1,
+      one: 1,
     }
     assert.has.same_kv result, expected
 
   pending 'quotation for word with apostrophe', ->
     result = count_words "can, can't, 'can't'"
     expected = {
-      can: 1,
       "can't": 2,
+      can: 1,
     }
     assert.has.same_kv result, expected

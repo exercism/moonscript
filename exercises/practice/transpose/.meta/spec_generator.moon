@@ -1,11 +1,4 @@
-string_list = (list, level) ->
-  if #list <= 2
-    "{#{table.concat [quote elem for elem in *list], ', '}}"
-  else
-    instrs = [indent quote(elem) .. ',', level + 1 for elem in *list]
-    table.insert instrs, 1, '{'
-    table.insert instrs, indent('}', level)
-    table.concat instrs, '\n'
+import string_list from require 'test_helpers'
 
 {
   module_imports: {'transpose'},

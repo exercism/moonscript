@@ -1,14 +1,4 @@
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
-int_lists = (list, level) ->
-  switch #list
-    when 0 then '{}'
-    when 1 then '{{1}}'
-    else
-      rows = [indent int_list(row), level + 1 for row in *list]
-      table.insert rows, 1, '{'
-      table.insert rows, indent('}', level)
-      table.concat rows, '\n'
+import int_lists from require 'test_helpers'
 
 {
   module_imports: {'spiral_matrix'},

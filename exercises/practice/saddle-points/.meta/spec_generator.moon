@@ -1,13 +1,4 @@
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
-int_lists = (lists, level) ->
-  if #lists == 1
-    "{#{int_list lists[1]}}"
-  else
-    rows = [indent int_list(row) .. ',', level + 1 for row in *lists]
-    table.insert rows, 1, '{'
-    table.insert rows, indent '}', level
-    table.concat rows, '\n'
+import int_lists, table_tostring_ordered from require 'test_helpers'
 
 result_obj = (obj) -> "{row: #{obj.row}, column: #{obj.column}}"
 result_list = (list) -> "{#{table.concat [result_obj obj for obj in *list], ', '}}"

@@ -1,5 +1,4 @@
-list_of_strings = (list) ->
-  "{#{table.concat [quote word for word in *list], ', '}}"
+import word_list from require 'test_helpers'
 
 {
   module_name: 'SecretHandshake',
@@ -9,7 +8,7 @@ list_of_strings = (list) ->
     -- you may want to "switch case.property" here
     lines = {
       "result = SecretHandshake.#{case.property} #{case.input.number}",
-      "expected = #{list_of_strings case.expected}",
+      "expected = #{word_list case.expected}",
       "assert.are.same expected, result"
     }
     table.concat [indent line, level for line in *lines], '\n'

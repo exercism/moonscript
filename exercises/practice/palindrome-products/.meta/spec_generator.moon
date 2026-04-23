@@ -1,7 +1,4 @@
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
-int_lists = (lists) ->
-  "{#{table.concat [int_list list for list in *lists], ', '}}"
+import int_list, int_lists from require 'test_helpers'
 
 value = (val) -> 
   if is_json_null val
@@ -23,7 +20,7 @@ value = (val) ->
       lines = {
         "palindrome, factors = PalindromeProducts.#{case.property} #{case.input.min}, #{case.input.max}",
         "expected_palindrome = #{value case.expected.value}",
-        "expected_factors    = #{int_lists case.expected.factors}",
+        "expected_factors    = #{int_lists case.expected.factors, level}",
         "assert.are.equal expected_palindrome, palindrome",
         "assert.are.same  expected_factors, factors",
       }

@@ -1,12 +1,4 @@
-string_list = (list, level) ->
-  if #list <= 2
-    "{#{table.concat [quote elem for elem in *list], ', '}}"
-  else
-    lines = [indent quote(elem) .. ',', level + 1 for elem in *list]
-    table.insert lines, 1, '{'
-    table.insert lines, indent('}', level)
-    table.concat lines, '\n'
-
+import string_list from require 'test_helpers'
 
 {
   module_imports: {'gamestate'},

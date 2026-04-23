@@ -12,6 +12,7 @@ int_list = (list) -> "{#{table.concat list, ', '}}"
 
 --- List of lists of ints
 int_lists = (lists, level) ->
+  error 'Provide a level for `int_lists`', 2 if not level
   if #lists == 0
     '{}'
   elseif #lists == 1
@@ -72,7 +73,12 @@ kv_table = (tbl, level) ->
   error 'Provide a level for `kv_table`', 2 if not level
   lines = {'{'}
   for k, v in pairs tbl
-    key = if k\match('^%a%w*$') then k else "[#{quote k}]"
+    key = if math.type(k) == "integer"
+      "[#{k}]"
+    elseif k\match('^%a%w*$') 
+      k
+    else
+      quote k
     table.insert lines, indent "#{key}: #{v},", level + 1
   table.insert lines, indent '}', level
   table.concat lines, '\n'

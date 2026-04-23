@@ -7,11 +7,12 @@ sort_users = (list) ->
   table.sort list, (a, b) -> a.name < b.name
   list
 
--- below, the tests do not require the payload to be validated
+-- The tests do not require the payload to be validated.
+-- Also, I'm not concerned about accepting references to user's tables,
+-- or returning references to internal tables.
 
 class RestApi
-  new: (database) =>
-    @db = {k,v for k,v in pairs database} -- clone it
+  new: (@db) =>
 
   GET:  (url, payload) => @route 'GET', url, payload
   POST: (url, payload) => @route 'POST', url, payload
@@ -19,16 +20,15 @@ class RestApi
   route: (method, url, payload) =>
     subject = url\match '^/(%w+)'
     func = "#{subject}_#{method}"
-    return {error: "Unknown function '#{func}'"} if not @[func]
+    return {error: "Unknown endpoint: #{method} #{url}"} if not @[func]
     @[func] @, payload
 
   users_GET: (payload) =>
-    users = @db.users or {}
     filter = if payload
       (user) -> contains payload.users, user.name
     else
       (user) -> true
-    {users: sort_users [u for u in *users when filter u]}
+    {users: sort_users [u for u in *@db.users when filter u]}
 
   add_POST: (payload) =>
     user = {

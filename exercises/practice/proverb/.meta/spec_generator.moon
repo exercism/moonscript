@@ -1,18 +1,18 @@
+import word_list from require 'test_helpers'
+
 {
   module_name: 'recite',
 
   generate_test: (case, level) ->
-    input = table.concat [quote word for word in *case.input.strings], ', '
-    local expected
-    if is_empty case.expected
-      expected = "''"
+    expected = if is_empty case.expected
+      "''"
     else
-      expected = "[[\n#{table.concat case.expected, '\n'}\n]]"
+      "[[\n#{table.concat case.expected, '\n'}\n]]"
 
     lines = {
-      (indent "result = recite {#{input}}", level),
-      (indent 'expected = ', level) .. expected,
-      (indent 'assert.are.equal expected, result', level)
+      "result = recite #{word_list case.input.strings}"
+      "expected = #{expected}"
+      'assert.are.equal expected, result'
     }
-    table.concat lines, '\n'
+    table.concat [indent line, level for line in *lines], '\n'
 }

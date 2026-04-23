@@ -1,19 +1,4 @@
-table_contains = (list, target) ->
-  for elem in *list
-    return true if elem == target
-  false
-
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
-instruction_list = (list, level) ->
-  if #list <= 2
-    "{#{table.concat [quote elem for elem in *list], ', '}}"
-  else
-    instrs = [indent quote(elem) .. ',', level + 1 for elem in *list]
-    table.insert instrs, 1, '{'
-    table.insert instrs, indent('}', level)
-    table.concat instrs, '\n'
-
+import int_list, string_list, table_contains from require 'test_helpers'
 
 {
   module_name: 'Forth',
@@ -24,8 +9,8 @@ instruction_list = (list, level) ->
       lines = {
         "interp1 = Forth!",
         "interp2 = Forth!",
-        "interp1\\evaluate #{instruction_list case.input.instructionsFirst, level}",
-        "interp2\\evaluate #{instruction_list case.input.instructionsSecond, level}",
+        "interp1\\evaluate #{string_list case.input.instructionsFirst, level}",
+        "interp2\\evaluate #{string_list case.input.instructionsSecond, level}",
         "assert.are.same #{int_list case.expected[1]}, interp1\\stack!",
         "assert.are.same #{int_list case.expected[2]}, interp2\\stack!",
       }
@@ -33,7 +18,7 @@ instruction_list = (list, level) ->
     else
       lines = {
         'interpreter = Forth!',
-        "instructions = #{instruction_list case.input.instructions, level}",
+        "instructions = #{string_list case.input.instructions, level}",
       }
 
       if case.expected.error

@@ -50,7 +50,9 @@ included_tests_from_toml = (path) ->
 -- functions marked as global so spec_generators can see them
 export indent, quote, is_json_null, is_empty, contains
 
-indent = (text, level) -> string.rep('  ', level) .. text
+indent = (text, level) ->
+  assert level, 'Provide the level to `indent`'
+  string.rep('  ', level) .. text
 
 quote = (str) ->
   if str\find "'"

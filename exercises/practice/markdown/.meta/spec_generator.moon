@@ -1,5 +1,4 @@
-json = require 'dkjson'
-json_string = (s) -> json.encode s
+import json_string from require 'test_helpers'
 
 {
   module_name: 'Markdown',

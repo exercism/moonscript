@@ -4,12 +4,17 @@ json = require 'dkjson'
 --    import int_list, word_list from require 'test_helpers'
 
 --- -----------------------------------------------------------------------
+--- Lists of booleans
+bool_list = (list) -> "{#{table.concat [tostring b for b in *list], ', '}}"
+
 --- List of ints
 int_list = (list) -> "{#{table.concat list, ', '}}"
 
 --- List of lists of ints
 int_lists = (lists, level) ->
-  if #lists == 1
+  if #lists == 0
+    '{}'
+  elseif #lists == 1
     "{#{int_list lists[1]}}"
   else
     rows = [indent int_list(row) .. ',', level + 1 for row in *lists]
@@ -73,9 +78,14 @@ kv_table = (tbl, level) ->
   table.concat lines, '\n'
 
 --- key-value table as a one-line string
--- Reminder: order of keys in indeterminate
+-- Reminder: order of keys in indeterminate.
+-- Note that `%q` renders floats in a hex format: -6.429 => -0x1.9b74bc6a7ef9ep+2
 table_tostring = (t) ->
   s = [string.format '%s: %q', k, v for k, v in pairs t]
+  "{#{table.concat s, ', '}}"
+
+table_tostring_ordered = (t, keys) ->
+  s = [string.format '%s: %q', k, t[k] for k in *keys]
   "{#{table.concat s, ', '}}"
 
 --- Table contains an element
@@ -128,6 +138,7 @@ table_dump = (what, level = 0) ->
 
 --- -----------------------------------------------------------------------
 {
+  :bool_list
   :int_list
   :int_lists
   :int_list_wrapped
@@ -135,6 +146,7 @@ table_dump = (what, level = 0) ->
   :string_list
   :kv_table
   :table_tostring
+  :table_tostring_ordered
   :json_string
   :table_contains
   :table_dump

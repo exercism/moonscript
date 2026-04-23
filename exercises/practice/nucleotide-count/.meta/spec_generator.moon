@@ -1,3 +1,5 @@
+import table_tostring_ordered from require 'test_helpers'
+
 {
   module_name: 'nucleotide_count',
 
@@ -11,7 +13,7 @@
     else
       -- use "same", not "equal", to compare tables
       lines = {
-        "expected = A: #{case.expected.A}, C: #{case.expected.C}, G: #{case.expected.G}, T: #{case.expected.T}"
+        "expected = #{table_tostring_ordered case.expected, {'A','C','G','T'}}"
         "result = nucleotide_count '#{case.input.strand}'",
         "assert.are.same expected, result"
       }

@@ -1,8 +1,4 @@
-json = require 'dkjson'
-json_string = (s) -> json.encode s
-
-int_list = (list) -> "{#{table.concat list, ', '}}"
-
+import json_string, int_list from require 'test_helpers'
 
 {
   module_name: 'Matrix',

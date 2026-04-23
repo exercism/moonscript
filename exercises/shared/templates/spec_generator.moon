@@ -1,6 +1,5 @@
--- helper functions can go here at the top, like:
-int_list = (list) -> "{#{table.concat list, ', '}}"
--- see `exercises/test_helpers.md` for some examples
+test_helpers = require 'test_helpers'
+import int_list, word_list from test_helpers
 
 {
   module_name: '${camel_slug}',
@@ -31,4 +30,5 @@ int_list = (list) -> "{#{table.concat list, ', '}}"
           "Bonus tests are indented 6 spaces"
         }
 ]]
+
 }

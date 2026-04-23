@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "rest_api.moon"
+    ],
+    "test": [
+      "rest_api_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Implement a RESTful API for tracking IOUs."
+}

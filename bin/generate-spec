@@ -132,7 +132,7 @@ canonical_data = json.decode read_file(canonical_data_path), 1, json.null
 tests_toml_path = exercise_directory .. '/.meta/tests.toml'
 included_tests = included_tests_from_toml tests_toml_path
 
-package.moonpath = "#{exercise_directory}/.meta/?.moon;#{package.moonpath}"
+package.moonpath = "#{exercise_directory}/.meta/?.moon;./lib/?.moon;#{package.moonpath}"
 spec_generator = require 'spec_generator'
 
 local spec

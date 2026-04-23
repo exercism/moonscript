@@ -13,183 +13,66 @@ These functions are exported from generate-spec for use in spec_generator module
 ## Helper functions
 
 Useful for generating pretty tables mostly.
+The functions are stored in `/lib/test_helpers.md`
 
-### List of ints
+An example:
 
 ```moonscript
-int_list = (list) -> "{#{table.concat list, ', '}}"
+test_helpers = require 'test_helpers'
+import int_list, word_list from test_helpers
+...
+generate_test: (case, level) ->
+  lines = {
+    "input = #{int_list case.input.numbers}"
+    "expected = #{word_list case.expected}"
+    ...
 ```
 
-Used in: all-your-base
+## Comparing tables deeply
 
-### List of lists of ints
+The `assert.are.same t1, t2` assertion is used to compare tables deeply.
+However when they don't match, by default busted does not show the whole object, which makes it hard for the student: "What is different?"
 
-```moonscript
-int_lists = (lists, level) ->
-  if #lists == 1
-    "{#{int_list lists[1]}}"
-  else
-    rows = [indent int_list(row) .. ',', level + 1 for row in *lists]
-    table.insert rows, 1, '{'
-    table.insert rows, indent '}', level
-    table.concat rows, '\n'
+```shnone
+Failure → ./rest_api_spec.moon @ 251
+rest-api iou lender owes borrower less than new loan
+...uarocks/lib/luarocks/rocks-5.4/busted/2.3.0-1/bin/busted:7: Expected objects to be the same.
+Passed in:
+(table: 0x641e0548a540) {
+ *[users] = {
+    [1] = {
+      [balance] = 1.0
+      [name] = 'Adam'
+      [owed_by] = { ... more }
+      [owes] = { } }
+   *[2] = {
+      [balance] = -1.0
+      [name] = 'Bob'
+      [owed_by] = { }
+     *[owes] = { ... more } } } }
+Expected:
+(table: 0x641e0548a620) {
+ *[users] = {
+    [1] = {
+      [balance] = 1.0
+      [name] = 'Adam'
+      [owed_by] = { ... more }
+      [owes] = { } }
+   *[2] = {
+      [balance] = -1.0
+      [name] = 'Bob'
+      [owed_by] = { }
+     *[owes] = { ... more } } } }
 ```
 
-Used in: saddle-points, spiral-matrix
+The solution here is to configure the `assert` object,.
+In the spec_generator.moon module, add this (adjust the value `4` as needed):
 
-### List of strings
-
-```moonscript
-string_list = (list) ->
-  "{#{table.concat [quote word for word in *list], ', '}}"
-```
-The `quote` function is defined in bin/generate-spec
-
-Used in: anagram
-
-### Indented multi-line list of strings
-
-```moonscript
-string_list = (list, level) ->
-  if #list <= 2
-    "{#{table.concat [quote elem for elem in *list], ', '}}"
-  else
-    lines = [indent quote(elem) .. ',', level + 1 for elem in *list]
-    table.insert lines, 1, '{'
-    table.insert lines, indent('}', level)
-    table.concat lines, '\n'
-```
-The `indent` function is defined in bin/generate-spec
-
-This returns a multi-line string without the first line indented.
-The returned string will be added to another string in the test case body,
-and then that string (without regard to internal newlines) will later be indented.
-
-Used in: forth, transpose
-
-### Key-Value list
-
-```moonscript
-kv_table = (tbl, level) ->
-  lines = {'{'}
-  for k, v in pairs tbl
-    key = if k\match('^%a%w*$') then k else "[#{quote k}]"
-    table.insert lines, indent "#{key}: #{v},", level + 1
-  table.insert lines, indent '}', level
-  table.concat lines, '\n'
-```
-
-Used in: word-count
-
-### key-value table as a one-line string
-
-```moonscript
-table.tostring = (t) ->
-  s = [string.format '%s: %q', k, v for k, v in pairs t]
-  "{#{table.concat s, ', '}}"
-```
-
-Reminder: order of keys in indeterminate
-
-Used in: meetup
-
-### Show strings with escapes, when you want to keep the `\t`, `\n` in the test case.
-
-```moonscript
-json = require 'dkjson'
--- and then
-  "result = Bob.hey #{json.encode case.input.heyBob}",
-```
-```moonscript
-json = require 'dkjson'
-json_string = (s) -> json.encode s
-```
-
-Used in: bob, matrix
-
-### Table contains an element
-
-```moonscript
-table_contains = (list, target) ->
-  for elem in *list
-    return true if elem == target
-  false
-```
-
-Used in: forth
-
-### Wrapped list of ints
-
-sieve has a test with loads of numbers.
-This _should_ work fine on Mac or Linux ("Works For Me™)
-
-```moonscript
-formatted = (list, level) ->
-  joined = table.concat list, ', '
-  cmd = "echo '#{joined}' | fold -s -w 76"
-  fh = io.popen cmd, 'r'
-  return "{#{joined}}" if not fh
-
-  lines = [indent(line\gsub('%s+$', ''), level + 1) for line in fh\lines!]
-
-  result = {fh\close!}
-  lines = {joined} if not result[1]
-
-  if #lines == 1
-    "{#{lines[1]\gsub('^%s+', '')}}"
-  else
-    table.insert lines, 1, "{"
-    table.insert lines, (indent "}", level)
-    table.concat lines, '\n'
-```
-
-### Arbitrarily deep nested tables
-
-The sgf-parsing exercises produces recursively nested structures.
-I came up with this (which could probably be refactored)
-
-```moonscript
-json = require 'dkjson'
-json_string = (s) -> json.encode s
-
-is_sequence = (t) ->
-  return false if type(t) != 'table'
-  size = 0
-  size += 1 for k, _ in pairs t when k != 'n'
-  size == #t
-
-is_empty = (t) -> not next t
-
--- mostly taken from:
--- https://github.com/leafo/moonscript/blob/7b7899741c6c1e971e436d36c9aabb56f51dc3d5/moonscript/util.moon#L58
-to_string = (what, level = 0) ->
-  seen = {}
-  _dump = (what, depth = 0) ->
-    t = type what
-    if t == 'string' then
-      json_string what
-    elseif t != 'table' then
-      tostring what
-    else
-      if seen[what] then
-        return "<cycle:#{tostring what}>"
-      seen[what] = true
-      if is_sequence what then
-        return "{" .. table.concat([to_string(v, level + depth + 1) for v in *what], ", ") .. "}"
-
-      depth += 1
-      lines = for k,v in pairs what do
-        key = if type(k) == 'number' then "[#{k}]" else k
-        (' ')\rep(depth * 2) .. "#{key}: " .. _dump(v, depth)
-      seen[what] = false
-      val = if not is_empty lines
-        table.concat [indent(line, level) .. "\n" for line in *lines]
-      else
-        ""
-      class_name = if type(what.__class) == 'table' and type(what.__class.__name) == 'string'
-        "<#{what.__class.__name}>"
-      "#{class_name or ""}{\n#{val}#{indent '}', level + depth - 1}"
-  _dump what
+```none
+  -- we have deep tables to compare, display it all when not the same
+  test_helpers: [[
+  assert\set_parameter "TableFormatLevel", 4
+]]
 ```
 
 ## Custom assertions
@@ -197,4 +80,3 @@ to_string = (what, level = 0) ->
 - dnd-character: `assert.between value, min, max`
 - space-age: `assert.approx_equal #{case.expected}, result`
 - word-count: `assert.has.same_kv result, expected`
-

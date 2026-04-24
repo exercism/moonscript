@@ -683,6 +683,14 @@
         "difficulty": 5
       },
       {
+        "slug": "game-of-life",
+        "name": "Conway's Game of Life",
+        "uuid": "a12cd1e2-4108-40ad-aa72-80706d1eeb30",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "crypto-square",
         "name": "Crypto Square",
         "uuid": "7e4ad5c7-fe53-4f7b-ac20-8f4c03799194",

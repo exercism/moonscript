@@ -48,6 +48,8 @@ Pick a style that you think is particularly readable for the module you're creat
 
   MyClassName
   ```
+  
+  However if the class definition is the last thing in the module, it's not necessary to explicitly return the class name.
 
 * a module that defines some functions can return the functions defined inside a table (note the colon after the function name):
 

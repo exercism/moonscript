@@ -5,6 +5,7 @@ trim = (str) -> str\gsub("^'+", '')\gsub("'+$", '')
     result = {}
     for word in sentence\lower!\gmatch("[%w+']+")
       w = trim word
-      result[w] = (result[w] or 0) + 1
+      if #w > 0
+        result[w] = (result[w] or 0) + 1
     result
 }

@@ -851,6 +851,14 @@
         "difficulty": 6
       },
       {
+        "slug": "wordy",
+        "name": "Wordy",
+        "uuid": "c4112228-adec-4109-a9aa-5bd366c1e658",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6
+      },
+      {
         "slug": "book-store",
         "name": "Book Store",
         "uuid": "5cda9fbb-709f-44c0-bddf-5cf2652eff01",

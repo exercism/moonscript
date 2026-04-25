@@ -7,8 +7,10 @@ import json_string, kv_table from require 'test_helpers'
   -- ----------------------------------------------------------
   same_kv = (state, arguments) ->
     actual = arguments[1]
+    return false if type(actual) != 'table'
     expected = arguments[2]
-    return false if #expected != #actual
+    size = (t) -> #[k for k, _ in pairs t]
+    return false if size(expected) != size(actual)
     for k, v in pairs expected
       return false if actual[k] != v
     true

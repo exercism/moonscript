@@ -883,6 +883,14 @@
         "difficulty": 7
       },
       {
+        "slug": "alphametics",
+        "name": "Alphametics",
+        "uuid": "11e3eb84-464f-49ce-8f4c-983c552cc748",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "forth",
         "name": "Forth",
         "uuid": "effcc47c-8a75-46be-b6f1-b0a9f00527ff",

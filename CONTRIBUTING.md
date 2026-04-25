@@ -129,7 +129,7 @@ It's a module that returns a table.
 
 - [`dnd-character`][dnd-character] -- `assert.between value, min, max`
 - [`space-age`][space-age] -- `assert.approx_equal #{case.expected}, result`
-- [`word-count`][word-count] -- `assert.has.same_kv result, expected`
+- [`alphametics`][alphametics] -- `assert.has.same_kv result, expected`
 
 #### Helper functions for formatting test cases
 
@@ -246,7 +246,7 @@ Here, the value `4` was chosen to reflect the max depth of the expected value:
 [generate-spec-exported]: ./bin/generate-spec#L51
 [test-helpers]: ./lib/test_helpers.moon
 [space-age]: ./exercises/practice/space-age/.meta/spec_generator.moon
-[word-count]: ./exercises/practice/word-count/.meta/spec_generator.moon
+[alphametics]: ./exercises/practice/alphametics/.meta/spec_generator.moon
 [dnd-character]: ./exercises/practice/dnd-character/.meta/spec_generator.moon
 [gigasecond]: ./exercises/practice/gigasecond/.meta/spec_generator.moon
 [simple-linked-list]: ./exercises/practice/simple-linked-list/.meta/spec_generator.moon

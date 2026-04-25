@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "alphametics.moon"
+    ],
+    "test": [
+      "alphametics_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Given an alphametics puzzle, find the correct solution."
+}

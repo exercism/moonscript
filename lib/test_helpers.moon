@@ -54,9 +54,10 @@ word_list = (list) ->
 -- This returns a multi-line string without the first line indented.
 -- The returned string will be added to another string in the test case body,
 -- and then that string (without regard to internal newlines) will later be indented.
-string_list = (list, level) ->
+string_list = (list, level, opts) ->
   error 'Provide a level for `string_list`', 2 if not level
-  if #list <= 2
+  opts = opts or {inline: 2}
+  if #list <= opts.inline
     "{#{table.concat [quote elem for elem in *list], ', '}}"
   else
     lines = [indent quote(elem) .. ',', level + 1 for elem in *list]

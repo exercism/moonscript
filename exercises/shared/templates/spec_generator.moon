@@ -1,9 +1,10 @@
-test_helpers = require 'test_helpers'
-import int_list, word_list from test_helpers
+import int_list, word_list from require 'test_helpers'
 
 {
+  -- one of:
   module_name: '${camel_slug}',
-  -- or, module_imports: {'func1', 'func2', ...},
+  -- or
+  -- module_imports: {'func1', 'func2', ...},
 
   generate_test: (case, level) ->
     local lines

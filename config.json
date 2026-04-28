@@ -867,6 +867,14 @@
         "difficulty": 7
       },
       {
+        "slug": "rectangles",
+        "name": "Rectangles",
+        "uuid": "c63979dc-1b48-4fbf-ae84-c10ba5a10304",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "rest-api",
         "name": "REST API",
         "uuid": "a999597a-d5db-4a72-83f7-133a2b7f3add",

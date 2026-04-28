@@ -867,6 +867,14 @@
         "difficulty": 7
       },
       {
+        "slug": "dominoes",
+        "name": "Dominoes",
+        "uuid": "2feb9a0a-2fcf-4e82-ad28-301f9b9ec883",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "rectangles",
         "name": "Rectangles",
         "uuid": "c63979dc-1b48-4fbf-ae84-c10ba5a10304",

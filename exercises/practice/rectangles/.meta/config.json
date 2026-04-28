@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "rectangles.moon"
+    ],
+    "test": [
+      "rectangles_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Count the rectangles in an ASCII diagram."
+}

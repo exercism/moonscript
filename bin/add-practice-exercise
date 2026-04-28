@@ -69,8 +69,14 @@ fi
 ./bin/fetch-configlet
 ./bin/configlet create --practice-exercise "${slug}" --author "${author}" --difficulty "${difficulty}"
 
-filter='.exercises.practice |= sort_by(.difficulty, (.name|ascii_upcase))'
-jq "${filter}" config.json > config.sorted && mv config.sorted config.json
+# sort by difficulty, then by name, but hello-world should always be first
+jq '
+    .exercises.practice |= (
+        map(if .slug == "hello-world" then .difficulty = -1 else . end)
+        | sort_by(.difficulty, (.name|ascii_upcase))
+        | .[0].difficulty = 1
+    )
+' config.json > config.sorted && mv config.sorted config.json
 
 exercise_dir="exercises/practice/${slug}"
 files=$(

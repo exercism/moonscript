@@ -43,57 +43,41 @@
         "difficulty": 1
       },
       {
-        "slug": "armstrong-numbers",
-        "name": "Armstrong Numbers",
-        "uuid": "a9cc7677-4151-4e3b-b08a-be547a56d705",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
-        "slug": "atbash-cipher",
-        "name": "Atbash Cipher",
-        "uuid": "dc112a08-5969-490e-8108-833f6f927cb2",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
-        "slug": "collatz-conjecture",
-        "name": "Collatz Conjecture",
-        "uuid": "0c6713d7-d0d8-4724-8c41-cbec5202689f",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "darts",
         "name": "Darts",
         "uuid": "4f75ff5d-f049-4053-8a96-86d45025b529",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 2
+        "difficulty": 1
       },
       {
-        "slug": "difference-of-squares",
-        "name": "Difference of Squares",
-        "uuid": "fe0d1922-3f7e-4fe6-baba-c5a8a495a3c7",
+        "slug": "leap",
+        "name": "Leap",
+        "uuid": "fe4c3a99-0d1e-4476-a9c6-73b676a7a427",
         "practices": [],
         "prerequisites": [],
-        "difficulty": 2
+        "difficulty": 1
+      },
+      {
+        "slug": "raindrops",
+        "name": "Raindrops",
+        "uuid": "9c6613c5-3df7-44a5-bb6e-4e7f0663b888",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
+      },
+      {
+        "slug": "two-fer",
+        "name": "Two-Fer",
+        "uuid": "677295c3-9ee4-418d-89cb-f8f016228062",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 1
       },
       {
         "slug": "eliuds-eggs",
         "name": "Eliud's Eggs",
         "uuid": "3c321816-b49c-45bd-a52d-f0b4e1f289b7",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
-        "slug": "etl",
-        "name": "ETL",
-        "uuid": "2c772f04-f65d-48f8-a19b-efaa84a5226d",
         "practices": [],
         "prerequisites": [],
         "difficulty": 2
@@ -123,14 +107,6 @@
         "difficulty": 2
       },
       {
-        "slug": "leap",
-        "name": "Leap",
-        "uuid": "fe4c3a99-0d1e-4476-a9c6-73b676a7a427",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "line-up",
         "name": "Line Up",
         "uuid": "faab9c05-bbb8-4b5c-8cb9-6d7019927630",
@@ -150,14 +126,6 @@
         "slug": "pangram",
         "name": "Pangram",
         "uuid": "7efe4785-5328-4130-8821-5fc067f29586",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
-        "slug": "raindrops",
-        "name": "Raindrops",
-        "uuid": "9c6613c5-3df7-44a5-bb6e-4e7f0663b888",
         "practices": [],
         "prerequisites": [],
         "difficulty": 2
@@ -211,14 +179,6 @@
         "difficulty": 2
       },
       {
-        "slug": "two-fer",
-        "name": "Two-Fer",
-        "uuid": "677295c3-9ee4-418d-89cb-f8f016228062",
-        "practices": [],
-        "prerequisites": [],
-        "difficulty": 2
-      },
-      {
         "slug": "acronym",
         "name": "Acronym",
         "uuid": "c8246501-0d84-4055-beb7-7ad79b0d88d9",
@@ -238,6 +198,22 @@
         "slug": "anagram",
         "name": "Anagram",
         "uuid": "64808988-f990-4804-ad31-952254a879d9",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "armstrong-numbers",
+        "name": "Armstrong Numbers",
+        "uuid": "a9cc7677-4151-4e3b-b08a-be547a56d705",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "atbash-cipher",
+        "name": "Atbash Cipher",
+        "uuid": "dc112a08-5969-490e-8108-833f6f927cb2",
         "practices": [],
         "prerequisites": [],
         "difficulty": 3
@@ -275,9 +251,33 @@
         "difficulty": 3
       },
       {
+        "slug": "collatz-conjecture",
+        "name": "Collatz Conjecture",
+        "uuid": "0c6713d7-d0d8-4724-8c41-cbec5202689f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "dnd-character",
         "name": "D&D Character",
         "uuid": "4857b012-eb5d-4538-b17e-8a1eb2206285",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "difference-of-squares",
+        "name": "Difference of Squares",
+        "uuid": "fe0d1922-3f7e-4fe6-baba-c5a8a495a3c7",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
+        "slug": "etl",
+        "name": "ETL",
+        "uuid": "2c772f04-f65d-48f8-a19b-efaa84a5226d",
         "practices": [],
         "prerequisites": [],
         "difficulty": 3

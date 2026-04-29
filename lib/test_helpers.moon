@@ -95,6 +95,17 @@ table_tostring_ordered = (t, keys) ->
   s = [string.format '%s: %q', k, t[k] for k in *keys]
   "{#{table.concat s, ', '}}"
 
+--- list of one-line key-value tables
+table_list = (list, level) ->
+  error 'Provide a level for `table_list`', 2 if not level
+  if #list <= 1
+    "{#{table.concat [table_tostring elem for elem in *list], ', '}}"
+  else
+    lines = [indent table_tostring(elem) .. ',', level + 1 for elem in *list]
+    table.insert lines, 1, '{'
+    table.insert lines, indent('}', level)
+    table.concat lines, '\n'
+
 --- Table contains an element
 table_contains = (list, target) ->
   for elem in *list
@@ -154,6 +165,7 @@ table_dump = (what, level = 0) ->
   :kv_table
   :table_tostring
   :table_tostring_ordered
+  :table_list
   :json_string
   :table_contains
   :table_dump

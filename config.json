@@ -907,6 +907,14 @@
         "difficulty": 8
       },
       {
+        "slug": "connect",
+        "name": "Connect",
+        "uuid": "8c824d1a-0609-4c72-8a3b-512a8469cc8f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 8
+      },
+      {
         "slug": "forth",
         "name": "Forth",
         "uuid": "effcc47c-8a75-46be-b6f1-b0a9f00527ff",

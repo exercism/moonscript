@@ -89,9 +89,9 @@ process = (node, level=0) ->
     output = {}
 
     if node.description
-      table.insert output, indent("describe #{quote node.description}, ->", level)
+      table.insert output, indent("describe #{quote(node.description .. ':')}, ->", level)
     else
-      table.insert output, indent("describe '#{exercise_name}', ->", level)
+      table.insert output, indent("describe '#{exercise_name}:', ->", level)
 
       if spec_generator.test_helpers
         table.insert output, spec_generator.test_helpers

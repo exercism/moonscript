@@ -1,6 +1,6 @@
 Yacht = require 'yacht'
 
-describe 'yacht', ->
+describe 'yacht:', ->
   it 'Yacht', ->
     result = Yacht.score 'yacht', {5, 5, 5, 5, 5}
     assert.is.equal 50, result

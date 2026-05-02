@@ -1,7 +1,7 @@
 Allergies = require 'allergies'
 
-describe 'allergies', ->
-  describe 'testing for eggs allergy', ->
+describe 'allergies:', ->
+  describe 'testing for eggs allergy:', ->
     it 'not allergic to anything', ->
       result = Allergies.allergic_to 'eggs', 0
       assert.is_false result
@@ -22,7 +22,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'eggs', 255
       assert.is_true result
 
-  describe 'testing for peanuts allergy', ->
+  describe 'testing for peanuts allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'peanuts', 0
       assert.is_false result
@@ -43,7 +43,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'peanuts', 255
       assert.is_true result
 
-  describe 'testing for shellfish allergy', ->
+  describe 'testing for shellfish allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'shellfish', 0
       assert.is_false result
@@ -64,7 +64,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'shellfish', 255
       assert.is_true result
 
-  describe 'testing for strawberries allergy', ->
+  describe 'testing for strawberries allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'strawberries', 0
       assert.is_false result
@@ -85,7 +85,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'strawberries', 255
       assert.is_true result
 
-  describe 'testing for tomatoes allergy', ->
+  describe 'testing for tomatoes allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'tomatoes', 0
       assert.is_false result
@@ -106,7 +106,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'tomatoes', 255
       assert.is_true result
 
-  describe 'testing for chocolate allergy', ->
+  describe 'testing for chocolate allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'chocolate', 0
       assert.is_false result
@@ -127,7 +127,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'chocolate', 255
       assert.is_true result
 
-  describe 'testing for pollen allergy', ->
+  describe 'testing for pollen allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'pollen', 0
       assert.is_false result
@@ -148,7 +148,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'pollen', 255
       assert.is_true result
 
-  describe 'testing for cats allergy', ->
+  describe 'testing for cats allergy:', ->
     pending 'not allergic to anything', ->
       result = Allergies.allergic_to 'cats', 0
       assert.is_false result
@@ -169,7 +169,7 @@ describe 'allergies', ->
       result = Allergies.allergic_to 'cats', 255
       assert.is_true result
 
-  describe 'list when:', ->
+  describe 'list when::', ->
     pending 'no allergies', ->
       result = Allergies.list 0
       expected = {}

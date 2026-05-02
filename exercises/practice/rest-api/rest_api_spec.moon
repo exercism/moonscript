@@ -1,9 +1,9 @@
 RestApi = require 'rest_api'
 
-describe 'rest-api', ->
+describe 'rest-api:', ->
   assert\set_parameter "TableFormatLevel", 4
 
-  describe 'user management', ->
+  describe 'user management:', ->
     it 'no users', ->
       database = {
         users: {}
@@ -25,9 +25,9 @@ describe 'rest-api', ->
       }
       result = api\POST '/add', payload
       expected = {
-        owed_by: {}
         balance: 0.0
         owes: {}
+        owed_by: {}
         name: "Adam"
       }
       assert.are.same expected, result
@@ -35,14 +35,14 @@ describe 'rest-api', ->
     pending 'get single user', ->
       database = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Bob"
           }}
       }
@@ -53,50 +53,50 @@ describe 'rest-api', ->
       result = api\GET '/users', payload
       expected = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Bob"
           }}
       }
       assert.are.same expected, result
 
-  describe 'iou', ->
+  describe 'iou:', ->
     pending 'both users have 0 balance', ->
       database = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Bob"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
-        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
+            balance: 3.0
+            owes: {}
             owed_by: {
               Bob: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: -3.0
             owes: {
               Adam: 3.0
             }
+            owed_by: {}
             name: "Bob"
           }}
       }
@@ -105,48 +105,48 @@ describe 'rest-api', ->
     pending 'borrower has negative balance', ->
       database = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: -3.0
             owes: {
               Chuck: 3.0
             }
+            owed_by: {}
             name: "Bob"
           }, {
+            balance: 3.0
+            owes: {}
             owed_by: {
               Bob: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Chuck"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
-        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
+            balance: 3.0
+            owes: {}
             owed_by: {
               Bob: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: -6.0
             owes: {
               Chuck: 3.0
               Adam: 3.0
             }
+            owed_by: {}
             name: "Bob"
           }}
       }
@@ -155,48 +155,48 @@ describe 'rest-api', ->
     pending 'lender has negative balance', ->
       database = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: -3.0
             owes: {
               Chuck: 3.0
             }
+            owed_by: {}
             name: "Bob"
           }, {
+            balance: 3.0
+            owes: {}
             owed_by: {
               Bob: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Chuck"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 3.0
         borrower: "Adam"
         lender: "Bob"
-        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            owed_by: {}
             balance: -3.0
             owes: {
               Bob: 3.0
             }
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {
-              Adam: 3.0
-            }
             balance: 0.0
             owes: {
               Chuck: 3.0
+            }
+            owed_by: {
+              Adam: 3.0
             }
             name: "Bob"
           }}
@@ -206,42 +206,42 @@ describe 'rest-api', ->
     pending 'lender owes borrower', ->
       database = {
         users: {{
-            owed_by: {}
             balance: -3.0
             owes: {
               Bob: 3.0
             }
+            owed_by: {}
             name: "Adam"
           }, {
+            balance: 3.0
+            owes: {}
             owed_by: {
               Adam: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Bob"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 2.0
         borrower: "Bob"
         lender: "Adam"
-        amount: 2.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            owed_by: {}
             balance: -1.0
             owes: {
               Bob: 1.0
             }
+            owed_by: {}
             name: "Adam"
           }, {
+            balance: 1.0
+            owes: {}
             owed_by: {
               Adam: 1.0
             }
-            balance: 1.0
-            owes: {}
             name: "Bob"
           }}
       }
@@ -250,42 +250,42 @@ describe 'rest-api', ->
     pending 'lender owes borrower less than new loan', ->
       database = {
         users: {{
-            owed_by: {}
             balance: -3.0
             owes: {
               Bob: 3.0
             }
+            owed_by: {}
             name: "Adam"
           }, {
+            balance: 3.0
+            owes: {}
             owed_by: {
               Adam: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Bob"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 4.0
         borrower: "Bob"
         lender: "Adam"
-        amount: 4.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
+            balance: 1.0
+            owes: {}
             owed_by: {
               Bob: 1.0
             }
-            balance: 1.0
-            owes: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: -1.0
             owes: {
               Adam: 1.0
             }
+            owed_by: {}
             name: "Bob"
           }}
       }
@@ -294,38 +294,38 @@ describe 'rest-api', ->
     pending 'lender owes borrower same as new loan', ->
       database = {
         users: {{
-            owed_by: {}
             balance: -3.0
             owes: {
               Bob: 3.0
             }
+            owed_by: {}
             name: "Adam"
           }, {
+            balance: 3.0
+            owes: {}
             owed_by: {
               Adam: 3.0
             }
-            balance: 3.0
-            owes: {}
             name: "Bob"
           }}
       }
       api = RestApi database
       payload = {
+        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
-        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Adam"
           }, {
-            owed_by: {}
             balance: 0.0
             owes: {}
+            owed_by: {}
             name: "Bob"
           }}
       }

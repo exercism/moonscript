@@ -1,6 +1,6 @@
 Camicia = require 'camicia'
 
-describe 'camicia', ->
+describe 'camicia:', ->
   it 'two cards, one trick', ->
     playerA = {'2'}
     playerB = {'3'}

@@ -1,6 +1,6 @@
 reverse = require 'reverse_string'
 
-describe 'reverse-string', ->
+describe 'reverse-string:', ->
   it 'an empty string', ->
     result = reverse ''
     assert.are.equal '', result

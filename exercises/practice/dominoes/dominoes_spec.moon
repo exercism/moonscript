@@ -1,6 +1,6 @@
 import canChain from require 'dominoes'
 
-describe 'dominoes', ->
+describe 'dominoes:', ->
   it 'empty input = empty output', ->
     dominoes = {}
     assert.is.true canChain dominoes

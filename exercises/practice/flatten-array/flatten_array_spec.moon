@@ -1,6 +1,6 @@
 import flatten from require 'flatten_array'
 
-describe 'flatten-array', ->
+describe 'flatten-array:', ->
   it 'empty', ->
     input = {}
     expected = {}

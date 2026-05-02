@@ -1,6 +1,6 @@
 PascalsTriangle = require 'pascals_triangle'
 
-describe 'pascals-triangle', ->
+describe 'pascals-triangle:', ->
   it 'zero rows', ->
     result = PascalsTriangle.rows 0
     expected = {}

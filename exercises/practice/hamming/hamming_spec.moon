@@ -1,6 +1,6 @@
 hamming = require 'hamming'
 
-describe 'hamming', ->
+describe 'hamming:', ->
   it 'empty strands', ->
     result = hamming.distance '', ''
     assert.are.equal 0, result

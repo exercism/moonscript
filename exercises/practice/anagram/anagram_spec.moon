@@ -1,6 +1,6 @@
 find_anagrams = require 'anagram'
 
-describe 'anagram', ->
+describe 'anagram:', ->
   it 'no matches', ->
     result = find_anagrams 'diaper', {'hello', 'world', 'zombies', 'pants'}
     expected = {}

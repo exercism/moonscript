@@ -1,6 +1,6 @@
 is_pangram = require 'pangram'
 
-describe 'pangram', ->
+describe 'pangram:', ->
   it 'empty sentence', ->
     result = is_pangram ''
     assert.is_false result

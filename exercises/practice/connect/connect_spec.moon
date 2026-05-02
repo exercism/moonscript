@@ -1,6 +1,6 @@
 Connect = require 'connect'
 
-describe 'connect', ->
+describe 'connect:', ->
   it 'an empty board has no winner', ->
     board = {
       '. . . . .',

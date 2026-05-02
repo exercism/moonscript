@@ -1,6 +1,6 @@
 Prism = require 'prism'
 
-describe 'prism', ->
+describe 'prism:', ->
   it 'zero prisms', ->
     start = {x: 0, y: 0, angle: 0}
     prisms = {}

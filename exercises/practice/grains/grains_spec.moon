@@ -1,7 +1,7 @@
 Grains = require 'grains'
 
-describe 'grains', ->
-  describe 'returns the number of grains on the square', ->
+describe 'grains:', ->
+  describe 'returns the number of grains on the square:', ->
     it 'grains on square 1', ->
       assert.are.equal 1, Grains.square 1
 

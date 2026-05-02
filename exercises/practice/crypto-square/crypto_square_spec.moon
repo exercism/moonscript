@@ -1,6 +1,6 @@
 import encode from require 'crypto_square'
 
-describe 'crypto-square', ->
+describe 'crypto-square:', ->
   it 'empty plaintext results in an empty ciphertext', ->
     result = encode ''
     expected = ''

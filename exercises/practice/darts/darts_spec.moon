@@ -1,6 +1,6 @@
 darts = require 'darts'
 
-describe 'darts', ->
+describe 'darts:', ->
   it 'Missed target', ->
     result = darts.score -9, 9
     assert.are.equal 0, result

@@ -1,6 +1,6 @@
 Matrix = require 'matrix'
 
-describe 'matrix', ->
+describe 'matrix:', ->
   it 'extract row from one number matrix', ->
     result = Matrix.row "1", 1
     expected = {1}

@@ -1,6 +1,6 @@
 import modifier, ability, character from require 'dnd_character'
 
-describe 'dnd-character', ->
+describe 'dnd-character:', ->
   -- ----------------------------------------------------------
   between = (state, arguments) ->
     assert #arguments == 3, 'expected three arguments to assert.between: value, min, max'
@@ -13,7 +13,7 @@ describe 'dnd-character', ->
   assert\register 'assertion', 'between', between, 'assertion.between.positive', 'assertion.between.negative'
   -- ----------------------------------------------------------
   
-  describe 'ability modifier', ->
+  describe 'ability modifier:', ->
     it 'ability modifier for score 3 is -4', ->
       assert.are.equal -4, modifier 3
 

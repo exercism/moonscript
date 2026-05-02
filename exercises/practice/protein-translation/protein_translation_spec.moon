@@ -1,6 +1,6 @@
 import proteins from require 'protein_translation'
 
-describe 'protein-translation', ->
+describe 'protein-translation:', ->
   it 'Empty RNA sequence results in no proteins', ->
     result = proteins ''
     expected = {}

@@ -1,6 +1,6 @@
 import abbreviate from require 'acronym'
 
-describe 'acronym', ->
+describe 'acronym:', ->
   it 'basic', ->
     result = abbreviate 'Portable Network Graphics'
     assert.are.equal 'PNG', result

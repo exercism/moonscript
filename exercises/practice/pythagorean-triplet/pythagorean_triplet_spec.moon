@@ -1,6 +1,6 @@
 import triplets_with_sum from require 'pythagorean_triplet'
 
-describe 'pythagorean-triplet', ->
+describe 'pythagorean-triplet:', ->
   it 'triplets whose sum is 12', ->
     result = triplets_with_sum 12
     expected = {{3, 4, 5}}

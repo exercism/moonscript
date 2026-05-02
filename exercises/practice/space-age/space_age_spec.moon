@@ -1,6 +1,6 @@
 SpaceAge = require 'space_age'
 
-describe 'space-age', ->
+describe 'space-age:', ->
   -- ----------------------------------------
   -- Why do we need to test "approximately equal"?
   -- See https://0.30000000000000004.com

@@ -1,6 +1,6 @@
 Say = require './say'
 
-describe 'say', ->
+describe 'say:', ->
   it 'zero', ->
     result = Say.in_english 0
     expected = 'zero'

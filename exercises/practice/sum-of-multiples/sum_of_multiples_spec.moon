@@ -1,6 +1,6 @@
 SumOfMultiples = require 'sum_of_multiples'
 
-describe 'sum-of-multiples', ->
+describe 'sum-of-multiples:', ->
   it 'no multiples within limit', ->
     result = SumOfMultiples.sum {3, 5}, 1
     assert.are.equal 0, result

@@ -1,6 +1,6 @@
 import saddle_points from require 'saddle_points'
 
-describe 'saddle-points', ->
+describe 'saddle-points:', ->
   cmp_saddle_points = (a, b) ->
     a.row < b.row or (a.row == b.row and a.column < b.column)
 

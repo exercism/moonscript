@@ -1,6 +1,6 @@
 tournament = require 'tournament'
 
-describe 'tournament', ->
+describe 'tournament:', ->
   
   write_file = (filename, lines) ->
     with io.open filename, 'w'

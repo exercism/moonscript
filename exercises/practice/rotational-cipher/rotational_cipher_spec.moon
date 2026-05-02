@@ -1,6 +1,6 @@
 RotationalCipher = require 'rotational_cipher'
 
-describe 'rotational-cipher', ->
+describe 'rotational-cipher:', ->
   it 'rotate a by 0, same output as input', ->
     result = RotationalCipher.rotate 'a', 0
     expected = 'a'

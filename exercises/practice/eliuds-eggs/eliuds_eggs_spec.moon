@@ -1,6 +1,6 @@
 count_eggs = require 'eliuds_eggs'
 
-describe 'eliuds-eggs', ->
+describe 'eliuds-eggs:', ->
   it '0 eggs', ->
     result = count_eggs 0
     assert.are.equal 0, result

@@ -1,6 +1,6 @@
 import meetup from require 'meetup'
 
-describe 'meetup', ->
+describe 'meetup:', ->
   it 'when teenth Monday is the 13th, the first day of the teenth week', ->
     result = meetup {year: 2013, month: 5, week: "teenth", dayofweek: "Monday"}
     expected = '2013-05-13'

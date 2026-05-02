@@ -1,6 +1,6 @@
 rational = require 'rational_numbers'
 
-describe 'rational-numbers', ->
+describe 'rational-numbers:', ->
   -- ----------------------------------------
   -- Why do we need to test "approximately equal"?
   -- See https://0.30000000000000004.com
@@ -15,8 +15,8 @@ describe 'rational-numbers', ->
   assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
   -- ----------------------------------------
 
-  describe 'Arithmetic', ->
-    describe 'Addition', ->
+  describe 'Arithmetic:', ->
+    describe 'Addition:', ->
       it 'Add two positive rational numbers', ->
         result = rational.add {1, 2}, {2, 3}
         expected = {7, 6}
@@ -37,7 +37,7 @@ describe 'rational-numbers', ->
         expected = {0, 1}
         assert.are.same expected, result
 
-    describe 'Subtraction', ->
+    describe 'Subtraction:', ->
       pending 'Subtract two positive rational numbers', ->
         result = rational.sub {1, 2}, {2, 3}
         expected = {-1, 6}
@@ -58,7 +58,7 @@ describe 'rational-numbers', ->
         expected = {0, 1}
         assert.are.same expected, result
 
-    describe 'Multiplication', ->
+    describe 'Multiplication:', ->
       pending 'Multiply two positive rational numbers', ->
         result = rational.mul {1, 2}, {2, 3}
         expected = {1, 3}
@@ -89,7 +89,7 @@ describe 'rational-numbers', ->
         expected = {0, 1}
         assert.are.same expected, result
 
-    describe 'Division', ->
+    describe 'Division:', ->
       pending 'Divide two positive rational numbers', ->
         result = rational.div {1, 2}, {2, 3}
         expected = {3, 4}
@@ -110,7 +110,7 @@ describe 'rational-numbers', ->
         expected = {1, 2}
         assert.are.same expected, result
 
-  describe 'Absolute value', ->
+  describe 'Absolute value:', ->
     pending 'Absolute value of a positive rational number', ->
       result = rational.abs {1, 2}
       assert.are.same {1, 2}, result
@@ -135,7 +135,7 @@ describe 'rational-numbers', ->
       result = rational.abs {2, 4}
       assert.are.same {1, 2}, result
 
-  describe 'Exponentiation of a rational number', ->
+  describe 'Exponentiation of a rational number:', ->
     pending 'Raise a positive rational number to a positive integer power', ->
       result = rational.exprational {1, 2}, 3
       assert.are.same {1, 8}, result
@@ -172,7 +172,7 @@ describe 'rational-numbers', ->
       result = rational.exprational {-1, 2}, 0
       assert.are.same {1, 1}, result
 
-  describe 'Exponentiation of a real number to a rational number', ->
+  describe 'Exponentiation of a real number to a rational number:', ->
     pending 'Raise a real number to a positive rational number', ->
       result = rational.expreal 8, {4, 3}
       assert.approx_equal 16.0, result
@@ -185,7 +185,7 @@ describe 'rational-numbers', ->
       result = rational.expreal 2, {0, 1}
       assert.approx_equal 1.0, result
 
-  describe 'Reduction to lowest terms', ->
+  describe 'Reduction to lowest terms:', ->
     pending 'Reduce a positive rational number to lowest terms', ->
       result = rational.reduce {2, 4}
       assert.are.same {1, 2}, result

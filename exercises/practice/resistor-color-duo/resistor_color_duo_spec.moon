@@ -1,6 +1,6 @@
 ResistorColorDuo = require 'resistor_color_duo'
 
-describe 'resistor-color-duo', ->
+describe 'resistor-color-duo:', ->
   it 'Brown and black', ->
     result = ResistorColorDuo.value 'brown', 'black'
     assert.are.equal 10, result

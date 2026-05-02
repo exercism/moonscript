@@ -1,6 +1,6 @@
 BookStore = require 'book_store'
 
-describe 'book-store', ->
+describe 'book-store:', ->
   it 'Only a single book', ->
     result = BookStore.total {1}
     expected = 800

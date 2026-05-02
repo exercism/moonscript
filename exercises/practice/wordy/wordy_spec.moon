@@ -1,6 +1,6 @@
 Wordy = require 'wordy'
 
-describe 'wordy', ->
+describe 'wordy:', ->
   it 'just a number', ->
     result = Wordy.answer 'What is 5?'
     assert.are.equal 5, result

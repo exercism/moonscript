@@ -1,6 +1,6 @@
 CollatzConjecture = require 'collatz_conjecture'
 
-describe 'collatz-conjecture', ->
+describe 'collatz-conjecture:', ->
   it 'zero steps for one', ->
     result = CollatzConjecture.steps 1
     assert.are.equal 0, result

@@ -1,6 +1,6 @@
 ArmstrongNumbers = require 'armstrong_numbers'
 
-describe 'armstrong-numbers', ->
+describe 'armstrong-numbers:', ->
   it 'Zero is an Armstrong number', ->
     result = ArmstrongNumbers.is_armstrong 0
     assert.is_true result

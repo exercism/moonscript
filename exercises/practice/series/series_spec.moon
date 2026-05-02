@@ -1,6 +1,6 @@
 import slices from require 'series'
 
-describe 'series', ->
+describe 'series:', ->
   it 'slices of one from one', ->
     result = [slice for slice in slices '1', 1]
     expected = {'1'}

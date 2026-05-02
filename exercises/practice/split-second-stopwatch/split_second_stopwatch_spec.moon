@@ -1,6 +1,6 @@
 SplitSecondStopwatch = require 'split_second_stopwatch'
 
-describe 'split-second-stopwatch', ->
+describe 'split-second-stopwatch:', ->
   it 'new stopwatch starts in ready state', ->
     stopwatch = SplitSecondStopwatch.Stopwatch!
     assert.same 'ready', stopwatch\state!

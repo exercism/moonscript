@@ -1,6 +1,6 @@
 raindrops = require 'raindrops'
 
-describe 'raindrops', ->
+describe 'raindrops:', ->
   it 'the sound for 1 is 1', ->
     result = raindrops 1
     assert.are.equal '1', result

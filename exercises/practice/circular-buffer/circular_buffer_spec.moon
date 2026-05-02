@@ -1,6 +1,6 @@
 CircularBuffer = require 'circular_buffer'
 
-describe 'circular-buffer', ->
+describe 'circular-buffer:', ->
   it 'reading empty buffer should fail', ->
     buffer = CircularBuffer 1
     value, ok = buffer\read!

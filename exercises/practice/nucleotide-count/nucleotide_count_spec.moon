@@ -1,6 +1,6 @@
 nucleotide_count = require 'nucleotide_count'
 
-describe 'nucleotide-count', ->
+describe 'nucleotide-count:', ->
   it 'empty strand', ->
     expected = {A: 0, C: 0, G: 0, T: 0}
     result = nucleotide_count ''

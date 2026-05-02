@@ -1,6 +1,6 @@
 is_leap_year = require 'leap'
 
-describe 'leap', ->
+describe 'leap:', ->
   it 'year not divisible by 4 in common year', ->
     assert.is_false is_leap_year 2015
 

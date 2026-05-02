@@ -1,6 +1,6 @@
 import rectangles from require 'rectangles'
 
-describe 'rectangles', ->
+describe 'rectangles:', ->
   it 'no rows', ->
     input = {}
     assert.are.equal 0, rectangles input

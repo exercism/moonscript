@@ -1,6 +1,6 @@
 import rebase from require 'all_your_base'
 
-describe 'all-your-base', ->
+describe 'all-your-base:', ->
   it 'single bit one to decimal', ->
     result = rebase in_base: 2, out_base: 10, digits: {1}
     expected = {1}

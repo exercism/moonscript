@@ -1,7 +1,7 @@
 VariableLengthQuantity = require 'variable_length_quantity'
 
-describe 'variable-length-quantity', ->
-  describe 'Encode a series of integers, producing a series of bytes.', ->
+describe 'variable-length-quantity:', ->
+  describe 'Encode a series of integers, producing a series of bytes.:', ->
     it 'zero', ->
       result = VariableLengthQuantity.encode {0}
       expected = {0}
@@ -117,7 +117,7 @@ describe 'variable-length-quantity', ->
       expected = {192, 0, 200, 232, 86, 255, 255, 255, 127, 0, 255, 127, 129, 128, 0}
       assert.are.same expected, result
 
-  describe 'Decode a series of bytes, producing a series of integers.', ->
+  describe 'Decode a series of bytes, producing a series of integers.:', ->
     pending 'one byte', ->
       result = VariableLengthQuantity.decode {127}
       expected = {127}

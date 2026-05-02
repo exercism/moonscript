@@ -1,28 +1,28 @@
 BinarySearchTree = require 'binary_search_tree'
 
-describe 'binary-search-tree', ->
+describe 'binary-search-tree:', ->
   it 'data is retained', ->
     tree = BinarySearchTree {'4'}
     result = tree\data!
     expected = {
-        left: nil
-        right: nil
         data: "4"
+        right: nil
+        left: nil
     }
     assert.are.same expected, result
 
-  describe 'insert data at proper node', ->
+  describe 'insert data at proper node:', ->
     pending 'smaller number at left node', ->
       tree = BinarySearchTree {'4', '2'}
       result = tree\data!
       expected = {
-          left: {
-              left: nil
-              right: nil
-              data: "2"
-          }
-          right: nil
           data: "4"
+          right: nil
+          left: {
+              data: "2"
+              right: nil
+              left: nil
+          }
       }
       assert.are.same expected, result
 
@@ -30,13 +30,13 @@ describe 'binary-search-tree', ->
       tree = BinarySearchTree {'4', '4'}
       result = tree\data!
       expected = {
-          left: {
-              left: nil
-              right: nil
-              data: "4"
-          }
-          right: nil
           data: "4"
+          right: nil
+          left: {
+              data: "4"
+              right: nil
+              left: nil
+          }
       }
       assert.are.same expected, result
 
@@ -44,13 +44,13 @@ describe 'binary-search-tree', ->
       tree = BinarySearchTree {'4', '5'}
       result = tree\data!
       expected = {
-          left: nil
-          right: {
-              left: nil
-              right: nil
-              data: "5"
-          }
           data: "4"
+          right: {
+              data: "5"
+              right: nil
+              left: nil
+          }
+          left: nil
       }
       assert.are.same expected, result
 
@@ -58,37 +58,37 @@ describe 'binary-search-tree', ->
     tree = BinarySearchTree {'4', '2', '6', '1', '3', '5', '7'}
     result = tree\data!
     expected = {
-        left: {
-            left: {
-                left: nil
-                right: nil
-                data: "1"
-            }
-            right: {
-                left: nil
-                right: nil
-                data: "3"
-            }
-            data: "2"
-        }
-        right: {
-            left: {
-                left: nil
-                right: nil
-                data: "5"
-            }
-            right: {
-                left: nil
-                right: nil
-                data: "7"
-            }
-            data: "6"
-        }
         data: "4"
+        right: {
+            data: "6"
+            right: {
+                data: "7"
+                right: nil
+                left: nil
+            }
+            left: {
+                data: "5"
+                right: nil
+                left: nil
+            }
+        }
+        left: {
+            data: "2"
+            right: {
+                data: "3"
+                right: nil
+                left: nil
+            }
+            left: {
+                data: "1"
+                right: nil
+                left: nil
+            }
+        }
     }
     assert.are.same expected, result
 
-  describe 'can sort data', ->
+  describe 'can sort data:', ->
     pending 'can sort single number', ->
       tree = BinarySearchTree {'2'}
       result = tree\sorted!

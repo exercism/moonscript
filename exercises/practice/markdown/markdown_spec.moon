@@ -1,6 +1,6 @@
 Markdown = require 'markdown'
 
-describe 'markdown', ->
+describe 'markdown:', ->
   it 'parses normal text as a paragraph', ->
     result = Markdown.parse "This will be a paragraph"
     expected = '<p>This will be a paragraph</p>'

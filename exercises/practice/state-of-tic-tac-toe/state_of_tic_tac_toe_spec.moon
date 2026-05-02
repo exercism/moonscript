@@ -1,7 +1,7 @@
 import gamestate from require 'state_of_tic_tac_toe'
 
-describe 'state-of-tic-tac-toe', ->
-  describe 'Won games', ->
+describe 'state-of-tic-tac-toe:', ->
+  describe 'Won games:', ->
     it 'Finished game where X won via left column victory', ->
       board = {
         'XOO',
@@ -146,7 +146,7 @@ describe 'state-of-tic-tac-toe', ->
       }
       assert.are.equal 'win', gamestate board
 
-  describe 'Drawn games', ->
+  describe 'Drawn games:', ->
     pending 'Draw', ->
       board = {
         'XOX',
@@ -163,7 +163,7 @@ describe 'state-of-tic-tac-toe', ->
       }
       assert.are.equal 'draw', gamestate board
 
-  describe 'Ongoing games', ->
+  describe 'Ongoing games:', ->
     pending 'Ongoing game: one move in', ->
       board = {
         '   ',
@@ -188,7 +188,7 @@ describe 'state-of-tic-tac-toe', ->
       }
       assert.are.equal 'ongoing', gamestate board
 
-  describe 'Invalid boards', ->
+  describe 'Invalid boards:', ->
     pending 'Invalid board: X went twice', ->
       board = {
         'XX ',

@@ -1,6 +1,6 @@
 Sieve = require 'sieve'
 
-describe 'sieve', ->
+describe 'sieve:', ->
   it 'no primes under two', ->
     result = Sieve.primes 1
     expected = {}

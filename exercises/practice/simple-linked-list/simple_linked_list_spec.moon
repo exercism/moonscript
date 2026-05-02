@@ -1,7 +1,7 @@
 SimpleLinkedList = require 'simple_linked_list'
 
-describe 'simple-linked-list', ->
-  describe 'count', ->
+describe 'simple-linked-list:', ->
+  describe 'count:', ->
     it 'Empty list has length of zero', ->
       list = SimpleLinkedList {}
       result = list\count!
@@ -17,7 +17,7 @@ describe 'simple-linked-list', ->
       result = list\count!
       assert.are.equal 3, result
 
-  describe 'pop', ->
+  describe 'pop:', ->
     pending 'Pop from empty list is an error', ->
       list = SimpleLinkedList {}
       f = -> list\pop!
@@ -53,7 +53,7 @@ describe 'simple-linked-list', ->
       result = list\count!
       assert.are.equal 0, result
 
-  describe 'push', ->
+  describe 'push:', ->
     pending 'Can push to an empty list', ->
       list = SimpleLinkedList!
       list\push 1
@@ -84,7 +84,7 @@ describe 'simple-linked-list', ->
       result = list\count!
       assert.are.equal 0, result
 
-  describe 'peek', ->
+  describe 'peek:', ->
     pending 'Peek on empty list is an error', ->
       list = SimpleLinkedList {}
       f = -> list\peek!
@@ -122,7 +122,7 @@ describe 'simple-linked-list', ->
       assert.are.equal 3, result
 
 
-  describe 'toList FIFO', ->
+  describe 'toList FIFO:', ->
     pending 'Empty linked list to list is empty', ->
       list = SimpleLinkedList {}
       result = list\toList!
@@ -144,7 +144,7 @@ describe 'simple-linked-list', ->
       result = list\toList!
       assert.are.same {1, 2, 4}, result
 
-  describe 'reverse', ->
+  describe 'reverse:', ->
     pending 'Reversed empty list has same values', ->
       list = SimpleLinkedList {}
       list\reverse!

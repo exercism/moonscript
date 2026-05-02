@@ -1,6 +1,6 @@
 import roster, add, grade from require 'grade_school'
 
-describe 'grade-school', ->
+describe 'grade-school:', ->
   it 'Roster is empty when no student is added', ->
     result = roster {}
     expected = {}

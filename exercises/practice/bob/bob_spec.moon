@@ -1,6 +1,6 @@
 Bob = require 'bob'
 
-describe 'bob', ->
+describe 'bob:', ->
   it 'stating something', ->
     result = Bob.hey "Tom-ay-to, tom-aaaah-to."
     assert.is.equal 'Whatever.', result

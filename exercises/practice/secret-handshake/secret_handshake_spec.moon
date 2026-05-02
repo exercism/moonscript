@@ -1,6 +1,6 @@
 SecretHandshake = require 'secret_handshake'
 
-describe 'secret-handshake', ->
+describe 'secret-handshake:', ->
   it 'wink for 1', ->
     result = SecretHandshake.commands 1
     expected = {'wink'}

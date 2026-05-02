@@ -1,6 +1,6 @@
 import prime from require 'nth_prime'
 
-describe 'nth-prime', ->
+describe 'nth-prime:', ->
   it 'first prime', ->
     assert.are.equal 2, prime 1
 

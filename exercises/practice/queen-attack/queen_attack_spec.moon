@@ -1,9 +1,9 @@
 Queen = require 'queen_attack'
 
-describe 'queen-attack', ->
+describe 'queen-attack:', ->
   -- Valid values for rows and columns are: 0 to 7 inclusive.
 
-  describe 'Test creation of Queens with valid and invalid positions', ->
+  describe 'Test creation of Queens with valid and invalid positions:', ->
     it 'queen with a valid position', ->
       queen = Queen 2, 2
       assert.is.truthy queen
@@ -24,7 +24,7 @@ describe 'queen-attack', ->
       f = -> Queen 4, 8
       assert.has.errors f, 'invalid position'
 
-  describe 'Test the ability of one queen to attack another', ->
+  describe 'Test the ability of one queen to attack another:', ->
     pending 'cannot attack', ->
       black_queen = Queen 6, 6
       white_queen = Queen 2, 4

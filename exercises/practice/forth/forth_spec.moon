@@ -1,7 +1,7 @@
 Forth = require 'forth'
 
-describe 'forth', ->
-  describe 'parsing and numbers', ->
+describe 'forth:', ->
+  describe 'parsing and numbers:', ->
     it 'numbers just get pushed onto the stack', ->
       interpreter = Forth!
       instructions = {'1 2 3 4 5'}
@@ -16,7 +16,7 @@ describe 'forth', ->
       expected = {-1, -2, -3, -4, -5}
       assert.is.same expected, interpreter\stack!
 
-  describe 'addition', ->
+  describe 'addition:', ->
     pending 'can add two numbers', ->
       interpreter = Forth!
       instructions = {'1 2 +'}
@@ -43,7 +43,7 @@ describe 'forth', ->
       expected = {1, 5}
       assert.is.same expected, interpreter\stack!
 
-  describe 'subtraction', ->
+  describe 'subtraction:', ->
     pending 'can subtract two numbers', ->
       interpreter = Forth!
       instructions = {'3 4 -'}
@@ -70,7 +70,7 @@ describe 'forth', ->
       expected = {1, 9}
       assert.is.same expected, interpreter\stack!
 
-  describe 'multiplication', ->
+  describe 'multiplication:', ->
     pending 'can multiply two numbers', ->
       interpreter = Forth!
       instructions = {'2 4 *'}
@@ -97,7 +97,7 @@ describe 'forth', ->
       expected = {1, 6}
       assert.is.same expected, interpreter\stack!
 
-  describe 'division', ->
+  describe 'division:', ->
     pending 'can divide two numbers', ->
       interpreter = Forth!
       instructions = {'12 3 /'}
@@ -137,7 +137,7 @@ describe 'forth', ->
       expected = {1, 4}
       assert.is.same expected, interpreter\stack!
 
-  describe 'combined arithmetic', ->
+  describe 'combined arithmetic:', ->
     pending 'addition and subtraction', ->
       interpreter = Forth!
       instructions = {'1 2 + 4 -'}
@@ -166,7 +166,7 @@ describe 'forth', ->
       expected = {7}
       assert.is.same expected, interpreter\stack!
 
-  describe 'dup', ->
+  describe 'dup:', ->
     pending 'copies a value on the stack', ->
       interpreter = Forth!
       instructions = {'1 dup'}
@@ -187,7 +187,7 @@ describe 'forth', ->
       f = -> interpreter\evaluate instructions
       assert.has.errors f, 'empty stack'
 
-  describe 'drop', ->
+  describe 'drop:', ->
     pending 'removes the top value on the stack if it is the only one', ->
       interpreter = Forth!
       instructions = {'1 drop'}
@@ -208,7 +208,7 @@ describe 'forth', ->
       f = -> interpreter\evaluate instructions
       assert.has.errors f, 'empty stack'
 
-  describe 'swap', ->
+  describe 'swap:', ->
     pending 'swaps the top two values on the stack if they are the only ones', ->
       interpreter = Forth!
       instructions = {'1 2 swap'}
@@ -235,7 +235,7 @@ describe 'forth', ->
       f = -> interpreter\evaluate instructions
       assert.has.errors f, 'only one value on the stack'
 
-  describe 'over', ->
+  describe 'over:', ->
     pending 'copies the second element if there are only two', ->
       interpreter = Forth!
       instructions = {'1 2 over'}
@@ -262,7 +262,7 @@ describe 'forth', ->
       f = -> interpreter\evaluate instructions
       assert.has.errors f, 'only one value on the stack'
 
-  describe 'user-defined words', ->
+  describe 'user-defined words:', ->
     pending 'can consist of built-in words', ->
       interpreter = Forth!
       instructions = {': dup-twice dup dup ;', '1 dup-twice'}
@@ -351,7 +351,7 @@ describe 'forth', ->
       assert.are.same {0}, interp1\stack!
       assert.are.same {2}, interp2\stack!
 
-  describe 'case-insensitivity', ->
+  describe 'case-insensitivity:', ->
     pending 'DUP is case-insensitive', ->
       interpreter = Forth!
       instructions = {'1 DUP Dup dup'}

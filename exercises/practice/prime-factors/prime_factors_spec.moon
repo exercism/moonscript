@@ -1,6 +1,6 @@
 import factors from require 'prime_factors'
 
-describe 'prime-factors', ->
+describe 'prime-factors:', ->
   it 'no factors', ->
     expected = {}
     result = factors 1

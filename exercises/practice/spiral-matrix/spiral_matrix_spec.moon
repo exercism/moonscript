@@ -1,6 +1,6 @@
 import spiral_matrix from require 'spiral_matrix'
 
-describe 'spiral-matrix', ->
+describe 'spiral-matrix:', ->
   it 'empty spiral', ->
     result = spiral_matrix 0
     expected = {}

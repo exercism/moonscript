@@ -1,6 +1,6 @@
 FoodChain = require 'food_chain'
 
-describe 'food-chain', ->
+describe 'food-chain:', ->
   it 'fly', ->
     result = FoodChain.recite 1, 1
     expected = {'I know an old lady who swallowed a fly.', "I don't know why she swallowed the fly. Perhaps she'll die."}

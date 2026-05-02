@@ -1,6 +1,6 @@
 PalindromeProducts = require 'palindrome_products'
 
-describe 'palindrome-products', ->
+describe 'palindrome-products:', ->
   it 'find the smallest palindrome from single digit factors', ->
     palindrome, factors = PalindromeProducts.smallest 1, 9
     expected_palindrome = 1

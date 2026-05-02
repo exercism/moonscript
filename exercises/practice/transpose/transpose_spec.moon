@@ -1,6 +1,6 @@
 import transpose from require 'transpose'
 
-describe 'transpose', ->
+describe 'transpose:', ->
   it 'empty string', ->
     input = {}
     expected = {}

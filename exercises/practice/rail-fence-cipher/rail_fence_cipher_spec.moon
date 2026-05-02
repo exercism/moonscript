@@ -1,7 +1,7 @@
 RailFenceCipher = require 'rail_fence_cipher'
 
-describe 'rail-fence-cipher', ->
-  describe 'encode', ->
+describe 'rail-fence-cipher:', ->
+  describe 'encode:', ->
     it 'encode with two rails', ->
       result = RailFenceCipher.encode 2, 'XOXOXOXOXOXOXOXOXO'
       expected = 'XXXXXXXXXOOOOOOOOO'
@@ -17,7 +17,7 @@ describe 'rail-fence-cipher', ->
       expected = 'ESXIEECSR'
       assert.are.equal expected, result
 
-  describe 'decode', ->
+  describe 'decode:', ->
     pending 'decode with three rails', ->
       result = RailFenceCipher.decode 3, 'TEITELHDVLSNHDTISEIIEA'
       expected = 'THEDEVILISINTHEDETAILS'

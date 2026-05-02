@@ -1,6 +1,6 @@
 Gigasecond = require 'gigasecond'
 
-describe 'gigasecond', ->
+describe 'gigasecond:', ->
   it 'date only specification of time', ->
     result = Gigasecond.add '2011-04-25'
     expected = '2043-01-01T01:46:40'

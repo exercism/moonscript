@@ -1,6 +1,6 @@
 import is_paired from require 'matching_brackets'
 
-describe 'matching-brackets', ->
+describe 'matching-brackets:', ->
   it 'paired square brackets', ->
     assert.is_true is_paired '[]'
 

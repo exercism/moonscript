@@ -1,6 +1,6 @@
 SGFParser = require 'sgf_parsing'
 
-describe 'sgf-parsing', ->
+describe 'sgf-parsing:', ->
   assert\set_parameter "TableFormatLevel", 5
 
   it 'empty input', ->
@@ -38,8 +38,8 @@ describe 'sgf-parsing', ->
     expected = {
       children: {}
       properties: {
-        C: {"d"}
         A: {"b"}
+        C: {"d"}
       }
     }
     assert.are.same expected, result
@@ -151,8 +151,8 @@ describe 'sgf-parsing', ->
           }
         }}
       properties: {
-        B: {"bar"}
         A: {"x[y]z", "foo"}
+        B: {"bar"}
       }
     }
     assert.are.same expected, result
@@ -167,8 +167,8 @@ describe 'sgf-parsing', ->
           }
         }}
       properties: {
-        B: {"bar"}
         A: {"a;b", "foo"}
+        B: {"bar"}
       }
     }
     assert.are.same expected, result
@@ -183,8 +183,8 @@ describe 'sgf-parsing', ->
           }
         }}
       properties: {
-        B: {"bar"}
         A: {"x(y)z", "foo"}
+        B: {"bar"}
       }
     }
     assert.are.same expected, result

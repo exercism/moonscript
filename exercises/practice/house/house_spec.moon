@@ -1,6 +1,6 @@
 House = require 'house'
 
-describe 'house', ->
+describe 'house:', ->
   it 'verse one - the house that jack built', ->
     result = House.recite 1, 1
     expected = {'This is the house that Jack built.'}

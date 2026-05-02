@@ -1,6 +1,6 @@
 import delivery_date from require 'swift_scheduling'
 
-describe 'swift-scheduling', ->
+describe 'swift-scheduling:', ->
   it 'NOW translates to two hours later', ->
     result = delivery_date 'NOW', '2012-02-13T09:00:00'
     expected = '2012-02-13T11:00:00'

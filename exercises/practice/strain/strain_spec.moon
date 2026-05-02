@@ -1,6 +1,6 @@
 Strain = require 'strain'
 
-describe 'strain', ->
+describe 'strain:', ->
   starts_with = (str, prefix) ->
     str\sub(1, #prefix) == prefix
 

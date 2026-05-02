@@ -1,6 +1,6 @@
 import is_isogram from require 'isogram'
 
-describe 'isogram', ->
+describe 'isogram:', ->
   it 'empty string', ->
     assert.is_true is_isogram ''
 

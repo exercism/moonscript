@@ -1,6 +1,6 @@
 recite = require 'proverb'
 
-describe 'proverb', ->
+describe 'proverb:', ->
   it 'zero pieces', ->
     result = recite {}
     expected = ''

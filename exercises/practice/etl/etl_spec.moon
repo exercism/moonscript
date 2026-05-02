@@ -1,6 +1,6 @@
 Etl = require 'etl'
 
-describe 'etl', ->
+describe 'etl:', ->
   it 'single letter', ->
     legacy = {
       '1': {'A'}

@@ -1,6 +1,6 @@
 HighScores = require 'high_scores'
 
-describe 'high-scores', ->
+describe 'high-scores:', ->
   it 'List of scores', ->
     scores = HighScores {30, 50, 20, 70}
     result = scores\scores!
@@ -19,7 +19,7 @@ describe 'high-scores', ->
     expected = 100
     assert.are.same expected, result
 
-  describe 'Top 3 scores', ->
+  describe 'Top 3 scores:', ->
     pending 'Personal top three from a list of scores', ->
       scores = HighScores {10, 30, 90, 30, 100, 20, 10, 0, 30, 40, 40, 70, 70}
       result = scores\personalTopThree!

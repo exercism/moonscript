@@ -1,6 +1,6 @@
 Luhn = require 'luhn'
 
-describe 'luhn', ->
+describe 'luhn:', ->
   it 'single digit strings can not be valid', ->
     assert.is_false Luhn.is_valid '1'
 

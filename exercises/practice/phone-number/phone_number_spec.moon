@@ -1,6 +1,6 @@
 import clean from require 'phone_number'
 
-describe 'phone-number', ->
+describe 'phone-number:', ->
   it 'cleans the number', ->
     result = clean '(223) 456-7890'
     assert.is.equal '2234567890', result

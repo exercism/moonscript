@@ -1,6 +1,6 @@
 FlowerField = require 'flower_field'
 
-describe 'flower-field', ->
+describe 'flower-field:', ->
   it 'no rows', ->
     garden = {}
     expected = {}

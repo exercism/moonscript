@@ -1,6 +1,6 @@
 import make_change from require 'change'
 
-describe 'change', ->
+describe 'change:', ->
   it 'change for 1 cent', ->
     result = make_change 1, {1, 5, 10, 25}
     expected = {1}

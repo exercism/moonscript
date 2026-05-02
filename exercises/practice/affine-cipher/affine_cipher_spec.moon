@@ -1,7 +1,7 @@
 import encode, decode from require 'affine_cipher'
 
-describe 'affine-cipher', ->
-  describe 'encode', ->
+describe 'affine-cipher:', ->
+  describe 'encode:', ->
     it 'encode yes', ->
       result = encode 'yes', {a: 5, b: 7}
       expected = 'xbt'
@@ -46,7 +46,7 @@ describe 'affine-cipher', ->
       f = -> encode 'This is a test.', {a: 6, b: 17}
       assert.has.error f, 'a and m must be coprime.'
 
-  describe 'decode', ->
+  describe 'decode:', ->
     pending 'decode exercism', ->
       result = decode 'tytgn fjr', {a: 3, b: 7}
       expected = 'exercism'

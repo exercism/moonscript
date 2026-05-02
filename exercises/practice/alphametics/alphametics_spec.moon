@@ -1,6 +1,6 @@
 import solve from require 'alphametics'
 
-describe 'alphametics', ->
+describe 'alphametics:', ->
   -- ----------------------------------------------------------
   same_kv = (state, arguments) ->
     actual = arguments[1]
@@ -23,8 +23,8 @@ describe 'alphametics', ->
     result = solve puzzle
     expected = {
       I: 1,
-      L: 0,
       B: 9,
+      L: 0,
     }
     assert.is.same_kv result, expected
 
@@ -41,8 +41,8 @@ describe 'alphametics', ->
     result = solve puzzle
     expected = {
       A: 9,
-      C: 0,
       B: 1,
+      C: 0,
     }
     assert.is.same_kv result, expected
 
@@ -62,11 +62,11 @@ describe 'alphametics', ->
     result = solve puzzle
     expected = {
       E: 2,
-      L: 1,
+      N: 7,
+      O: 4,
       A: 0,
       T: 9,
-      O: 4,
-      N: 7,
+      L: 1,
     }
     assert.is.same_kv result, expected
 
@@ -75,12 +75,12 @@ describe 'alphametics', ->
     result = solve puzzle
     expected = {
       E: 4,
-      L: 1,
-      S: 9,
-      I: 0,
-      H: 5,
       G: 2,
+      H: 5,
+      I: 0,
       T: 7,
+      S: 9,
+      L: 1,
     }
     assert.is.same_kv result, expected
 
@@ -89,13 +89,13 @@ describe 'alphametics', ->
     result = solve puzzle
     expected = {
       E: 5,
-      D: 7,
-      S: 9,
-      R: 8,
-      Y: 2,
-      M: 1,
-      O: 0,
       N: 6,
+      O: 0,
+      M: 1,
+      Y: 2,
+      R: 8,
+      S: 9,
+      D: 7,
     }
     assert.is.same_kv result, expected
 
@@ -103,16 +103,16 @@ describe 'alphametics', ->
     puzzle = 'AND + A + STRONG + OFFENSE + AS + A + GOOD == DEFENSE'
     result = solve puzzle
     expected = {
-      A: 5,
-      O: 2,
       N: 0,
+      O: 2,
       E: 4,
-      D: 3,
-      S: 6,
-      R: 1,
-      T: 9,
-      G: 8,
       F: 7,
+      G: 8,
+      T: 9,
+      A: 5,
+      R: 1,
+      S: 6,
+      D: 3,
     }
     assert.is.same_kv result, expected
 
@@ -120,15 +120,15 @@ describe 'alphametics', ->
     puzzle = 'THIS + A + FIRE + THEREFORE + FOR + ALL + HISTORIES + I + TELL + A + TALE + THAT + FALSIFIES + ITS + TITLE + TIS + A + LIE + THE + TALE + OF + THE + LAST + FIRE + HORSES + LATE + AFTER + THE + FIRST + FATHERS + FORESEE + THE + HORRORS + THE + LAST + FREE + TROLL + TERRIFIES + THE + HORSES + OF + FIRE + THE + TROLL + RESTS + AT + THE + HOLE + OF + LOSSES + IT + IS + THERE + THAT + SHE + STORES + ROLES + OF + LEATHERS + AFTER + SHE + SATISFIES + HER + HATE + OFF + THOSE + FEARS + A + TASTE + RISES + AS + SHE + HEARS + THE + LEAST + FAR + HORSE + THOSE + FAST + HORSES + THAT + FIRST + HEAR + THE + TROLL + FLEE + OFF + TO + THE + FOREST + THE + HORSES + THAT + ALERTS + RAISE + THE + STARES + OF + THE + OTHERS + AS + THE + TROLL + ASSAILS + AT + THE + TOTAL + SHIFT + HER + TEETH + TEAR + HOOF + OFF + TORSO + AS + THE + LAST + HORSE + FORFEITS + ITS + LIFE + THE + FIRST + FATHERS + HEAR + OF + THE + HORRORS + THEIR + FEARS + THAT + THE + FIRES + FOR + THEIR + FEASTS + ARREST + AS + THE + FIRST + FATHERS + RESETTLE + THE + LAST + OF + THE + FIRE + HORSES + THE + LAST + TROLL + HARASSES + THE + FOREST + HEART + FREE + AT + LAST + OF + THE + LAST + TROLL + ALL + OFFER + THEIR + FIRE + HEAT + TO + THE + ASSISTERS + FAR + OFF + THE + TROLL + FASTS + ITS + LIFE + SHORTER + AS + STARS + RISE + THE + HORSES + REST + SAFE + AFTER + ALL + SHARE + HOT + FISH + AS + THEIR + AFFILIATES + TAILOR + A + ROOFS + FOR + THEIR + SAFE == FORTRESSES'
     result = solve puzzle
     expected = {
-      L: 2,
-      A: 1,
       O: 6,
-      E: 0,
-      T: 9,
-      S: 4,
-      R: 3,
       I: 7,
-      H: 8,
+      L: 2,
+      E: 0,
       F: 5,
+      H: 8,
+      A: 1,
+      R: 3,
+      S: 4,
+      T: 9,
     }
     assert.is.same_kv result, expected

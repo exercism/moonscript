@@ -1,11 +1,11 @@
 import ComplexNumber, add, sub, mul, div from require 'complex_numbers'
 
-describe 'complex-numbers', ->
+describe 'complex-numbers:', ->
   pi = math.pi
   e  = math.exp(1)
   ln = math.log
 
-  describe 'Real part', ->
+  describe 'Real part:', ->
     it 'Real part of a purely real number', ->
       c = ComplexNumber(1, 0)
       result = c\real!
@@ -21,7 +21,7 @@ describe 'complex-numbers', ->
       result = c\real!
       assert.are.equal 1, result
 
-  describe 'Imaginary part', ->
+  describe 'Imaginary part:', ->
     pending 'Imaginary part of a purely real number', ->
       c = ComplexNumber(1, 0)
       result = c\imaginary!
@@ -44,8 +44,8 @@ describe 'complex-numbers', ->
     expected = ComplexNumber(-1, 0)
     assert.are.equal expected, result
 
-  describe 'Arithmetic', ->
-    describe 'Addition', ->
+  describe 'Arithmetic:', ->
+    describe 'Addition:', ->
       pending 'Add purely real numbers', ->
         c1 = ComplexNumber(1, 0)
         c2 = ComplexNumber(2, 0)
@@ -67,7 +67,7 @@ describe 'complex-numbers', ->
         expected = ComplexNumber(4, 6)
         assert.are.equal expected, result
 
-    describe 'Subtraction', ->
+    describe 'Subtraction:', ->
       pending 'Subtract purely real numbers', ->
         c1 = ComplexNumber(1, 0)
         c2 = ComplexNumber(2, 0)
@@ -89,7 +89,7 @@ describe 'complex-numbers', ->
         expected = ComplexNumber(-2, -2)
         assert.are.equal expected, result
 
-    describe 'Multiplication', ->
+    describe 'Multiplication:', ->
       pending 'Multiply purely real numbers', ->
         c1 = ComplexNumber(1, 0)
         c2 = ComplexNumber(2, 0)
@@ -111,7 +111,7 @@ describe 'complex-numbers', ->
         expected = ComplexNumber(-5, 10)
         assert.are.equal expected, result
 
-    describe 'Division', ->
+    describe 'Division:', ->
       pending 'Divide purely real numbers', ->
         c1 = ComplexNumber(1, 0)
         c2 = ComplexNumber(2, 0)
@@ -133,7 +133,7 @@ describe 'complex-numbers', ->
         expected = ComplexNumber(0.44, 0.08)
         assert.are.equal expected, result
 
-  describe 'Absolute value', ->
+  describe 'Absolute value:', ->
     pending 'Absolute value of a positive purely real number', ->
       c = ComplexNumber(5, 0)
       result = c\abs!
@@ -159,7 +159,7 @@ describe 'complex-numbers', ->
       result = c\abs!
       assert.are.equal 5, result
 
-  describe 'Complex conjugate', ->
+  describe 'Complex conjugate:', ->
     pending 'Conjugate a purely real number', ->
       c = ComplexNumber(5, 0)
       result = c\conjugate!
@@ -178,7 +178,7 @@ describe 'complex-numbers', ->
       expected = ComplexNumber(1, -1)
       assert.are.equal expected, result
 
-  describe 'Complex exponential function', ->
+  describe 'Complex exponential function:', ->
     pending "Euler's identity/formula", ->
       c = ComplexNumber(0, pi)
       result = c\exp!
@@ -209,7 +209,7 @@ describe 'complex-numbers', ->
       expected = ComplexNumber(1, 1)
       assert.are.equal expected, result
 
-  describe 'Operations between real numbers and complex numbers', ->
+  describe 'Operations between real numbers and complex numbers:', ->
     pending 'Add real number to complex number', ->
       result = add ComplexNumber(1, 2), 5
       expected = ComplexNumber(6, 2)

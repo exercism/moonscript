@@ -1,6 +1,6 @@
 LineUp = require 'line_up'
 
-describe 'line-up', ->
+describe 'line-up:', ->
   it 'format smallest non-exceptional ordinal numeral 4', ->
     result = LineUp.format 'Gianna', 4
     expected = 'Gianna, you are the 4th customer we serve today. Thank you!'

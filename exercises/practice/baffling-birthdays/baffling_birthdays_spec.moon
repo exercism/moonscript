@@ -1,6 +1,6 @@
 BafflingBirthdays = require 'baffling_birthdays'
 
-describe 'baffling-birthdays', ->
+describe 'baffling-birthdays:', ->
   -- ----------------------------------------
   -- https://lunarmodules.github.io/Penlight/libraries/pl.tablex.html
   tablex = require 'pl.tablex'
@@ -20,7 +20,7 @@ describe 'baffling-birthdays', ->
   isLeapYear = (year) -> year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
   -- ----------------------------------------
 
-  describe 'shared birthday', ->
+  describe 'shared birthday:', ->
     it 'one birthdate', ->
       birthdates = {'2000-01-01'}
       assert.is.false BafflingBirthdays.sharedBirthday birthdates
@@ -57,7 +57,7 @@ describe 'baffling-birthdays', ->
       birthdates = {'1966-07-29', '1977-02-12', '2001-12-25', '1980-07-29', '2019-02-12'}
       assert.is.true BafflingBirthdays.sharedBirthday birthdates
 
-  describe 'random birthdates', ->
+  describe 'random birthdates:', ->
     pending 'generate requested number of birthdates', ->
       result = true
       for n = 1, 100
@@ -90,7 +90,7 @@ describe 'baffling-birthdays', ->
       notSeen = [day for day,count in pairs days when count == 0]
       assert.is.equal 0, #notSeen
 
-  describe 'estimated probability of at least one shared birthday', ->
+  describe 'estimated probability of at least one shared birthday:', ->
     pending 'for one person', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 1
       assert.is.approx_equal 0.0, result

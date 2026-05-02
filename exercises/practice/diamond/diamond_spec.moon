@@ -1,6 +1,6 @@
 Diamond = require 'diamond'
 
-describe 'diamond', ->
+describe 'diamond:', ->
   it "Degenerate case with a single 'A' row", ->
     result = Diamond.rows 'A'
     expected = {'A'}

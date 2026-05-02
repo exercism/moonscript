@@ -1,7 +1,7 @@
 import classify from require 'perfect_numbers'
 
-describe 'perfect-numbers', ->
-  describe 'Perfect numbers', ->
+describe 'perfect-numbers:', ->
+  describe 'Perfect numbers:', ->
     it 'Smallest perfect number is classified correctly', ->
       assert.are.equal 'perfect', classify 6
 
@@ -11,7 +11,7 @@ describe 'perfect-numbers', ->
     pending 'Large perfect number is classified correctly', ->
       assert.are.equal 'perfect', classify 33550336
 
-  describe 'Abundant numbers', ->
+  describe 'Abundant numbers:', ->
     pending 'Smallest abundant number is classified correctly', ->
       assert.are.equal 'abundant', classify 12
 
@@ -24,7 +24,7 @@ describe 'perfect-numbers', ->
     pending 'Perfect square abundant number is classified correctly', ->
       assert.are.equal 'abundant', classify 196
 
-  describe 'Deficient numbers', ->
+  describe 'Deficient numbers:', ->
     pending 'Smallest prime deficient number is classified correctly', ->
       assert.are.equal 'deficient', classify 2
 
@@ -40,7 +40,7 @@ describe 'perfect-numbers', ->
     pending 'Edge case (no factors other than itself) is classified correctly', ->
       assert.are.equal 'deficient', classify 1
 
-  describe 'Invalid inputs', ->
+  describe 'Invalid inputs:', ->
     pending 'Zero is rejected (as it is not a positive integer)', ->
       func = -> classify 0
       assert.has.error func, 'Classification is only possible for positive integers.'

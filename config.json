@@ -603,6 +603,14 @@
         "difficulty": 4
       },
       {
+        "slug": "sublist",
+        "name": "Sublist",
+        "uuid": "e8c87596-3db8-422b-8fda-7e49957aac30",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "transpose",
         "name": "Transpose",
         "uuid": "c71d962b-61f1-4a41-9b73-20e262ae7469",

@@ -1,4 +1,4 @@
-import int_list_wrapped from require 'test_helpers'
+import indent, int_list_wrapped from require 'spec_helpers'
 
 {
   module_name: 'Sieve',

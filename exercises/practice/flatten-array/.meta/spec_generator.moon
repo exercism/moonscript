@@ -1,3 +1,5 @@
+import indent, int_list from require 'spec_helpers'
+
 -- A simple way to render an arbitrary list of lists is to stringify it
 -- and then munge the string into a Lua table literal.
 json = (require 'dkjson').use_lpeg!
@@ -8,8 +10,6 @@ nested_lists = (list) ->
   a = a\gsub ',', ', '
   a = a\gsub 'null', '"null"'
   a
-
-import int_list from require 'test_helpers'
 
 {
   module_imports: {'flatten'},

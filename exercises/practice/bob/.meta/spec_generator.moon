@@ -1,3 +1,4 @@
+import indent, quote from require 'spec_helpers'
 json = require 'dkjson'
 
 {

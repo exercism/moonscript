@@ -1,4 +1,4 @@
-import table_dump from require 'test_helpers'
+import indent, quote, table_dump from require 'spec_helpers'
 
 {
   module_name: 'RestApi',

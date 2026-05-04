@@ -1,4 +1,4 @@
-import int_lists from require 'test_helpers'
+import indent, int_lists from require 'spec_helpers'
 
 {
   module_name: 'PascalsTriangle',

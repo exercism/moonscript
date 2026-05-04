@@ -1,4 +1,4 @@
-import bool_list, word_list from require 'test_helpers'
+import indent, quote, bool_list, word_list from require 'spec_helpers'
 
 student_grade = (t) -> "{#{quote t[1]}, #{t[2]}}"
 

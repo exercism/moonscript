@@ -1,4 +1,4 @@
-import word_list from require 'test_helpers'
+import indent, quote, word_list from require 'spec_helpers'
 
 format_expected = (val) -> type(val) == 'table' and word_list(val) or quote(val)
 

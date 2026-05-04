@@ -1,4 +1,4 @@
-import int_lists, word_list from require 'test_helpers'
+import indent, int_lists, word_list from require 'spec_helpers'
 
 {
   module_name: 'GameOfLife',

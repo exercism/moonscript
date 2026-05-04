@@ -1,3 +1,5 @@
+import indent from require 'spec_helpers'
+
 {
   module_name: 'SquareRoot',
   generate_test: (case, level) ->

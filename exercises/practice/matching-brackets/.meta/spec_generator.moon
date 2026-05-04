@@ -1,3 +1,5 @@
+import indent, quote from require 'spec_helpers'
+
 {
   module_imports: {'is_paired'},
   generate_test: (case, level) ->

@@ -25,25 +25,25 @@ describe 'rest-api:', ->
       }
       result = api\POST '/add', payload
       expected = {
-        balance: 0.0
+        name: "Adam"
         owes: {}
         owed_by: {}
-        name: "Adam"
+        balance: 0.0
       }
       assert.are.same expected, result
 
     pending 'get single user', ->
       database = {
         users: {{
-            balance: 0.0
-            owes: {}
-            owed_by: {}
             name: "Adam"
-          }, {
-            balance: 0.0
             owes: {}
             owed_by: {}
+            balance: 0.0
+          }, {
             name: "Bob"
+            owes: {}
+            owed_by: {}
+            balance: 0.0
           }}
       }
       api = RestApi database
@@ -53,10 +53,10 @@ describe 'rest-api:', ->
       result = api\GET '/users', payload
       expected = {
         users: {{
-            balance: 0.0
+            name: "Bob"
             owes: {}
             owed_by: {}
-            name: "Bob"
+            balance: 0.0
           }}
       }
       assert.are.same expected, result
@@ -65,39 +65,39 @@ describe 'rest-api:', ->
     pending 'both users have 0 balance', ->
       database = {
         users: {{
-            balance: 0.0
-            owes: {}
-            owed_by: {}
             name: "Adam"
-          }, {
-            balance: 0.0
             owes: {}
             owed_by: {}
+            balance: 0.0
+          }, {
             name: "Bob"
+            owes: {}
+            owed_by: {}
+            balance: 0.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
+        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: 3.0
+            name: "Adam"
             owes: {}
             owed_by: {
               Bob: 3.0
             }
-            name: "Adam"
+            balance: 3.0
           }, {
-            balance: -3.0
+            name: "Bob"
             owes: {
               Adam: 3.0
             }
             owed_by: {}
-            name: "Bob"
+            balance: -3.0
           }}
       }
       assert.are.same expected, result
@@ -105,49 +105,49 @@ describe 'rest-api:', ->
     pending 'borrower has negative balance', ->
       database = {
         users: {{
-            balance: 0.0
+            name: "Adam"
             owes: {}
             owed_by: {}
-            name: "Adam"
+            balance: 0.0
           }, {
-            balance: -3.0
+            name: "Bob"
             owes: {
               Chuck: 3.0
             }
             owed_by: {}
-            name: "Bob"
+            balance: -3.0
           }, {
-            balance: 3.0
+            name: "Chuck"
             owes: {}
             owed_by: {
               Bob: 3.0
             }
-            name: "Chuck"
+            balance: 3.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
+        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: 3.0
+            name: "Adam"
             owes: {}
             owed_by: {
               Bob: 3.0
             }
-            name: "Adam"
+            balance: 3.0
           }, {
-            balance: -6.0
+            name: "Bob"
             owes: {
               Chuck: 3.0
               Adam: 3.0
             }
             owed_by: {}
-            name: "Bob"
+            balance: -6.0
           }}
       }
       assert.are.same expected, result
@@ -155,50 +155,50 @@ describe 'rest-api:', ->
     pending 'lender has negative balance', ->
       database = {
         users: {{
-            balance: 0.0
+            name: "Adam"
             owes: {}
             owed_by: {}
-            name: "Adam"
+            balance: 0.0
           }, {
-            balance: -3.0
+            name: "Bob"
             owes: {
               Chuck: 3.0
             }
             owed_by: {}
-            name: "Bob"
+            balance: -3.0
           }, {
-            balance: 3.0
+            name: "Chuck"
             owes: {}
             owed_by: {
               Bob: 3.0
             }
-            name: "Chuck"
+            balance: 3.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 3.0
         borrower: "Adam"
         lender: "Bob"
+        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: -3.0
+            name: "Adam"
             owes: {
               Bob: 3.0
             }
             owed_by: {}
-            name: "Adam"
+            balance: -3.0
           }, {
-            balance: 0.0
+            name: "Bob"
             owes: {
               Chuck: 3.0
             }
             owed_by: {
               Adam: 3.0
             }
-            name: "Bob"
+            balance: 0.0
           }}
       }
       assert.are.same expected, result
@@ -206,43 +206,43 @@ describe 'rest-api:', ->
     pending 'lender owes borrower', ->
       database = {
         users: {{
-            balance: -3.0
+            name: "Adam"
             owes: {
               Bob: 3.0
             }
             owed_by: {}
-            name: "Adam"
+            balance: -3.0
           }, {
-            balance: 3.0
+            name: "Bob"
             owes: {}
             owed_by: {
               Adam: 3.0
             }
-            name: "Bob"
+            balance: 3.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 2.0
         borrower: "Bob"
         lender: "Adam"
+        amount: 2.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: -1.0
+            name: "Adam"
             owes: {
               Bob: 1.0
             }
             owed_by: {}
-            name: "Adam"
+            balance: -1.0
           }, {
-            balance: 1.0
+            name: "Bob"
             owes: {}
             owed_by: {
               Adam: 1.0
             }
-            name: "Bob"
+            balance: 1.0
           }}
       }
       assert.are.same expected, result
@@ -250,43 +250,43 @@ describe 'rest-api:', ->
     pending 'lender owes borrower less than new loan', ->
       database = {
         users: {{
-            balance: -3.0
+            name: "Adam"
             owes: {
               Bob: 3.0
             }
             owed_by: {}
-            name: "Adam"
+            balance: -3.0
           }, {
-            balance: 3.0
+            name: "Bob"
             owes: {}
             owed_by: {
               Adam: 3.0
             }
-            name: "Bob"
+            balance: 3.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 4.0
         borrower: "Bob"
         lender: "Adam"
+        amount: 4.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: 1.0
+            name: "Adam"
             owes: {}
             owed_by: {
               Bob: 1.0
             }
-            name: "Adam"
+            balance: 1.0
           }, {
-            balance: -1.0
+            name: "Bob"
             owes: {
               Adam: 1.0
             }
             owed_by: {}
-            name: "Bob"
+            balance: -1.0
           }}
       }
       assert.are.same expected, result
@@ -294,39 +294,39 @@ describe 'rest-api:', ->
     pending 'lender owes borrower same as new loan', ->
       database = {
         users: {{
-            balance: -3.0
+            name: "Adam"
             owes: {
               Bob: 3.0
             }
             owed_by: {}
-            name: "Adam"
+            balance: -3.0
           }, {
-            balance: 3.0
+            name: "Bob"
             owes: {}
             owed_by: {
               Adam: 3.0
             }
-            name: "Bob"
+            balance: 3.0
           }}
       }
       api = RestApi database
       payload = {
-        amount: 3.0
         borrower: "Bob"
         lender: "Adam"
+        amount: 3.0
       }
       result = api\POST '/iou', payload
       expected = {
         users: {{
-            balance: 0.0
-            owes: {}
-            owed_by: {}
             name: "Adam"
-          }, {
-            balance: 0.0
             owes: {}
             owed_by: {}
+            balance: 0.0
+          }, {
             name: "Bob"
+            owes: {}
+            owed_by: {}
+            balance: 0.0
           }}
       }
       assert.are.same expected, result

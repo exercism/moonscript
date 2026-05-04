@@ -1,7 +1,9 @@
+import indent, quote from require 'spec_helpers'
+
 {
   module_name: 'ResistorColorDuo',
   generate_test: (case, level) ->
-    input = ["'#{color}'" for color in *case.input.colors]
+    input = [quote color for color in *case.input.colors]
     lines = {
       "result = ResistorColorDuo.value #{table.concat input, ', '}",
       "assert.are.equal #{case.expected}, result"

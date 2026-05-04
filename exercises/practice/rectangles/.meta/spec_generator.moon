@@ -1,5 +1,4 @@
-test_helpers = require 'test_helpers'
-import string_list from test_helpers
+import indent, string_list from require 'spec_helpers'
 
 {
   module_imports: {'rectangles'},

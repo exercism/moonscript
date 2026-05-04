@@ -1,4 +1,5 @@
-import string_list from require 'test_helpers'
+import indent, string_list from require 'spec_helpers'
+
 {
   module_name: 'FlowerField'
 

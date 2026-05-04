@@ -1,3 +1,5 @@
+import indent from require 'spec_helpers'
+
 {
   module_name: 'DifferenceOfSquares',
   generate_test: (case, level=2) ->

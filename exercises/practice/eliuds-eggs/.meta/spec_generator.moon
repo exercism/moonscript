@@ -1,3 +1,5 @@
+import indent from require 'spec_helpers'
+
 {
   module_name: 'count_eggs',
   generate_test: (case, level) ->

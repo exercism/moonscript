@@ -1,4 +1,9 @@
-import table_size from require './test_helpers'
+-- because `#t` is insufficient for non-sequence tables
+table_size = (t) ->
+  count = 0
+  count += 1 for _ in pairs t
+  count
+
 
 Robot = require 'robot_name'
 
@@ -7,7 +12,7 @@ describe 'robot-name', ->
     it 'a robot has a name', ->
       robot = Robot!
       name = robot\name!
-      assert.is.match name, '^[A-Z][A-Z][0-9][0-9][0-9]$'
+      assert.matches '^[A-Z][A-Z][0-9][0-9][0-9]$', name
 
     pending 'name does not change', ->
       robot = Robot!

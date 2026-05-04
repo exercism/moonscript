@@ -1,4 +1,4 @@
-import int_list from require 'test_helpers'
+import indent, int_list from require 'spec_helpers'
 
 {
   module_name: 'CustomSet',

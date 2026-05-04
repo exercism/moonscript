@@ -1,4 +1,4 @@
-import int_list from require 'test_helpers'
+import indent, quote, int_list from require 'spec_helpers'
 
 {
   module_imports: {'sublist'},

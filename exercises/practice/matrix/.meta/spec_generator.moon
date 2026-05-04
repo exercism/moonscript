@@ -1,4 +1,4 @@
-import json_string, int_list from require 'test_helpers'
+import indent, json_string, int_list from require 'spec_helpers'
 
 {
   module_name: 'Matrix',

@@ -6,8 +6,8 @@ describe 'binary-search-tree:', ->
     result = tree\data!
     expected = {
         data: "4"
-        right: nil
         left: nil
+        right: nil
     }
     assert.are.same expected, result
 
@@ -17,12 +17,12 @@ describe 'binary-search-tree:', ->
       result = tree\data!
       expected = {
           data: "4"
-          right: nil
           left: {
               data: "2"
-              right: nil
               left: nil
+              right: nil
           }
+          right: nil
       }
       assert.are.same expected, result
 
@@ -31,12 +31,12 @@ describe 'binary-search-tree:', ->
       result = tree\data!
       expected = {
           data: "4"
-          right: nil
           left: {
               data: "4"
-              right: nil
               left: nil
+              right: nil
           }
+          right: nil
       }
       assert.are.same expected, result
 
@@ -45,12 +45,12 @@ describe 'binary-search-tree:', ->
       result = tree\data!
       expected = {
           data: "4"
+          left: nil
           right: {
               data: "5"
-              right: nil
               left: nil
+              right: nil
           }
-          left: nil
       }
       assert.are.same expected, result
 
@@ -59,30 +59,30 @@ describe 'binary-search-tree:', ->
     result = tree\data!
     expected = {
         data: "4"
-        right: {
-            data: "6"
-            right: {
-                data: "7"
-                right: nil
-                left: nil
-            }
-            left: {
-                data: "5"
-                right: nil
-                left: nil
-            }
-        }
         left: {
             data: "2"
-            right: {
-                data: "3"
-                right: nil
-                left: nil
-            }
             left: {
                 data: "1"
-                right: nil
                 left: nil
+                right: nil
+            }
+            right: {
+                data: "3"
+                left: nil
+                right: nil
+            }
+        }
+        right: {
+            data: "6"
+            left: {
+                data: "5"
+                left: nil
+                right: nil
+            }
+            right: {
+                data: "7"
+                left: nil
+                right: nil
             }
         }
     }

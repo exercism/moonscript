@@ -125,44 +125,46 @@ It's a module that returns a table.
   These tests are not executed by the test runner.
     - Examples: [`robot-name`][robot-name], [`custom-set`][custom-set]
 
-##### Examples of custom assertions
-
-- [`dnd-character`][dnd-character] -- `assert.between value, min, max`
-- [`space-age`][space-age] -- `assert.approx_equal #{case.expected}, result`
-- [`alphametics`][alphametics] -- `assert.has.same_kv result, expected`
-
-#### Helper functions for formatting test cases
-
-##### Functions in bin/generate-spec
-
-These functions are exported from [`bin/generate-spec`][generate-spec-exported] for use in spec_generator modules
-
-- `indent(text, level)` -- provide leading whitespace to the appropriate level.
-- `quote(str)` -- add quotation marks to the string, single or double as appropriate.
-- `is_empty(tbl)` -- predicate: is the table empty
-- `is_json_null(value)` -- predicate: is the value `json.null` from dkjson
-- `contains(tbl, value)` -- predicate: does the table contain the value (uses `==`)
-
 ##### Helper functions
 
 We have a library of helper functions, useful for generating pretty tables mostly.
 
-For example, to nicely format a list of words, or a list of strings over multiple lines, or to recursively format nested tables.
+- to safely quote a word,
+- to nicely format a list of words, or a list of strings over multiple lines,
+- to recursively format nested tables.
 
-**Look in [`lib/test_helpers.moon`][test-helpers].**
+**Look in [`lib/spec_helpers.moon`][spec-helpers].**
 
 Example:
 
 ```moonscript
-import int_list, string_list from require 'test_helpers'
+import indent, int_list, string_list from require 'spec_helpers'
 ...
 {
   generate_test: (case, level) ->
     lines = {
       "input = #{int_list case.input.numbers}"
       "expected = #{string_list case.expected, level}"
-      ...
+      "assert.are.same expected, someFunc input"
+    }
+    table.concat [indent line for line in *lines], "\n"
 ```
+
+##### Custom Assertions
+
+Custom assertions are stored in [`lib/spec_handlers/assertions.moon][assertions].
+Currently there is only one:
+
+- [`dnd-character`][dnd-character] -- `assert.is.between value, min, max`
+
+I used to have some more, but the [luassert][luassert] library is quite complete:
+
+- `assert.are.equal expected, actual` -- compare with `==`
+- `assert.are.same expected, actual` -- deeply compare tables for same keys and values
+- `assert.is.near expected, actual, epsilon` -- floats are approximately equal
+- `assert.matches pattern, string [, init [, plain]]` -- pattern matching (with lua patterns)
+    - see the lua [string.find][string-find] and [string.match][string-match] docs.
+    - luassert uses string.match, or string.find if "plain" is true.
 
 ##### Comparing tables deeply
 
@@ -242,9 +244,13 @@ Here, the value `4` was chosen to reflect the max depth of the expected value:
 [exercise-list]: https://github.com/exercism/moonscript/issues/102
 [gh-issues]: https://github.com/exercism/moonscript/issues
 [gh-pulls]: https://github.com/exercism/moonscript/pulls
+[luassert]: https://github.com/lunarmodules/luassert/blob/master/src/assertions.lua
+[string-find]: https://www.lua.org/manual/5.4/manual.html#pdf-string.find
+[string-match]: https://www.lua.org/manual/5.4/manual.html#pdf-string.match
 [style]: ./STYLE.md
 [generate-spec-exported]: ./bin/generate-spec#L51
-[test-helpers]: ./lib/test_helpers.moon
+[spec-helpers]: ./lib/spec_helpers.moon
+[assertions]: ./lib/spec_helpers/assertions.moon
 [space-age]: ./exercises/practice/space-age/.meta/spec_generator.moon
 [alphametics]: ./exercises/practice/alphametics/.meta/spec_generator.moon
 [dnd-character]: ./exercises/practice/dnd-character/.meta/spec_generator.moon

@@ -1,4 +1,4 @@
-int_list = (list) -> "{#{table.concat list, ', '}}"
+import indent, quote, int_list from require 'spec_helpers'
 
 {
   module_imports: {'make_change'},

@@ -1,4 +1,4 @@
-import table_tostring_ordered from require 'test_helpers'
+import indent, table_tostring_ordered from require 'spec_helpers'
 
 {
   module_imports: {'measure'},

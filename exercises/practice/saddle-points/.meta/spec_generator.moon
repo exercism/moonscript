@@ -1,4 +1,4 @@
-import int_lists, table_tostring_ordered from require 'test_helpers'
+import indent, int_lists from require 'spec_helpers'
 
 result_obj = (obj) -> "{row: #{obj.row}, column: #{obj.column}}"
 result_list = (list) -> "{#{table.concat [result_obj obj for obj in *list], ', '}}"
@@ -7,7 +7,7 @@ result_list = (list) -> "{#{table.concat [result_obj obj for obj in *list], ', '
   module_imports: {'saddle_points'},
 
   test_helpers: [[
-  cmp_saddle_points = (a, b) ->
+  compare_saddle_points = (a, b) ->
     a.row < b.row or (a.row == b.row and a.column < b.column)
 ]]
 
@@ -16,8 +16,8 @@ result_list = (list) -> "{#{table.concat [result_obj obj for obj in *list], ', '
       "matrix = #{int_lists case.input.matrix, level}",
       "result = saddle_points matrix"
       "expected = #{result_list case.expected}",
-      "table.sort result, cmp_saddle_points",
-      "table.sort expected, cmp_saddle_points",
+      "table.sort result, compare_saddle_points",
+      "table.sort expected, compare_saddle_points",
       "assert.are.same expected, result"
     }
     table.concat [indent line, level for line in *lines], '\n'

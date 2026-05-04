@@ -1,32 +1,26 @@
-import int_list, word_list from require 'test_helpers'
+import indent, is_empty, int_list, word_list from require 'spec_helpers'
 
 format_predicate = (pred) ->
   switch pred
-    when "fn(x) -> true"
-      "(_) -> true"
-    when "fn(x) -> false"
-      "(_) -> false"
-    when "fn(x) -> x % 2 == 1"
-      "(num) -> num % 2 == 1"
-    when "fn(x) -> x % 2 == 0"
-      "(num) -> num % 2 == 0"
-    when "fn(x) -> contains(x, 5)"
-      "(list) -> contains list, 5"
-    when "fn(x) -> starts_with(x, 'z')"
-      "(str) -> starts_with str, 'z'"
+    when "fn(x) -> true"                then "(_) -> true"
+    when "fn(x) -> false"               then "(_) -> false"
+    when "fn(x) -> x % 2 == 1"          then "(num) -> num % 2 == 1"
+    when "fn(x) -> x % 2 == 0"          then "(num) -> num % 2 == 0"
+    when "fn(x) -> contains(x, 5)"      then "(list) -> contains list, 5"
+    when "fn(x) -> starts_with(x, 'z')" then "(str) -> starts_with str, 'z'"
     else
       pred
 
 format_list = (list) ->
-  if #list == 0
-    "{}"
+  if is_empty list
+    '{}'
   elseif type(list[1]) == 'string'
     word_list list
   else
     int_list list
 
 format_value = (val, level) ->
-  if #val == 0
+  if is_empty val
     '{}'
   elseif type(val[1]) == 'table' -- list of lists
     rows = [indent format_list(row), level + 1 for row in *val]

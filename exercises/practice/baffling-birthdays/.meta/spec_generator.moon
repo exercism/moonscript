@@ -1,5 +1,4 @@
-tablex = require 'pl.tablex'
-import int_list, word_list from require 'test_helpers'
+import indent, int_list, word_list from require 'spec_helpers'
 
 {
   module_name: 'BafflingBirthdays',
@@ -15,7 +14,7 @@ import int_list, word_list from require 'test_helpers'
       when 'estimatedProbabilityOfSharedBirthday'
         lines = {
           "result = BafflingBirthdays.#{case.property} #{case.input.groupSize}",
-          "assert.is.approx_equal #{case.expected}, result"
+          "assert.is.near #{case.expected}, result, 1.0"
         }
       when 'randomBirthdates'
         switch case.description
@@ -63,18 +62,6 @@ import int_list, word_list from require 'test_helpers'
   -- https://lunarmodules.github.io/Penlight/libraries/pl.tablex.html
   tablex = require 'pl.tablex'
 
-  --
-  epsilon = 1.0
-  is_close_to = (state, arguments) ->
-    {a, b} = arguments
-    math.abs(a - b) <= epsilon
-
-  say = require 'say'
-  say\set 'assertion.approx_equal.positive', "Expected %s and %s to be within #{epsilon}"
-  say\set 'assertion.approx_equal.negative', "Expected %s and %s not to be within #{epsilon}"
-  assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
-
-  --
   isLeapYear = (year) -> year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
   -- ----------------------------------------
 ]]

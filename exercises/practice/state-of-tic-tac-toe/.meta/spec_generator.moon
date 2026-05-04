@@ -1,4 +1,4 @@
-import string_list from require 'test_helpers'
+import indent, quote, string_list from require 'spec_helpers'
 
 {
   module_imports: {'gamestate'},

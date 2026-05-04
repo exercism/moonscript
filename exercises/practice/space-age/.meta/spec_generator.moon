@@ -1,21 +1,7 @@
+import indent, quote from require 'spec_helpers'
+
 {
   module_name: 'SpaceAge',
-
-  test_helpers: [[
-  -- ----------------------------------------
-  -- Why do we need to test "approximately equal"?
-  -- See https://0.30000000000000004.com
-  epsilon = 1e-2
-  is_close_to = (state, arguments) ->
-    {a, b} = arguments
-    math.abs(a - b) <= epsilon
-
-  say = require 'say'
-  say\set 'assertion.approx_equal.positive', "Expected %s and %s to be within #{epsilon}"
-  say\set 'assertion.approx_equal.negative', "Expected %s and %s not to be within #{epsilon}"
-  assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
-  -- ----------------------------------------
-]]
 
   generate_test: (case, level) ->
     local lines
@@ -28,7 +14,7 @@
     else
       lines = {
         "result = SpaceAge.age #{quote case.input.planet}, #{case.input.seconds}",
-        "assert.approx_equal #{case.expected}, result"
+        "assert.is.near #{case.expected}, result, 0.01"
       }
     table.concat [indent line, level for line in *lines], '\n'
 }

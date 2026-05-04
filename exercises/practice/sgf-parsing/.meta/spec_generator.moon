@@ -1,4 +1,4 @@
-import json_string, table_dump from require 'test_helpers'
+import indent, quote, json_string, table_dump from require 'spec_helpers'
 
 {
   module_name: 'SGFParser',
@@ -15,7 +15,7 @@ import json_string, table_dump from require 'test_helpers'
       }
     else
       {
-        "result = SGFParser.#{case.property} #{json_string case.input.encoded}",
+        "result = SGFParser.parse #{json_string case.input.encoded}",
         "expected = #{table_dump case.expected, level}",
         "assert.are.same expected, result"
       }

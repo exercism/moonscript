@@ -1,6 +1,10 @@
-import int_list, int_lists from require 'test_helpers'
+import indent
+       quote
+       is_json_null
+       int_lists
+  from require 'spec_helpers'
 
-value = (val) -> 
+value = (val) ->
   if is_json_null val
     nil
   else

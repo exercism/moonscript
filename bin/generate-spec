@@ -3,76 +3,35 @@
 
 require 'moonscript'
 json = (require 'dkjson').use_lpeg!
+path = require 'pl.path'
+file = require 'pl.file'
 -- import p from require 'moon'
 
-local exercise_name, exercise_directory, spec_generator, included_tests -- forward declarations
+package.moonpath = "./lib/?.moon;#{package.moonpath}"
+import indent, quote, table_contains from require 'spec_helpers'
 
+die = (msg) ->
+  io.stderr\write msg
+  os.exit 1
 
-file_exists = (path) ->
-  f = io.open path, 'r'
-  if f
-    f\close!
-    true
-  else
-    false
-
-
-read_file = (path) ->
-  f = assert io.open path, 'r'
-  contents = f\read '*a'
-  f\close!
-  contents
-
-
-write_file = (path, contents) ->
-  f = assert io.open path, 'w'
-  f\write contents
-  f\close!
-
-
+-- ----------------------------------------------------------
 included_tests_from_toml = (path) ->
   included = {}
-  local uuid, last_uuid
-  line_no = 0
+  local last_uuid
 
-  for line in io.lines(path)
-    line_no += 1
-    for uuid in line\gmatch('%[([%x%-]+)%]')
+  for line in io.lines path
+    for uuid in line\gmatch '%[([%x%-]+)%]'
       last_uuid = uuid
       included[uuid] = true
 
-    if line\match('^include%s*=%s*false')
+    if line\match '^include%s*=%s*false'
       included[last_uuid] = nil
 
   included
 
 -- ----------------------------------------------------------
--- functions marked as global so spec_generators can see them
-export indent, quote, is_json_null, is_empty, contains
-
-indent = (text, level) ->
-  error 'Provide a level for `indent`', 2 if not level
-  string.rep('  ', level) .. text
-
-quote = (str) ->
-  if str\find "'"
-    "\"#{str\gsub '"', '\\"'}\""
-  else
-    "'#{str}'"
-
-is_empty = (t) -> not next t
-
--- the dkjson `json.null` value is an empty table
-is_json_null = (value) -> type(value) == 'table' and is_empty(value)
-
--- a table contains a value
-contains = (t, v) ->
-  for elem in *t
-    return true if elem == v
-  false
-
--- ----------------------------------------------------------
-
+-- forward declarations
+local exercise_name, exercise_directory, spec_generator, included_tests
 
 test_cmd = 'it'
 
@@ -81,18 +40,21 @@ process = (node, level=0) ->
   for exclusion in *(spec_generator.exclusions or {})
     if node[exclusion.key]
       if exclusion.op == 'contains'
-        return '' if contains node[exclusion.key], exclusion.value
+        return '' if table_contains node[exclusion.key], exclusion.value
       else
         return '' if node[exclusion.key] == exclusion.value
 
-  if node.cases
+  if not node.cases
+    test = "#{test_cmd} #{quote node.description}, ->\n#{spec_generator.generate_test(node, level + 1)}\n"
+    test_cmd = 'pending'
+    return indent test, level
+  else
     output = {}
 
     if node.description
       table.insert output, indent("describe #{quote(node.description .. ':')}, ->", level)
     else
       table.insert output, indent("describe '#{exercise_name}:', ->", level)
-
       if spec_generator.test_helpers
         table.insert output, spec_generator.test_helpers
 
@@ -105,11 +67,6 @@ process = (node, level=0) ->
 
     return table.concat output, '\n'
 
-  else -- no "cases" member
-    test = "#{test_cmd} #{quote node.description}, ->\n#{spec_generator.generate_test(node, level + 1)}\n"
-    test_cmd = 'pending'
-    return indent test, level
-
 -- ----------------------------------------------------------
 -- "main"
 -- ----------------------------------------------------------
@@ -121,6 +78,12 @@ if snake_name == 'say'
   snake_name = './say'
 
 exercise_directory = 'exercises/practice/' .. exercise_name
+if not path.exists(exercise_directory)
+  die "no such directory: #{exercise_directory}\n"
+
+-- can't generate what's not there
+if not path.exists("#{exercise_directory}/.meta/spec_generator.moon")
+  die "#{exercise_name} does not have a spec_generator module.\n"
 
 canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{exercise_name}/canonical-data.json"
 canonical_data_path = "canonical-data/#{exercise_name}.json"
@@ -129,7 +92,7 @@ assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
 assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
 
 -- "json.null" ref: https://dkolf.de/dkjson-lua/documentation
-canonical_data = json.decode read_file(canonical_data_path), 1, json.null
+canonical_data = json.decode file.read(canonical_data_path, false), 1, json.null
 
 tests_toml_path = exercise_directory .. '/.meta/tests.toml'
 included_tests = included_tests_from_toml tests_toml_path
@@ -143,7 +106,7 @@ if spec_generator.module_name
 elseif spec_generator.module_imports
   spec = "import #{table.concat spec_generator.module_imports, ', '} from require '#{snake_name}'"
 else
-  error 'spec_generator is missing both "module_name" and "module_imports"'
+  die 'spec_generator is missing both "module_name" and "module_imports"'
 
 spec ..= "\n\n" .. process(canonical_data)
 
@@ -161,6 +124,6 @@ if spec_generator.bonus
   spec ..= spec_generator.bonus
 
 spec_path = exercise_directory .. '/' .. snake_name .. '_spec.moon'
-write_file spec_path, spec
+file.write spec_path, spec, false
 
 print "Created #{spec_path}"

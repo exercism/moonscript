@@ -1,4 +1,4 @@
-import table_tostring_ordered from require 'test_helpers'
+import indent, quote, table_tostring_ordered from require 'spec_helpers'
 keys = {'year', 'month', 'week', 'dayofweek'}
 
 {

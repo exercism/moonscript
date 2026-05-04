@@ -1,23 +1,7 @@
-import int_list from require 'test_helpers'
+import indent, int_list from require 'spec_helpers'
 
 {
   module_name: 'rational',
-
-  test_helpers: [[
-  -- ----------------------------------------
-  -- Why do we need to test "approximately equal"?
-  -- See https://0.30000000000000004.com
-  epsilon = 1e-9
-  is_close_to = (state, arguments) ->
-    {a, b} = arguments
-    math.abs(a - b) <= epsilon
-
-  say = require 'say'
-  say\set 'assertion.approx_equal.positive', "Expected %s and %s to be within #{epsilon}"
-  say\set 'assertion.approx_equal.negative', "Expected %s and %s not to be within #{epsilon}"
-  assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
-  -- ----------------------------------------
-]]
 
   generate_test: (case, level) ->
     local lines
@@ -42,7 +26,7 @@ import int_list from require 'test_helpers'
       when 'expreal'
         lines = {
           "result = rational.#{case.property} #{case.input.x}, #{int_list case.input.r}",
-          "assert.approx_equal #{case.expected}, result"
+          "assert.is.near #{case.expected}, result, 1e-6"
         }
     table.concat [indent line, level for line in *lines], '\n'
 }

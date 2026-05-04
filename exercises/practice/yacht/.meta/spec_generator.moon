@@ -1,3 +1,5 @@
+import indent, quote from require 'spec_helpers'
+
 {
   module_name: 'Yacht',
   generate_test: (case, level) ->

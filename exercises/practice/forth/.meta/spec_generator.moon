@@ -1,4 +1,9 @@
-import int_list, string_list, table_contains from require 'test_helpers'
+import  indent
+        quote
+        int_list
+        string_list
+        table_contains
+  from require 'spec_helpers'
 
 {
   module_name: 'Forth',

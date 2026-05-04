@@ -1,4 +1,4 @@
-import word_list from require 'test_helpers'
+import indent, word_list from require 'spec_helpers'
 
 {
   module_name: 'SecretHandshake',

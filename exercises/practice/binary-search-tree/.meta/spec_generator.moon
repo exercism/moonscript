@@ -1,6 +1,6 @@
 stringx = require 'pl.stringx'
 import dump from require 'moon'
-import word_list from require 'test_helpers'
+import indent, word_list from require 'spec_helpers'
 
 bst = (t, level) ->
   dumped = dump t

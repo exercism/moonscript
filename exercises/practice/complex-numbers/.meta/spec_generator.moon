@@ -1,3 +1,5 @@
+import indent from require 'spec_helpers'
+
 op = add: '+', sub: '-', mul: '*', div: '/'
 
 cn = (z) ->

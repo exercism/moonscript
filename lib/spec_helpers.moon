@@ -1,7 +1,20 @@
 json = require 'dkjson'
 
 -- example usage in a spec_generator:
---    import int_list, word_list from require 'test_helpers'
+--    import indent, quote, int_list, word_list from require 'test_helpers'
+-- or
+--    import
+--      indent
+--      quote
+--      int_list
+--      word_list
+--      from require 'test_helpers'
+
+--- -----------------------------------------------------------------------
+-- Since moonscript is a conten
+indent = (text, level) ->
+  error 'Provide a level for `indent`', 2 if not level
+  string.rep('  ', level) .. text
 
 --- -----------------------------------------------------------------------
 --- Lists of booleans
@@ -46,6 +59,13 @@ int_list_wrapped = (list, level) ->
     table.concat lines, '\n'
 
 --- -----------------------------------------------------------------------
+-- Safely quote a string
+quote = (str) ->
+  if str\find "'"
+    "\"#{str\gsub '"', '\\"'}\""
+  else
+    "'#{str}'"
+
 --- List of strings
 word_list = (list) ->
   "{#{table.concat [quote word for word in *list], ', '}}"
@@ -67,6 +87,15 @@ string_list = (list, level, opts) ->
 
 --- Show strings with escapes, when you want to keep the `\t`, `\n` in the test case.
 json_string = (s) -> json.encode s
+
+-- comparing against the dkjson `json.null` value
+local is_empty
+is_json_null = (value) ->
+  return false unless type(value) == 'table'
+  return false unless is_empty(value)
+  return false unless getmetatable(value)
+  return false unless type(getmetatable(value).__tojson) == 'function'
+  true
 
 --- -----------------------------------------------------------------------
 --- Key-Value list
@@ -92,6 +121,12 @@ table_tostring = (t) ->
   "{#{table.concat s, ', '}}"
 
 table_tostring_ordered = (t, keys) ->
+  s = [string.format '%s: %q', k, t[k] for k in *keys]
+  "{#{table.concat s, ', '}}"
+
+table_tostring_sortby_keys = (t) ->
+  keys = [k for k, _ in pairs t]
+  table.sort keys
   s = [string.format '%s: %q', k, t[k] for k in *keys]
   "{#{table.concat s, ', '}}"
 
@@ -157,16 +192,21 @@ table_dump = (what, level = 0) ->
 --- -----------------------------------------------------------------------
 {
   :bool_list
+  :indent
   :int_list
-  :int_lists
   :int_list_wrapped
-  :word_list
-  :string_list
-  :kv_table
-  :table_tostring
-  :table_tostring_ordered
-  :table_list
+  :int_lists
+  :is_empty
+  :is_json_null
   :json_string
+  :kv_table
+  :quote
+  :string_list
   :table_contains
   :table_dump
+  :table_list
+  :table_tostring
+  :table_tostring_ordered
+  :table_tostring_sortby_keys
+  :word_list
 }

@@ -1,4 +1,4 @@
-import table_list from require 'test_helpers'
+import indent, table_list from require 'spec_helpers'
 
 {
   module_imports: {'maximumValue'},

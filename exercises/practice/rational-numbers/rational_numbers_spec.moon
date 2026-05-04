@@ -1,20 +1,6 @@
 rational = require 'rational_numbers'
 
 describe 'rational-numbers:', ->
-  -- ----------------------------------------
-  -- Why do we need to test "approximately equal"?
-  -- See https://0.30000000000000004.com
-  epsilon = 1e-9
-  is_close_to = (state, arguments) ->
-    {a, b} = arguments
-    math.abs(a - b) <= epsilon
-
-  say = require 'say'
-  say\set 'assertion.approx_equal.positive', "Expected %s and %s to be within #{epsilon}"
-  say\set 'assertion.approx_equal.negative', "Expected %s and %s not to be within #{epsilon}"
-  assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
-  -- ----------------------------------------
-
   describe 'Arithmetic:', ->
     describe 'Addition:', ->
       it 'Add two positive rational numbers', ->
@@ -175,15 +161,15 @@ describe 'rational-numbers:', ->
   describe 'Exponentiation of a real number to a rational number:', ->
     pending 'Raise a real number to a positive rational number', ->
       result = rational.expreal 8, {4, 3}
-      assert.approx_equal 16.0, result
+      assert.is.near 16.0, result, 1e-6
 
     pending 'Raise a real number to a negative rational number', ->
       result = rational.expreal 9, {-1, 2}
-      assert.approx_equal 0.33333333333333, result
+      assert.is.near 0.33333333333333, result, 1e-6
 
     pending 'Raise a real number to a zero rational number', ->
       result = rational.expreal 2, {0, 1}
-      assert.approx_equal 1.0, result
+      assert.is.near 1.0, result, 1e-6
 
   describe 'Reduction to lowest terms:', ->
     pending 'Reduce a positive rational number to lowest terms', ->

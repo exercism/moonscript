@@ -1,19 +1,10 @@
+import indent from require 'spec_helpers'
+assertions = require 'spec_helpers.assertions'
+
 {
   module_imports: {'modifier', 'ability', 'character'},
 
-  test_helpers: [[
-  -- ----------------------------------------------------------
-  between = (state, arguments) ->
-    assert #arguments == 3, 'expected three arguments to assert.between: value, min, max'
-    { val, min, max } = arguments
-    val and min <= val and val <= max
-
-  say = require 'say'
-  say\set 'assertion.between.positive', 'Expected %s to be in the range [%s, %s]'
-  say\set 'assertion.between.negative', 'Expected %s not to be in the range [%s, %s]'
-  assert\register 'assertion', 'between', between, 'assertion.between.positive', 'assertion.between.negative'
-  -- ----------------------------------------------------------
-  ]]
+  test_helpers: assertions.between
 
   generate_test: (case, level) ->
     local lines
@@ -27,18 +18,18 @@
         lines = {
           "for i = 1, 50",
           "  score = ability!",
-          "  assert.between score, 3, 18"
+          "  assert.is.between score, 3, 18"
         }
       when 'character'
         if case.description == "random character is valid"
           lines = {
             "player = character!",
-            "assert.between player.strength, 3, 18",
-            "assert.between player.dexterity, 3, 18",
-            "assert.between player.constitution, 3, 18",
-            "assert.between player.intelligence, 3, 18",
-            "assert.between player.wisdom, 3, 18",
-            "assert.between player.charisma, 3, 18",
+            "assert.is.between player.strength, 3, 18",
+            "assert.is.between player.dexterity, 3, 18",
+            "assert.is.between player.constitution, 3, 18",
+            "assert.is.between player.intelligence, 3, 18",
+            "assert.is.between player.wisdom, 3, 18",
+            "assert.is.between player.charisma, 3, 18",
             "assert.are.equal (10 + modifier player.constitution), player.hitpoints"
           }
         else

@@ -1,3 +1,5 @@
+import indent, quote from require 'spec_helpers'
+
 {
   module_name: 'ResistorColor',
 
@@ -5,7 +7,7 @@
     local lines
     if case.property == "colorCode"
       lines = {
-        "result = ResistorColor.color_code '#{case.input.color}'",
+        "result = ResistorColor.color_code #{quote case.input.color}",
         "assert.are.equal #{case.expected}, result"
       }
     else
@@ -15,7 +17,7 @@
         "assert.are.same expected, result"
       }
 
-    table.concat [indent(line, level) for line in *lines], '\n'
+    table.concat [indent line, level for line in *lines], '\n'
 }
 
 

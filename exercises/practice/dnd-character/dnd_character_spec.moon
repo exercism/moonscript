@@ -12,7 +12,7 @@ describe 'dnd-character:', ->
   say\set 'assertion.between.negative', 'Expected %s not to be in the range [%s, %s]'
   assert\register 'assertion', 'between', between, 'assertion.between.positive', 'assertion.between.negative'
   -- ----------------------------------------------------------
-  
+
   describe 'ability modifier:', ->
     it 'ability modifier for score 3 is -4', ->
       assert.are.equal -4, modifier 3
@@ -65,16 +65,16 @@ describe 'dnd-character:', ->
   pending 'random ability is within range', ->
     for i = 1, 50
       score = ability!
-      assert.between score, 3, 18
+      assert.is.between score, 3, 18
 
   pending 'random character is valid', ->
     player = character!
-    assert.between player.strength, 3, 18
-    assert.between player.dexterity, 3, 18
-    assert.between player.constitution, 3, 18
-    assert.between player.intelligence, 3, 18
-    assert.between player.wisdom, 3, 18
-    assert.between player.charisma, 3, 18
+    assert.is.between player.strength, 3, 18
+    assert.is.between player.dexterity, 3, 18
+    assert.is.between player.constitution, 3, 18
+    assert.is.between player.intelligence, 3, 18
+    assert.is.between player.wisdom, 3, 18
+    assert.is.between player.charisma, 3, 18
     assert.are.equal (10 + modifier player.constitution), player.hitpoints
 
   pending 'each ability is only calculated once', ->

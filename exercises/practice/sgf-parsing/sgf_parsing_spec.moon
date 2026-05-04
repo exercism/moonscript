@@ -18,29 +18,29 @@ describe 'sgf-parsing:', ->
   pending 'node without properties', ->
     result = SGFParser.parse "(;)"
     expected = {
-      children: {}
       properties: {}
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'single node tree', ->
     result = SGFParser.parse "(;A[B])"
     expected = {
-      children: {}
       properties: {
         A: {"B"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'multiple properties', ->
     result = SGFParser.parse "(;A[b]C[d])"
     expected = {
-      children: {}
       properties: {
         A: {"b"}
         C: {"d"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
@@ -59,172 +59,172 @@ describe 'sgf-parsing:', ->
   pending 'two nodes', ->
     result = SGFParser.parse "(;A[B];B[C])"
     expected = {
-      children: {{
-          children: {}
-          properties: {
-            B: {"C"}
-          }
-        }}
       properties: {
         A: {"B"}
       }
+      children: {{
+          properties: {
+            B: {"C"}
+          }
+          children: {}
+        }}
     }
     assert.are.same expected, result
 
   pending 'two child trees', ->
     result = SGFParser.parse "(;A[B](;B[C])(;C[D]))"
     expected = {
-      children: {{
-          children: {}
-          properties: {
-            B: {"C"}
-          }
-        }, {
-          children: {}
-          properties: {
-            C: {"D"}
-          }
-        }}
       properties: {
         A: {"B"}
       }
+      children: {{
+          properties: {
+            B: {"C"}
+          }
+          children: {}
+        }, {
+          properties: {
+            C: {"D"}
+          }
+          children: {}
+        }}
     }
     assert.are.same expected, result
 
   pending 'multiple property values', ->
     result = SGFParser.parse "(;A[b][c][d])"
     expected = {
-      children: {}
       properties: {
         A: {"b", "c", "d"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'within property values, whitespace characters such as tab are converted to spaces', ->
     result = SGFParser.parse "(;A[hello\t\tworld])"
     expected = {
-      children: {}
       properties: {
         A: {"hello  world"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'within property values, newlines remain as newlines', ->
     result = SGFParser.parse "(;A[hello\n\nworld])"
     expected = {
-      children: {}
       properties: {
         A: {"hello\n\nworld"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'escaped closing bracket within property value becomes just a closing bracket', ->
     result = SGFParser.parse "(;A[\\]])"
     expected = {
-      children: {}
       properties: {
         A: {"]"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'escaped backslash in property value becomes just a backslash', ->
     result = SGFParser.parse "(;A[\\\\])"
     expected = {
-      children: {}
       properties: {
         A: {"\\"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending "opening bracket within property value doesn't need to be escaped", ->
     result = SGFParser.parse "(;A[x[y\\]z][foo]B[bar];C[baz])"
     expected = {
-      children: {{
-          children: {}
-          properties: {
-            C: {"baz"}
-          }
-        }}
       properties: {
         A: {"x[y]z", "foo"}
         B: {"bar"}
       }
+      children: {{
+          properties: {
+            C: {"baz"}
+          }
+          children: {}
+        }}
     }
     assert.are.same expected, result
 
   pending "semicolon in property value doesn't need to be escaped", ->
     result = SGFParser.parse "(;A[a;b][foo]B[bar];C[baz])"
     expected = {
-      children: {{
-          children: {}
-          properties: {
-            C: {"baz"}
-          }
-        }}
       properties: {
         A: {"a;b", "foo"}
         B: {"bar"}
       }
+      children: {{
+          properties: {
+            C: {"baz"}
+          }
+          children: {}
+        }}
     }
     assert.are.same expected, result
 
   pending "parentheses in property value don't need to be escaped", ->
     result = SGFParser.parse "(;A[x(y)z][foo]B[bar];C[baz])"
     expected = {
-      children: {{
-          children: {}
-          properties: {
-            C: {"baz"}
-          }
-        }}
       properties: {
         A: {"x(y)z", "foo"}
         B: {"bar"}
       }
+      children: {{
+          properties: {
+            C: {"baz"}
+          }
+          children: {}
+        }}
     }
     assert.are.same expected, result
 
   pending 'escaped tab in property value is converted to space', ->
     result = SGFParser.parse "(;A[hello\\\tworld])"
     expected = {
-      children: {}
       properties: {
         A: {"hello world"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'escaped newline in property value is converted to nothing at all', ->
     result = SGFParser.parse "(;A[hello\\\nworld])"
     expected = {
-      children: {}
       properties: {
         A: {"helloworld"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'escaped t and n in property value are just letters, not whitespace', ->
     result = SGFParser.parse "(;A[\\t = t and \\n = n])"
     expected = {
-      children: {}
       properties: {
         A: {"t = t and n = n"}
       }
+      children: {}
     }
     assert.are.same expected, result
 
   pending 'mixing various kinds of whitespace and escaped characters in property value', ->
     result = SGFParser.parse "(;A[\\]b\nc\\\nd\t\te\\\\ \\\n\\]])"
     expected = {
-      children: {}
       properties: {
         A: {"]b\ncd  e\\ ]"}
       }
+      children: {}
     }
     assert.are.same expected, result

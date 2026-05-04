@@ -5,18 +5,6 @@ describe 'baffling-birthdays:', ->
   -- https://lunarmodules.github.io/Penlight/libraries/pl.tablex.html
   tablex = require 'pl.tablex'
 
-  --
-  epsilon = 1.0
-  is_close_to = (state, arguments) ->
-    {a, b} = arguments
-    math.abs(a - b) <= epsilon
-
-  say = require 'say'
-  say\set 'assertion.approx_equal.positive', "Expected %s and %s to be within #{epsilon}"
-  say\set 'assertion.approx_equal.negative', "Expected %s and %s not to be within #{epsilon}"
-  assert\register 'assertion', 'approx_equal', is_close_to, 'assertion.approx_equal.positive', 'assertion.approx_equal.negative'
-
-  --
   isLeapYear = (year) -> year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
   -- ----------------------------------------
 
@@ -93,16 +81,16 @@ describe 'baffling-birthdays:', ->
   describe 'estimated probability of at least one shared birthday:', ->
     pending 'for one person', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 1
-      assert.is.approx_equal 0.0, result
+      assert.is.near 0.0, result, 1.0
 
     pending 'among ten people', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 10
-      assert.is.approx_equal 11.694818, result
+      assert.is.near 11.694818, result, 1.0
 
     pending 'among twenty-three people', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 23
-      assert.is.approx_equal 50.729723, result
+      assert.is.near 50.729723, result, 1.0
 
     pending 'among seventy people', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 70
-      assert.is.approx_equal 99.915958, result
+      assert.is.near 99.915958, result, 1.0

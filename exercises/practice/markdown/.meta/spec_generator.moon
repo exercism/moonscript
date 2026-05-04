@@ -1,4 +1,4 @@
-import json_string from require 'test_helpers'
+import indent, quote, json_string from require 'spec_helpers'
 
 {
   module_name: 'Markdown',

@@ -1,3 +1,5 @@
+import indent, quote from require 'spec_helpers'
+
 string_list = (list, level) ->
   lines = [indent quote(elem) .. ',', level + 1 for elem in *list]
   table.insert lines, 1, '{'

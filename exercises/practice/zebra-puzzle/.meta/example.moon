@@ -3,6 +3,7 @@ permute = require 'pl.permute'  -- https://luarocks.org/modules/tieske/penlight
 toTheRightOf = (a, b) -> a == b + 1
 nextTo       = (a, b) -> toTheRightOf(a, b) or toTheRightOf(b, a)
 
+HOUSES = {1,2,3,4,5}
 FIRST = 1
 MIDDLE = 3
 
@@ -25,13 +26,13 @@ MIDDLE = 3
 
 solve = ->
   -- solve for colours
-  for p1 in permute.order_iter {1,2,3,4,5}
+  for p1 in permute.order_iter HOUSES
     {red, green, ivory, yellow, blue} = p1
     -- clue 6
     if toTheRightOf green, ivory
 
       -- solve for nationalities
-      for p2 in permute.order_iter {1,2,3,4,5}
+      for p2 in permute.order_iter HOUSES
         {english, spanish, ukrainian, norwegian, japanese} = p2
         -- clues 2, 10, 15
         if english == red and norwegian == FIRST and nextTo norwegian, blue
@@ -44,19 +45,19 @@ solve = ->
           }
 
           -- solve for beverages
-          for p3 in permute.order_iter {1,2,3,4,5}
+          for p3 in permute.order_iter HOUSES
             {coffee, tea, milk, orangeJuice, water} = p3
             -- clues 4, 5, 9
             if coffee == green and ukrainian == tea and milk == MIDDLE
 
               -- solve for hobbies
-              for p4 in permute.order_iter {1,2,3,4,5}
+              for p4 in permute.order_iter HOUSES
                 {dancing, painting, reading, football, chess} = p4
                 -- clues 8, 13, 14
                 if painting == yellow and football == orangeJuice and japanese == chess
 
                   -- solve for pets
-                  for p5 in permute.order_iter {1,2,3,4,5}
+                  for p5 in permute.order_iter HOUSES
                     {dog, snails, fox, horse, zebra} = p5
                     -- clues 3, 7, 11, 12
                     if spanish == dog and dancing == snails and nextTo(reading, fox) and nextTo painting, horse
@@ -64,11 +65,9 @@ solve = ->
                         waterDrinker: nationalities[water]
                         zebraOwner: nationalities[zebra]
                       }
-  return waterDrinker: '?', zebraOwner: '?'
-
-SOLUTION = solve!
+  error 'No Solution!'
 
 {
-  drinksWater: -> SOLUTION.waterDrinker
-  ownsZebra: -> SOLUTION.zebraOwner
+  drinksWater: -> solve!.waterDrinker
+  ownsZebra: -> solve!.zebraOwner
 }

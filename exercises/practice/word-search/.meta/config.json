@@ -1,0 +1,17 @@
+{
+  "authors": [
+    "glennj"
+  ],
+  "files": {
+    "solution": [
+      "word_search.moon"
+    ],
+    "test": [
+      "word_search_spec.moon"
+    ],
+    "example": [
+      ".meta/example.moon"
+    ]
+  },
+  "blurb": "Create a program to solve a word search puzzle."
+}

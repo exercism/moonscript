@@ -1,4 +1,4 @@
-import int_list, word_list from require 'test_helpers'
+import indent, quote, int_list, word_list from require 'spec_helpers'
 
 {
   -- one of:

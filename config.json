@@ -731,6 +731,14 @@
         "difficulty": 5
       },
       {
+        "slug": "killer-sudoku-helper",
+        "name": "Killer Sudoku Helper",
+        "uuid": "af673916-a7af-4e9e-ac98-db885de660c8",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "knapsack",
         "name": "Knapsack",
         "uuid": "67cca2b4-9e4e-43f6-9e17-a3d7d291015f",

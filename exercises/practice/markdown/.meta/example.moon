@@ -12,7 +12,9 @@ parse = (input) ->
       in_list = false
       markup ..= '</ul>'
 
-  for line in input\gmatch "[^\n]+"
+  for input_line in input\gmatch "[^\n]+"
+    -- the loop variable is constant/immutable
+    line = input_line
     -- handle the in-line markup
     line = line\gsub("__(.-)__", "<strong>%1</strong>")
     line = line\gsub("_(.-)_", "<em>%1</em>")

@@ -165,7 +165,7 @@ table_dump = (what, level = 0) ->
   _dump = (what, depth = 0) ->
     t = type what
     if t == 'string' then
-      json_string what
+      if what\find "[\t\r\n\\]" then json_string what else quote what
     elseif t != 'table' then
       tostring what
     else

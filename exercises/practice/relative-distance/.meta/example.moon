@@ -1,19 +1,11 @@
 buildTree = (tree) ->
+  -- given the algorithm I'm using, all we need to know is the parent of each person
   t = {}
   for name, children in pairs tree
     if not t[name]
-      t[name] = {
-        parent: nil
-        siblings: {}
-        children: {}
-      }
-    for i, child in ipairs children
-      table.insert t[name].children, child
-      if t[child]
-        t[child].parent = name
-      else
-        t[child] = {parent: name, children: {}}
-      t[child].siblings = [c for j, c in ipairs children when i != j]
+      t[name] = {parent: nil}
+    for child in *children
+      t[child] = {parent: name}
   t
 
 ancestry = (t, person) ->
@@ -34,11 +26,11 @@ removeCommonAncestors = (list1, list2) ->
     anc = {who, ancestry(t, who) for who in *{a, b}}
 
     -- different roots, no relation
-    return nil if anc[a][1] != anc[b][1]
+    return nil  if anc[a][1] != anc[b][1]
 
     removeCommonAncestors anc[a], anc[b]
-    return #anc[b] if #anc[a] == 0  -- a is ancestor of b
-    return #anc[a] if #anc[b] == 0  -- b is ancestor of a
+    return #anc[b]  if #anc[a] == 0  -- a is ancestor of b
+    return #anc[a]  if #anc[b] == 0  -- b is ancestor of a
 
     -- if we get here, they are siblings or cousins
     #anc[a] + #anc[b] - 1

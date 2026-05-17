@@ -1,4 +1,4 @@
 {
-  degreeOfSeparation: (tree, a, b) ->
+  degreeOfSeparation: (familyTree, personA, personB) ->
     error 'Implement me!'
 }

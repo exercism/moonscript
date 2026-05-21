@@ -779,6 +779,14 @@
         "difficulty": 5
       },
       {
+        "slug": "relative-distance",
+        "name": "Relative Distance",
+        "uuid": "d978e2b2-5647-4309-8e64-330fd1f95484",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 5
+      },
+      {
         "slug": "simple-cipher",
         "name": "Simple Cipher",
         "uuid": "f55d8d06-21cf-4ac4-a6cc-61ed90ff3588",

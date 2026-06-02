@@ -915,6 +915,14 @@
         "difficulty": 7
       },
       {
+        "slug": "poker",
+        "name": "Poker",
+        "uuid": "662bce2e-94bb-4b1e-94a0-d69be06ab7e8",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 7
+      },
+      {
         "slug": "rectangles",
         "name": "Rectangles",
         "uuid": "c63979dc-1b48-4fbf-ae84-c10ba5a10304",

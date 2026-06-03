@@ -499,6 +499,14 @@
         "difficulty": 4
       },
       {
+        "slug": "list-ops",
+        "name": "List Ops",
+        "uuid": "4d62e0eb-70b6-4f94-9eff-acd1bbb0da33",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "luhn",
         "name": "Luhn",
         "uuid": "8b2916c6-5ffc-489a-bedb-d5402b3d7152",

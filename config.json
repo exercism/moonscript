@@ -579,6 +579,14 @@
         "difficulty": 4
       },
       {
+        "slug": "save-the-cow",
+        "name": "Save the Cow",
+        "uuid": "7b85dc03-54e5-45ea-ac02-a9da503c89e9",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 4
+      },
+      {
         "slug": "series",
         "name": "Series",
         "uuid": "9206db65-e0c9-4ea5-afc2-23910ea6dca2",

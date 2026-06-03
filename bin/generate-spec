@@ -85,11 +85,12 @@ if not path.exists(exercise_directory)
 if not path.exists("#{exercise_directory}/.meta/spec_generator.moon")
   die "#{exercise_name} does not have a spec_generator module.\n"
 
-canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{exercise_name}/canonical-data.json"
 canonical_data_path = "canonical-data/#{exercise_name}.json"
 
-assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
-assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
+if not path.exists canonical_data_path
+  canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{exercise_name}/canonical-data.json"
+  assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
+  assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
 
 -- "json.null" ref: https://dkolf.de/dkjson-lua/documentation
 canonical_data = json.decode file.read(canonical_data_path, false), 1, json.null

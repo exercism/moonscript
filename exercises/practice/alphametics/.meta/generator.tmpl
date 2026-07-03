@@ -1,0 +1,16 @@
+import solve from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if h.is_json_null(case.expected) then -%>
+    puzzle = <%- h.quote(case.input.puzzle) %>
+    assert.is.falsy solve puzzle
+<%   else -%>
+    puzzle = <%- h.quote(case.input.puzzle) %>
+    result = solve puzzle
+    expected = <%- h.table_tostring_sortby_keys(case.expected, 2) %>
+    assert.are.same result, expected
+<%   end -%>
+
+<% end -%>

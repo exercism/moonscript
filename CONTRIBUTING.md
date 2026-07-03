@@ -116,13 +116,25 @@ There are 3 tags:
 And the end tag can be `-%>` in order to suppress a trailing newline following the tag.
 Otherwise, there will be a lot of blank lines in the resulting file.
 
-Because anything outside of a tag is literal text, we're stuck with mostly putting control statements at the start of lines with no indentation. 
-This can make it tricky to ensure that you have an `end` statement for each `if` or `for`.
-
 Note that **Lua** syntax is required here, not MoonScript syntax.
 You need parentheses for function calls.
 You need a `do` for each `for`, and a `then` for each `if` or `elseif`.
 For loops, you'll need `ipairs` (or `pairs`) not MoonScript's `*` generator operator.
+
+Because anything outside of a tag is literal text, we're stuck with mostly putting control statements at the start of lines with no indentation. 
+This can make it tricky to ensure that you have an `end` statement for each `if` or `for`.
+To mitigate this, add some indentation inside the tag:
+
+```
+<% for i, case in ipairs(data.cases) do -%>
+  ...
+<%   if case.property == 'foo' then -%>
+    ...
+<%   else if case.property == 'bar' then -%>
+    ...
+<%   end -%>
+<% end -%>
+```
 
 #### Template environment
 

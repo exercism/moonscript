@@ -8,14 +8,14 @@ OPTIONALLY: a preface block of code
 describe <%- h.quote(slug.kebab .. ':') %>, ->
 <% for i, case in ipairs(data.cases) do -%>
   <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
-<% if not case.expected.error then -%>
+<%   if not case.expected.error then -%>
     result = <%= slug.pascal %>.<%= case.property %> <%= case.input %>
     expected = <%= case.expected %>
     assert.are.same expected, result
-<% else -%>
+<%   else -%>
     f = -> <%= slug.pascal %>.<%= case.property %> <%= case.input %>
     assert.has.errors f, <%- h.quote(case.expected.error) %>
-<% end -%>
+<%   end -%>
 
 <% end -%>
 

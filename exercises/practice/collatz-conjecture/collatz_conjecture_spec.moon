@@ -24,3 +24,4 @@ describe 'collatz-conjecture:', ->
   pending 'negative value is an error', ->
     f = -> CollatzConjecture.steps -15
     assert.has.errors f, 'Only positive integers are allowed'
+

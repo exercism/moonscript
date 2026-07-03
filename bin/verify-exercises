@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 
-# Synopsis:
-# Verify that each exercise's example/exemplar solution passes the tests.
-# You can either verify all exercises or a single exercise.
+usage() {
+    cat >&2 <<END_USAGE
+Synopsis:
+Verify that each exercise's example/exemplar solution passes the tests.
+You can either verify all exercises or a single exercise.
 
-# Example: verify all exercises
-# bin/verify-exercises
+Usage: $0 [-h] [-t] [exercise_slug]
 
-# Example: verify single exercise
-# bin/verify-exercises two-fer
+Where: -t = use TAP output for busted
+
+Example: verify all exercises: $ bin/verify-exercises
+
+Example: verify single exercise: $ bin/verify-exercises two-fer
+END_USAGE
+}
 
 set -eo pipefail
 
@@ -33,7 +39,7 @@ unskip_tests() {
 }
 
 run_tests() {
-    busted --verbose
+    busted "${busted_opts[@]}"
 }
 
 verify_exercise() {
@@ -85,6 +91,19 @@ required_tool perl
 required_tool busted
 
 cd "$(dirname "$(realpath "$0")")/.."
+
+busted_opts=( --verbose )
+while getopts ':ht' opt; do
+    case $opt in
+        h) usage
+           exit ;;
+        t) busted_opts+=( --output=TAP ) ;;
+        *) echo "invalid option: -$OPTARG" >&2
+           usage
+           exit 2 ;;
+    esac
+done
+shift $((OPTIND - 1))
 
 exercise_slug="${1:-*}"
 verify_exercises "${exercise_slug}"

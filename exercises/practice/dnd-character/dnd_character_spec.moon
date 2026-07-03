@@ -1,18 +1,19 @@
 import modifier, ability, character from require 'dnd_character'
 
+-- ----------------------------------------------------------
+-- a custom assertion
+between = (state, arguments) ->
+  assert #arguments == 3, 'expected three arguments to assert.between: value, min, max'
+  { val, min, max } = arguments
+  val and min <= val and val <= max
+
+say = require 'say'
+say\set 'assertion.between.positive', 'Expected %s to be in the range [%s, %s]'
+say\set 'assertion.between.negative', 'Expected %s not to be in the range [%s, %s]'
+assert\register 'assertion', 'between', between, 'assertion.between.positive', 'assertion.between.negative'
+-- ----------------------------------------------------------
+
 describe 'dnd-character:', ->
-  -- ----------------------------------------------------------
-  between = (state, arguments) ->
-    assert #arguments == 3, 'expected three arguments to assert.between: value, min, max'
-    { val, min, max } = arguments
-    val and min <= val and val <= max
-
-  say = require 'say'
-  say\set 'assertion.between.positive', 'Expected %s to be in the range [%s, %s]'
-  say\set 'assertion.between.negative', 'Expected %s not to be in the range [%s, %s]'
-  assert\register 'assertion', 'between', between, 'assertion.between.positive', 'assertion.between.negative'
-  -- ----------------------------------------------------------
-
   describe 'ability modifier:', ->
     it 'ability modifier for score 3 is -4', ->
       assert.are.equal -4, modifier 3
@@ -86,3 +87,4 @@ describe 'dnd-character:', ->
     assert.are.equal player.wisdom, player.wisdom
     assert.are.equal player.charisma, player.charisma
     assert.are.equal player.hitpoints, player.hitpoints
+

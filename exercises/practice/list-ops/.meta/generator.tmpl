@@ -1,0 +1,45 @@
+<%= slug.pascal %> = require '<%= slug.snake %>'
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<% for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<% if case.property == 'append' then -%>
+      result = ListOps.append <%= h.int_list(case.input.list1) %>, <%= h.int_list(case.input.list2) %>
+      expected = <%= h.int_list(case.expected) %>
+      assert.are.same expected, result
+
+<% elseif case.property == 'concat' then -%>
+      result = ListOps.concat <%- h.table_dump(case.input.lists, 3) %>
+      expected = <%- h.table_dump(case.expected, 3) %>
+      assert.are.same expected, result
+
+<% elseif case.property == 'filter' then -%>
+      result = ListOps.filter <%- h.int_list(case.input.list) %>, <%- case.input["function"]:gsub('modulo', '%%') %>
+      expected = <%- h.int_list(case.expected) %>
+      assert.are.same expected, result
+
+<% elseif case.property == 'length' then -%>
+      result = ListOps.length <%- h.int_list(case.input.list) %>
+      expected = <%- case.expected %>
+      assert.are.equal expected, result
+
+<% elseif case.property == 'map' then -%>
+      result = ListOps.map <%- h.int_list(case.input.list) %>, <%- case.input["function"] %>
+      expected = <%- h.int_list(case.expected) %>
+      assert.are.same expected, result
+
+<% elseif case.property == 'foldl' or case.property == 'foldr' then -%>
+      result = ListOps.<%= case.property %> <%- h.int_list(case.input.list) %>, <%= case.input.initial %>, <%- case.input["function"] %>
+      expected = <%- case.expected %>
+      assert.are.equal expected, result
+
+<% elseif case.property == 'reverse' then -%>
+      result = ListOps.reverse <%- h.table_dump(case.input.list, 3) %>
+      expected = <%- h.table_dump(case.expected) %>
+      assert.are.same expected, result
+
+<% end -%>
+<% end -%>
+<% end -%>

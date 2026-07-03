@@ -155,6 +155,20 @@ spec = tmpl {
 - `h` is the `spec_helpers` module table. See below.
 - `test_cmd` is a function to return "it" or "pending" as appropriate.
 
+If the template fails to compile, you'll see a message like
+
+```
+$ bin/generate-spec allergies
+moon: bin/generate-spec:85: (77) compiled template is nil!
+stack traceback:
+        [C]: in function 'assert'
+        bin/generate-spec:85: (77) in upvalue 'moonscript_chunk'
+```
+
+It's tricky to debug this. 
+Look in the code tags to find a missing end-quote or end-bracket.
+Ensure all your if's and for's and end's are in the right place.
+
 #### Helper functions
 
 We have a library of helper functions, useful for generating pretty tables mostly.

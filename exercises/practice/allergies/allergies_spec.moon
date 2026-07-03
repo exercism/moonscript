@@ -173,49 +173,50 @@ describe 'allergies:', ->
     pending 'no allergies', ->
       result = Allergies.list 0
       expected = {}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'just eggs', ->
       result = Allergies.list 1
       expected = {'eggs'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'just peanuts', ->
       result = Allergies.list 2
       expected = {'peanuts'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'just strawberries', ->
       result = Allergies.list 8
       expected = {'strawberries'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'eggs and peanuts', ->
       result = Allergies.list 3
       expected = {'eggs', 'peanuts'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'more than eggs but not peanuts', ->
       result = Allergies.list 5
       expected = {'eggs', 'shellfish'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'lots of stuff', ->
       result = Allergies.list 248
       expected = {'strawberries', 'tomatoes', 'chocolate', 'pollen', 'cats'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'everything', ->
       result = Allergies.list 255
       expected = {'eggs', 'peanuts', 'shellfish', 'strawberries', 'tomatoes', 'chocolate', 'pollen', 'cats'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'no allergen score parts', ->
       result = Allergies.list 509
       expected = {'eggs', 'shellfish', 'strawberries', 'tomatoes', 'chocolate', 'pollen', 'cats'}
-      assert.is.same expected, result
+      assert.are.same expected, result
 
     pending 'no allergen score parts without highest valid score', ->
       result = Allergies.list 257
       expected = {'eggs'}
-      assert.is.same expected, result
+      assert.are.same expected, result
+

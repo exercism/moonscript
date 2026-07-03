@@ -1,0 +1,18 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%     if case.property == 'allergicTo' then -%>
+      result = <%= slug.pascal %>.allergic_to <%- h.quote(case.input.item) %>, <%= case.input.score %>
+      assert.is_<%= case.expected %> result
+<%     elseif case.property == 'list' then -%>
+      result = <%= slug.pascal %>.list <%= case.input.score %>
+      expected = <%- h.word_list(case.expected) %>
+      assert.are.same expected, result
+<%     end -%>
+
+<%   end -%>
+<% end -%>

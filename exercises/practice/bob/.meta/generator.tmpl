@@ -1,0 +1,11 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+<% local json = require('dkjson') -%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = Bob.hey <%- json.encode(case.input.heyBob) %>
+    expected = <%- h.quote(case.expected) %>
+    assert.are.equal expected, result
+
+<% end -%>

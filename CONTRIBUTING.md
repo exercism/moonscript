@@ -168,6 +168,7 @@ stack traceback:
 It's tricky to debug this. 
 Look in the code tags to find a missing end-quote or end-bracket.
 Ensure all your if's and for's and end's are in the right place.
+Check the canonical data: do you have to deal with nested cases arrays?
 
 #### Helper functions
 

@@ -72,3 +72,4 @@ describe 'atbash-cipher:', ->
       result = AtbashCipher.decode 'zmlyhgzxovrhlugvmzhgvkkrmthglmv'
       expected = 'anobstacleisoftenasteppingstone'
       assert.are.equal expected, result
+

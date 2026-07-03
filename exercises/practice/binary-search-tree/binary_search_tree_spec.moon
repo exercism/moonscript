@@ -5,9 +5,9 @@ describe 'binary-search-tree:', ->
     tree = BinarySearchTree {'4'}
     result = tree\data!
     expected = {
-        data: "4"
-        left: nil
-        right: nil
+      data: '4'
+      left: nil
+      right: nil
     }
     assert.are.same expected, result
 
@@ -16,13 +16,13 @@ describe 'binary-search-tree:', ->
       tree = BinarySearchTree {'4', '2'}
       result = tree\data!
       expected = {
-          data: "4"
-          left: {
-              data: "2"
-              left: nil
-              right: nil
-          }
+        data: '4'
+        left: {
+          data: '2'
+          left: nil
           right: nil
+        }
+        right: nil
       }
       assert.are.same expected, result
 
@@ -30,13 +30,13 @@ describe 'binary-search-tree:', ->
       tree = BinarySearchTree {'4', '4'}
       result = tree\data!
       expected = {
-          data: "4"
-          left: {
-              data: "4"
-              left: nil
-              right: nil
-          }
+        data: '4'
+        left: {
+          data: '4'
+          left: nil
           right: nil
+        }
+        right: nil
       }
       assert.are.same expected, result
 
@@ -44,13 +44,13 @@ describe 'binary-search-tree:', ->
       tree = BinarySearchTree {'4', '5'}
       result = tree\data!
       expected = {
-          data: "4"
+        data: '4'
+        left: nil
+        right: {
+          data: '5'
           left: nil
-          right: {
-              data: "5"
-              left: nil
-              right: nil
-          }
+          right: nil
+        }
       }
       assert.are.same expected, result
 
@@ -58,33 +58,33 @@ describe 'binary-search-tree:', ->
     tree = BinarySearchTree {'4', '2', '6', '1', '3', '5', '7'}
     result = tree\data!
     expected = {
-        data: "4"
+      data: '4'
+      left: {
+        data: '2'
         left: {
-            data: "2"
-            left: {
-                data: "1"
-                left: nil
-                right: nil
-            }
-            right: {
-                data: "3"
-                left: nil
-                right: nil
-            }
+          data: '1'
+          left: nil
+          right: nil
         }
         right: {
-            data: "6"
-            left: {
-                data: "5"
-                left: nil
-                right: nil
-            }
-            right: {
-                data: "7"
-                left: nil
-                right: nil
-            }
+          data: '3'
+          left: nil
+          right: nil
         }
+      }
+      right: {
+        data: '6'
+        left: {
+          data: '5'
+          left: nil
+          right: nil
+        }
+        right: {
+          data: '7'
+          left: nil
+          right: nil
+        }
+      }
     }
     assert.are.same expected, result
 
@@ -118,3 +118,4 @@ describe 'binary-search-tree:', ->
       result = tree\sorted!
       expected = {'1', '2', '3', '5', '6', '7'}
       assert.are.same expected, result
+

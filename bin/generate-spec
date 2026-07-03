@@ -29,7 +29,6 @@ included_tests_from_toml = (path) ->
 
   included
 
-
 filter_cases = (canonical_data, included_tests) ->
   filter_group = (group) -> 
     filtered = {}
@@ -81,8 +80,8 @@ included_tests = included_tests_from_toml tests_toml_path
 filter_cases canonical_data, included_tests
 
 template_text = file.read template_file
-tmpl = etlua.compile template_text
-assert tmpl, "compiled template is nil!"
+tmpl, err = etlua.compile template_text
+assert tmpl, "could not compile the template: #{err}"
 
 test_cmd = (cond) -> cond and "it" or "pending"
 spec = tmpl {

@@ -1,0 +1,38 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+<%
+  local function bst(t, level)
+    return h.table_dump(t, level):gsub('%b<>', 'nil'):gsub('{}', 'nil')
+  end
+  --[[ This template is a bit more complicated:
+       there are a couple of case groups in addition to some top-level individual cases
+  --]]
+%>
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, node in ipairs(data.cases) do -%>
+<%   if not node.cases then -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(node.description) %>, ->
+    tree = <%= slug.pascal %> <%- h.word_list(node.input.treeData) %>
+    result = tree\data!
+    expected = <%- bst(node.expected, 2) %>
+    assert.are.same expected, result
+
+<%   else -%>
+  describe <%- h.quote(node.description .. ':') %>, ->
+<%     for j, case in ipairs(node.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%       if case.property == 'data' then -%>
+      tree = <%= slug.pascal %> <%- h.word_list(case.input.treeData) %>
+      result = tree\data!
+      expected = <%- bst(case.expected, 3) %>
+      assert.are.same expected, result
+
+<%       elseif case.property == 'sortedData' then -%>
+      tree = <%= slug.pascal %> <%- h.word_list(case.input.treeData) %>
+      result = tree\sorted!
+      expected = <%- h.word_list(case.expected) %>
+      assert.are.same expected, result
+
+<%       end --[[if]] -%>
+<%     end --[[for]] -%>
+<%   end --[[if]] -%>
+<% end --[[for]] -%>

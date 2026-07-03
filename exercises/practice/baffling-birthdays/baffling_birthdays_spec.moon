@@ -1,13 +1,13 @@
 BafflingBirthdays = require 'baffling_birthdays'
 
+-- ----------------------------------------
+-- https://lunarmodules.github.io/Penlight/libraries/pl.tablex.html
+tablex = require 'pl.tablex'
+
+isLeapYear = (year) -> year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+-- ----------------------------------------
+
 describe 'baffling-birthdays:', ->
-  -- ----------------------------------------
-  -- https://lunarmodules.github.io/Penlight/libraries/pl.tablex.html
-  tablex = require 'pl.tablex'
-
-  isLeapYear = (year) -> year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
-  -- ----------------------------------------
-
   describe 'shared birthday:', ->
     it 'one birthdate', ->
       birthdates = {'2000-01-01'}
@@ -94,3 +94,4 @@ describe 'baffling-birthdays:', ->
     pending 'among seventy people', ->
       result = BafflingBirthdays.estimatedProbabilityOfSharedBirthday 70
       assert.is.near 99.915958, result, 1.0
+

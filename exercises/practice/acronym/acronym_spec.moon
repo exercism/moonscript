@@ -36,3 +36,4 @@ describe 'acronym:', ->
   pending 'underscore emphasis', ->
     result = abbreviate 'The Road _Not_ Taken'
     assert.are.equal 'TRNT', result
+

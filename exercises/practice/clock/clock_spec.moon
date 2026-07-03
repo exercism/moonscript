@@ -244,3 +244,4 @@ describe 'clock:', ->
       a = Clock hour: 24, minute: 0
       b = Clock hour: 0, minute: 0
       assert.is_true, a\equals(b)
+

@@ -80,3 +80,4 @@ describe 'anagram:', ->
     result = find_anagrams 'LISTEN', {'LISTEN', 'Silent'}
     expected = {'Silent'}
     assert.are.same expected, result
+

@@ -1,0 +1,16 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    playerA = <%- h.word_list(case.input.playerA) %>
+    playerB = <%- h.word_list(case.input.playerB) %>
+    expected = {
+      status: <%- h.quote(case.expected.status) %>
+      cards: <%= case.expected.cards %>
+      tricks: <%= case.expected.tricks %>
+    }
+    result = Camicia.<%= case.property %> playerA, playerB
+    assert.are.same expected, result
+
+<% end -%>

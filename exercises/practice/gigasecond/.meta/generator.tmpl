@@ -1,0 +1,12 @@
+<%= slug.pascal %> = require '<%= slug.snake %>'
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+<% if not h.table_contains(case.scenarios, 'immutable') then -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= slug.pascal %>.<%= case.property %> <%- h.quote(case.input.moment) %>
+    expected = <%- h.quote(case.expected) %>
+    assert.are.equal expected, result
+
+<% end -%>
+<% end -%>

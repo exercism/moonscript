@@ -170,3 +170,4 @@ describe 'circular-buffer:', ->
     assert.are.equal 4, value
     value, ok = buffer\read!
     assert.is_false ok
+

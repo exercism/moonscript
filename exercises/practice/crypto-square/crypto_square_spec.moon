@@ -40,3 +40,4 @@ describe 'crypto-square:', ->
     result = encode 'If man was meant to stay on the ground, god would have given us roots.'
     expected = 'imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn  sseoau '
     assert.are.equal expected, result
+

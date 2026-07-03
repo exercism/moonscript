@@ -109,3 +109,4 @@ describe 'connect:', ->
       '        X X X X X X X X O',
     }
     assert.are.equal 'X', Connect.winner board
+

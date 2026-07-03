@@ -1,0 +1,15 @@
+import make_change from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if not case.expected.error then -%>
+    result = make_change <%= case.input.target %>, <%= h.int_list(case.input.coins) %>
+    expected = <%= h.int_list(case.expected) %>
+    assert.are.same expected, result
+<%   else -%>
+    f = -> make_change <%= case.input.target %>, <%= h.int_list(case.input.coins) %>
+    assert.has.error f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

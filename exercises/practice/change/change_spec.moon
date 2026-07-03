@@ -62,3 +62,4 @@ describe 'change:', ->
   pending 'cannot find negative change values', ->
     f = -> make_change -5, {1, 2, 5}
     assert.has.error f, "target can't be negative"
+

@@ -96,3 +96,4 @@ describe 'all-your-base:', ->
   pending 'both bases are negative', ->
     f = -> rebase in_base: -2, out_base: -7, digits: {1}
     assert.has.errors f, 'input base must be >= 2'
+

@@ -1,0 +1,11 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    legacy = <%- h.table_dump(case.input.legacy, 2, {sort_keys = true}):gsub('%d+', h.quote) %>
+    expected = <%- h.table_dump(case.expected, 2, {sort_keys = true}) %>
+    result = <%= slug.pascal %>.<%= case.property %> legacy
+    assert.are.same expected, result
+
+<% end -%>

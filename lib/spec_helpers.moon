@@ -160,7 +160,7 @@ is_empty = (t) -> not next t
 
 -- mostly taken from:
 -- https://github.com/leafo/moonscript/blob/7b7899741c6c1e971e436d36c9aabb56f51dc3d5/moonscript/util.moon#L58
-table_dump = (what, level = 0) ->
+table_dump = (what, level = 0, options = {sort_keys: false}) ->
   seen = {}
   _dump = (what, depth = 0) ->
     t = type what
@@ -176,7 +176,12 @@ table_dump = (what, level = 0) ->
         return "{" .. table.concat([table_dump(v, level + depth + 1) for v in *what], ", ") .. "}"
 
       depth += 1
-      lines = for k,v in pairs what do
+      keys = [k for k, _ in pairs what]
+      if options.sort_keys
+        table.sort keys
+
+      lines = for k in *keys do
+        v = what[k]
         key = if type(k) == 'number' then "[#{k}]" else k
         (' ')\rep(depth * 2) .. "#{key}: " .. _dump(v, depth)
       seen[what] = false

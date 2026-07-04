@@ -6,7 +6,7 @@ describe 'etl:', ->
       '1': {'A'}
     }
     expected = {
-      'a': 1
+      a: 1
     }
     result = Etl.transform legacy
     assert.are.same expected, result
@@ -16,11 +16,11 @@ describe 'etl:', ->
       '1': {'A', 'E', 'I', 'O', 'U'}
     }
     expected = {
-      'a': 1
-      'e': 1
-      'i': 1
-      'o': 1
-      'u': 1
+      a: 1
+      e: 1
+      i: 1
+      o: 1
+      u: 1
     }
     result = Etl.transform legacy
     assert.are.same expected, result
@@ -31,10 +31,10 @@ describe 'etl:', ->
       '2': {'D', 'G'}
     }
     expected = {
-      'a': 1
-      'd': 2
-      'e': 1
-      'g': 2
+      a: 1
+      d: 2
+      e: 1
+      g: 2
     }
     result = Etl.transform legacy
     assert.are.same expected, result
@@ -50,32 +50,33 @@ describe 'etl:', ->
       '8': {'J', 'X'}
     }
     expected = {
-      'a': 1
-      'b': 3
-      'c': 3
-      'd': 2
-      'e': 1
-      'f': 4
-      'g': 2
-      'h': 4
-      'i': 1
-      'j': 8
-      'k': 5
-      'l': 1
-      'm': 3
-      'n': 1
-      'o': 1
-      'p': 3
-      'q': 10
-      'r': 1
-      's': 1
-      't': 1
-      'u': 1
-      'v': 4
-      'w': 4
-      'x': 8
-      'y': 4
-      'z': 10
+      a: 1
+      b: 3
+      c: 3
+      d: 2
+      e: 1
+      f: 4
+      g: 2
+      h: 4
+      i: 1
+      j: 8
+      k: 5
+      l: 1
+      m: 3
+      n: 1
+      o: 1
+      p: 3
+      q: 10
+      r: 1
+      s: 1
+      t: 1
+      u: 1
+      v: 4
+      w: 4
+      x: 8
+      y: 4
+      z: 10
     }
     result = Etl.transform legacy
     assert.are.same expected, result
+

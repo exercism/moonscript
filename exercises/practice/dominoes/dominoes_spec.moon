@@ -107,3 +107,4 @@ describe 'dominoes:', ->
       {6, 4},
     }
     assert.is.false canChain dominoes
+

@@ -52,3 +52,4 @@ describe 'darts:', ->
   pending 'Asymmetric position between the inner and middle circles', ->
     result = darts.score 0.5, -4
     assert.are.equal 5, result
+

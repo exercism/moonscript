@@ -160,3 +160,4 @@ describe 'flower-field:', ->
     expected = {'1**1'}
     result = FlowerField.annotate garden
     assert.are.same expected, result
+

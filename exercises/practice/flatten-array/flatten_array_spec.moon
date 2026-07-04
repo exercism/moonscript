@@ -55,3 +55,4 @@ describe 'flatten-array:', ->
     input = {"null", {{{"null"}}}, "null", "null", {{"null", "null"}, "null"}, "null"}
     expected = {}
     assert.are.same expected, flatten input
+

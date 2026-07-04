@@ -1,0 +1,21 @@
+import flatten from require <%- h.quote(slug.snake) %>
+<%
+  local json = require('dkjson').use_lpeg()
+  local function nested_lists(list)
+    local a = json.encode(list)
+    a = a:gsub('%[', '{')
+    a = a:gsub('%]', '}')
+    a = a:gsub(',', ', ')
+    a = a:gsub('null', '"null"')
+    return a
+  end
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    input = <%- nested_lists(case.input.array) %>
+    expected = <%= h.int_list(case.expected) %>
+    assert.are.same expected, flatten input
+
+<% end -%>

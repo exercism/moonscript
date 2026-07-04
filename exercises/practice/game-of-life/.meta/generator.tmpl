@@ -1,0 +1,11 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    matrix = <%= h.int_lists(case.input.matrix, 2) %>
+    result = <%= slug.pascal %>.<%= case.property %> matrix
+    expected = <%= h.int_lists(case.expected, 2) %>
+    assert.are.same expected, result
+
+<% end -%>

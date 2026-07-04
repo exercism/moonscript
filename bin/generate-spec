@@ -83,26 +83,13 @@ template_text = file.read template_file
 tmpl, err = etlua.compile template_text
 assert tmpl, "could not compile the template: #{err}"
 
-test_cmd = (cond) -> cond and "it" or "pending"
+test_cmd = (is_first) -> is_first and "it" or "pending"
 spec = tmpl {
   data: canonical_data,
   slug: {kebab: exercise_name, snake: snake_name, pascal: pascal_name},
   h: spec_helpers,
   :test_cmd,
 }
-
--- if spec_generator.bonus
---   spec ..= [[
-
-
---   -- The next tests are optional.
---   -- Set the environment variable BONUS_TESTS to run them:
---   -- For example, in bash run:  BONUS_TESTS=true busted
-
---   if os.getenv('BONUS_TESTS') == 'true'
---     describe 'Bonus tests', ->
--- ]]
---   spec ..= spec_generator.bonus
 
 spec_path = exercise_directory .. '/' .. snake_name .. '_spec.moon'
 file.write spec_path, spec, false

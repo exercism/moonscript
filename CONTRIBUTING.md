@@ -279,8 +279,33 @@ Here, the value `4` was chosen to reflect the max depth of the expected value:
             name: "Adam"
         }, 
         ...
-``` 
+```
 
+### Bonus tests
+
+It might be interesting to add some non-canonical tests for some exercises.
+This might be to reveal an interesting aspect of MoonScript/Lua capabilities, or it might be a very time-consuming test that you want the test-runner to avoid.
+
+Add bonus tests after the generated canonical tests in `generator.tmpl` like this
+
+```
+-- preamble
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  canonical test generation here ...
+<% end %>
+
+  -- The next tests are optional.
+  -- Set the environment variable BONUS_TESTS to run them:
+  -- For example, in bash run:  BONUS_TESTS=true busted
+
+  if os.getenv('BONUS_TESTS') == 'true'
+    describe 'Bonus tests', ->
+      pending 'bonus test 1', -> ...
+      pending 'bonus test 2', -> ...
+```
+You must keep the _"-- The next tests are optional."_ comment, the test runner relies on it.
+`custom-set` has bonus tests.
 
 [forum]: https://forum.exercism.org/c/programming/moonscript
 [forum-new-topic]: https://forum.exercism.org/new-topic?category=moonscript

@@ -16,3 +16,4 @@ describe 'eliuds-eggs:', ->
   pending '13 eggs', ->
     result = count_eggs 2000000000
     assert.are.equal 13, result
+

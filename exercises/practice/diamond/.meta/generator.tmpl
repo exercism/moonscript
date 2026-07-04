@@ -1,0 +1,10 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= slug.pascal %>.<%= case.property %> <%- h.quote(case.input.letter) %>
+    expected = <%- h.string_list(case.expected, 2) %>
+    assert.are.same expected, result
+
+<% end -%>

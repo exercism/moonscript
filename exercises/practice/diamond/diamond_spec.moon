@@ -95,3 +95,4 @@ describe 'diamond:', ->
       '                         A                         ',
     }
     assert.are.same expected, result
+

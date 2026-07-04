@@ -39,3 +39,4 @@ describe 'difference-of-squares:', ->
     pending 'difference of squares 100', ->
       result = DifferenceOfSquares.difference_of_squares 100
       assert.are.equal 25164150, result
+

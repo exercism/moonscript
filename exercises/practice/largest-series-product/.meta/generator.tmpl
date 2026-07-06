@@ -1,0 +1,19 @@
+import largest_product from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'table' and case.expected.error then -%>
+    f = -> largest_product <%- h.quote(case.input.digits) %>, <%= case.input.span %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<%   else -%>
+<%     if case.comments then
+         for _, comment in ipairs(case.comments) do -%>
+    -- <%- comment %>
+<%       end
+       end -%>
+    result = largest_product <%- h.quote(case.input.digits) %>, <%= case.input.span %>
+    assert.are.equal <%= case.expected %>, result
+<%   end -%>
+
+<% end -%>

@@ -155,3 +155,4 @@ describe 'linked-list:', ->
     assert.are.equal 107, list\pop!
     assert.are.equal 9, list\pop!
     assert.are.equal 73, list\pop!
+

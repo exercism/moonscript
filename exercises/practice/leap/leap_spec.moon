@@ -27,3 +27,4 @@ describe 'leap:', ->
 
   pending 'year divisible by 200, not divisible by 400 in common year', ->
     assert.is_false is_leap_year 1800
+

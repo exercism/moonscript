@@ -42,3 +42,4 @@ describe 'isogram:', ->
 
   pending 'word with duplicated character and with two hyphens', ->
     assert.is_false is_isogram 'up-to-date'
+

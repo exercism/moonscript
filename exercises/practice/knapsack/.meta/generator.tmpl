@@ -1,0 +1,11 @@
+import maximumValue from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    items = <%- h.table_list(case.input.items, 2) %>
+    maxWeight = <%= case.input.maximumWeight %>
+    result = maximumValue maxWeight, items
+    assert.are.equal <%= case.expected %>, result
+
+<% end -%>

@@ -1,0 +1,45 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, item in ipairs(data.cases) do
+     if item.cases then -%>
+  describe <%- h.quote(item.description .. ':') %>, ->
+<%     for j, case in ipairs(item.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+      scores = HighScores <%- h.int_list(case.input.scores) %>
+<%       if case.property == 'latestAfterTopThree' then -%>
+      _ = scores\personalTopThree!
+      result = scores\latest!
+<%       elseif case.property == 'scoresAfterTopThree' then -%>
+      _ = scores\personalTopThree!
+      result = scores\scores!
+<%       elseif case.property == 'latestAfterBest' then -%>
+      _ = scores\personalBest!
+      result = scores\latest!
+<%       elseif case.property == 'scoresAfterBest' then -%>
+      _ = scores\personalBest!
+      result = scores\scores!
+<%       else -%>
+      result = scores\<%= case.property %>!
+<%       end -%>
+<%       if type(case.expected) == 'table' then -%>
+      expected = <%- h.int_list(case.expected) %>
+<%       else -%>
+      expected = <%= case.expected %>
+<%       end -%>
+      assert.are.same expected, result
+
+<%     end -%>
+<%   else -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(item.description) %>, ->
+    scores = HighScores <%- h.int_list(item.input.scores) %>
+    result = scores\<%= item.property %>!
+<%     if type(item.expected) == 'table' then -%>
+    expected = <%- h.int_list(item.expected) %>
+<%     else -%>
+    expected = <%= item.expected %>
+<%     end -%>
+    assert.are.same expected, result
+
+<%   end -%>
+<% end -%>

@@ -77,3 +77,4 @@ describe 'high-scores:', ->
       result = scores\scores!
       expected = {20, 70, 15, 25, 30}
       assert.are.same expected, result
+

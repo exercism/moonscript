@@ -1,0 +1,20 @@
+import transmitSequence, decodeMessage from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+  -- Inputs and expected data are given in hexadecimal.
+
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%     if type(case.expected) == 'table' and case.expected.error then -%>
+      f = -> <%= case.property %> <%- h.string_list(case.input.message, 3, {inline=7}) %>
+      assert.has.error f, <%- h.quote(case.expected.error) %>
+<%     else -%>
+      result = <%= case.property %> <%- h.string_list(case.input.message, 3, {inline=7}) %>
+      expected = <%- h.string_list(case.expected, 3, {inline=7}) %>
+      assert.are.same expected, result
+<%     end -%>
+
+<%   end -%>
+<% end -%>

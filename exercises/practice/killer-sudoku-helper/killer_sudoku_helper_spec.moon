@@ -74,3 +74,4 @@ describe 'killer-sudoku-helper:', ->
       {3, 7},
     }
     assert.are.same expected, result
+

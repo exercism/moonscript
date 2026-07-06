@@ -1,0 +1,87 @@
+import ComplexNumber, add, sub, mul, div from require '<%= slug.snake %>'
+<%
+  -- Note that nested cases can be 3 levels deep.
+  -- This template is more "code-y" than typical.
+  local is_first = true
+  local function test_cmd()
+    local cmd
+    if is_first then
+      is_first = false
+      return "it"
+    else
+      return "pending"
+    end
+  end
+
+  local function cn(z)
+    if type(z) == "number" then
+      return z
+    end
+    return ('ComplexNumber(%s, %s)'):format(z[1], z[2])
+  end
+
+  local op = {add='+', sub='-', mul='*', div='/'}
+
+  local function render_case(case, level)
+    local t = h.indent(('%s %s, ->\n'):format(test_cmd(), h.quote(case.description)), level)
+    local lines
+    if h.table_contains({"real", "imaginary", "abs"}, case.property) then
+      lines = {
+        "c = " .. cn(case.input.z),
+        "result = cBACKSLASH" .. case.property .. "!",
+        "assert.are.equal " .. case.expected .. ", result"
+      }
+    elseif h.table_contains({'add', 'sub', 'mul', 'div'}, case.property) then
+      if type(case.input.z1) == "number" or type(case.input.z2) == "number" then
+        lines = {
+          ('result = %s %s, %s'):format(case.property, cn(case.input.z1), cn(case.input.z2)),
+          "expected = " .. cn(case.expected),
+          "assert.are.equal expected, result"
+        }
+      else
+        lines = {
+          "c1 = " .. cn(case.input.z1),
+          "c2 = " .. cn(case.input.z2),
+          "result = c1 " .. op[case.property] .. " c2",
+          "expected = " .. cn(case.expected),
+          "assert.are.equal expected, result"
+        }
+      end
+    elseif h.table_contains({"conjugate", "exp"}, case.property) then
+      lines = {
+        "c = " .. cn(case.input.z),
+        "result = cBACKSLASH" .. case.property .. "!",
+        "expected = " .. cn(case.expected),
+        "assert.are.equal expected, result"
+      }
+    end
+    for i = 1, #lines do
+      lines[i] = h.indent(lines[i], level + 1)
+    end
+    return t .. table.concat(lines, "\n") .. "\n"
+  end
+
+  local function render_spec(cases, level)
+    if cases.cases then
+      local result = h.indent("describe " .. h.quote(cases.description .. ':') .. ', ->', level)
+      return result .. "\n" .. render_spec(cases.cases, level)
+    else
+      local result = {}
+      for i, node in ipairs(cases) do
+        if node.uuid then
+          result[i] = render_case(node, level + 1)
+        else
+          result[i] = render_spec(node, level + 1)
+        end
+      end
+      return table.concat(result, "\n")
+    end
+  end
+-%>
+
+pi = math.pi
+e  = math.exp(1)
+ln = math.log
+
+describe '<%= slug.kebab %>:', ->
+<%- render_spec(data.cases, 0):gsub('BACKSLASH', string.char(92)) %>

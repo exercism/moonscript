@@ -66,3 +66,4 @@ describe 'luhn:', ->
 
   pending "non-numeric, non-space char in the middle with a sum that's divisible by 10 isn't allowed", ->
     assert.is_false Luhn.is_valid '59%59'
+

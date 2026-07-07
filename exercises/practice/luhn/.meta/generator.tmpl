@@ -1,0 +1,8 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    assert.is_<%= case.expected %> Luhn.is_valid <%- h.quote(case.input.value) %>
+
+<% end -%>

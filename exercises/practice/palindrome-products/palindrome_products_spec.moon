@@ -88,3 +88,4 @@ describe 'palindrome-products:', ->
     expected_factors    = {{3297, 3333}}
     assert.are.equal expected_palindrome, palindrome
     assert.are.same  expected_factors, factors
+

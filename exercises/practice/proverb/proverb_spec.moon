@@ -8,9 +8,7 @@ describe 'proverb:', ->
 
   pending 'one piece', ->
     result = recite {'nail'}
-    expected = [[
-And all for the want of a nail.
-]]
+    expected = 'And all for the want of a nail.'
     assert.are.equal expected, result
 
   pending 'two pieces', ->
@@ -52,3 +50,4 @@ For want of a soldier the battle was lost.
 And all for the want of a pin.
 ]]
     assert.are.equal expected, result
+

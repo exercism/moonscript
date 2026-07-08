@@ -1,0 +1,16 @@
+recite = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = recite <%- h.word_list(case.input.strings) %>
+<%   if #case.expected <= 1 then -%>
+    expected = <%- h.quote(case.expected[1] or '') %>
+<%   else -%>
+    expected = [[
+<%- table.concat(case.expected, '\n') %>
+]]
+<%   end -%>
+    assert.are.equal expected, result
+
+<% end -%>

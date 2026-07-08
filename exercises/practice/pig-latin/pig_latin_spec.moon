@@ -98,3 +98,4 @@ describe 'pig-latin:', ->
     pending 'a whole phrase', ->
       result = translate 'quick fast run'
       assert.are.equal 'ickquay astfay unray', result
+

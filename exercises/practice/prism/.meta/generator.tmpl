@@ -1,0 +1,26 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+<%
+  local function prism(p)
+    return ('{id: %s, x: %s, y: %s, angle: %s}'):format(p.id, p.x, p.y, p.angle)
+  end
+  local function prism_list(ps, level)
+    if #ps == 0 then return "{}" end
+    local lines = {"{"}
+    for _, p in ipairs(ps) do
+      lines[#lines + 1] = h.indent(prism(p), level + 1)
+    end
+    lines[#lines + 1] = h.indent("}", level)
+    return table.concat(lines, "\n")
+  end
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    start = {x: <%= case.input.start.x %>, y: <%= case.input.start.y %>, angle: <%= case.input.start.angle %>}
+    prisms = <%= prism_list(case.input.prisms, 2) %>
+    expected = <%= h.int_list(case.expected.sequence) %>
+    result = <%= slug.pascal %>.<%= case.property %> start, prisms
+    assert.are.same expected, result
+
+<% end -%>

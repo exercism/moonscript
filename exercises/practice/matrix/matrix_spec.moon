@@ -40,3 +40,4 @@ describe 'matrix:', ->
     result = Matrix.column "89 1903 3\n18 3 1\n9 4 800", 2
     expected = {1903, 3, 4}
     assert.are.same expected, result
+

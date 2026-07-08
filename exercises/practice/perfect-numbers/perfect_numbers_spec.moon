@@ -42,9 +42,10 @@ describe 'perfect-numbers:', ->
 
   describe 'Invalid inputs:', ->
     pending 'Zero is rejected (as it is not a positive integer)', ->
-      func = -> classify 0
-      assert.has.error func, 'Classification is only possible for positive integers.'
+      f = -> classify 0
+      assert.has.error f, 'Classification is only possible for positive integers.'
 
     pending 'Negative integer is rejected (as it is not a positive integer)', ->
-      func = -> classify -1
-      assert.has.error func, 'Classification is only possible for positive integers.'
+      f = -> classify -1
+      assert.has.error f, 'Classification is only possible for positive integers.'
+

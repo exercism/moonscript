@@ -1,0 +1,9 @@
+import is_paired from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<% --[[ hoops needed for backslash handling ]] -%>
+    assert.is_<%= tostring(case.expected) %> is_paired <%- h.quote(case.input.value):gsub(string.char(92), '%0%0') %>
+
+<% end -%>

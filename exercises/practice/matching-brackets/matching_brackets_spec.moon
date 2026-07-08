@@ -60,3 +60,4 @@ describe 'matching-brackets:', ->
 
   pending 'complex latex expression', ->
     assert.is_true is_paired '\\left(\\begin{array}{cc} \\frac{1}{3} & x\\\\ \\mathrm{e}^{x} &... x^2 \\end{array}\\right)'
+

@@ -475,3 +475,4 @@ describe 'meetup:', ->
     result = meetup {year: 2012, month: 12, week: "first", dayofweek: "Friday"}
     expected = '2012-12-07'
     assert.are.equal expected, result
+

@@ -53,3 +53,4 @@ describe 'pythagorean-triplet:', ->
       {7500, 10000, 12500},
     }
     assert.are.same expected, result
+

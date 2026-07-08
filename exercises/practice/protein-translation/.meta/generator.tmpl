@@ -1,0 +1,16 @@
+import proteins from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if case.expected.error then -%>
+    f = -> proteins <%- h.quote(case.input.strand) %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+
+<%   else -%>
+    result = proteins <%- h.quote(case.input.strand) %>
+    expected = <%- h.word_list(case.expected) %>
+    assert.are.same expected, result
+
+<%   end -%>
+<% end -%>

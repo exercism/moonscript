@@ -64,3 +64,4 @@ describe 'queen-attack:', ->
       black_queen = Queen 2, 5
       white_queen = Queen 4, 1
       assert.is_false black_queen\can_attack white_queen
+

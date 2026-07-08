@@ -1,0 +1,13 @@
+import prime from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'number' then -%>
+    assert.are.equal <%- case.expected %>, prime <%- case.input.number %>
+<%   else -%>
+    f = -> prime <%= case.input.number %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

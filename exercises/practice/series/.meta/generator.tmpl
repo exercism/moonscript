@@ -1,0 +1,15 @@
+import slices from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'table' and not case.expected.error then -%>
+    result = [slice for slice in slices <%- h.quote(case.input.series) %>, <%= case.input.sliceLength %>]
+    expected = <%- h.word_list(case.expected) %>
+    assert.are.same expected, result
+<%   else -%>
+    f = -> slices <%- h.quote(case.input.series) %>, <%= case.input.sliceLength %>
+    assert.has_error f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

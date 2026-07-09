@@ -129,3 +129,4 @@ describe 'robot-simulator:', ->
       assert.are.equal 11, robot\x!
       assert.are.equal 5, robot\y!
       assert.are.equal 'north', robot\direction!
+

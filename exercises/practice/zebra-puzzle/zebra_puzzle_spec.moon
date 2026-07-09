@@ -6,3 +6,4 @@ describe 'zebra-puzzle:', ->
 
   pending 'resident who owns zebra', ->
     assert.are.equal 'Japanese', ownsZebra!
+

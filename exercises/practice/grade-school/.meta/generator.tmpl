@@ -1,0 +1,30 @@
+import roster, add, grade from require <%- h.quote(slug.snake) %>
+<%
+  local function student_grade(t)
+    return '{' .. h.quote(t[1]) .. ', ' .. t[2] .. '}'
+  end
+  local function student_grade_list(list)
+    local students = {}
+    for _, e in ipairs(list) do
+      students[#students + 1] = student_grade(e)
+    end
+    return '{' .. table.concat(students, ', ') .. '}'
+  end
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if case.property == 'roster' then -%>
+    result = <%= case.property %> <%- student_grade_list(case.input.students) %>
+    expected = <%- h.word_list(case.expected) %>
+<%   elseif case.property == 'add' then -%>
+    result = <%= case.property %> <%- student_grade_list(case.input.students) %>
+    expected = <%- h.bool_list(case.expected) %>
+<%   elseif case.property == 'grade' then -%>
+    result = <%= case.property %> <%- student_grade_list(case.input.students) %>, <%= case.input.desiredGrade %>
+    expected = <%- h.word_list(case.expected) %>
+<%   end -%>
+    assert.are.same expected, result
+
+<% end -%>

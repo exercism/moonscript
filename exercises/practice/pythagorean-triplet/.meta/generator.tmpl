@@ -1,0 +1,10 @@
+import triplets_with_sum from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = triplets_with_sum <%- case.input.n %>
+    expected = <%- h.int_lists(case.expected, 2) %>
+    assert.are.same expected, result
+
+<% end -%>

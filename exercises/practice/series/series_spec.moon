@@ -50,3 +50,4 @@ describe 'series:', ->
   pending 'empty series is invalid', ->
     f = -> slices '', 1
     assert.has_error f, 'series cannot be empty'
+

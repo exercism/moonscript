@@ -28,3 +28,4 @@ describe 'resistor-color-duo:', ->
   pending 'Black and brown, one-digit', ->
     result = ResistorColorDuo.value 'black', 'brown'
     assert.are.equal 1, result
+

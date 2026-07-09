@@ -1,0 +1,20 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, item in ipairs(data.cases) do -%>
+<%   if item.cases then -%>
+  describe <%- h.quote(item.description .. ':') %>, ->
+<%     for j, case in ipairs(item.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+      result = <%= slug.pascal %>.color_code <%- h.quote(case.input.color) %>
+      assert.are.equal <%= case.expected %>, result
+
+<%     end -%>
+<%   else -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(item.description) %>, ->
+    expected = {'black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'grey', 'white'}
+    result = ResistorColor.colors!
+    assert.are.same expected, result
+
+<%   end -%>
+<% end -%>

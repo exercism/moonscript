@@ -18,3 +18,4 @@ describe 'resistor-color:', ->
     expected = {'black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'grey', 'white'}
     result = ResistorColor.colors!
     assert.are.same expected, result
+

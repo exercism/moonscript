@@ -1,0 +1,66 @@
+rational = require <%- h.quote(slug.snake) %>
+<%
+  -- Note that nested cases can be 3 levels deep.
+  -- This template is more "code-y" than typical.
+  local is_first = true
+  local function test_cmd()
+    local cmd
+    if is_first then
+      is_first = false
+      return "it"
+    else
+      return "pending"
+    end
+  end
+
+  local function render_case(case, level)
+    local t = h.indent(('%s %s, ->\n'):format(test_cmd(), h.quote(case.description)), level)
+    local lines
+    if h.table_contains({'add', 'sub', 'mul', 'div'}, case.property) then
+      lines = {
+        "result = rational." .. case.property .. " " .. h.int_list(case.input.r1) .. ", " .. h.int_list(case.input.r2),
+        "expected = " .. h.int_list(case.expected),
+        "assert.are.same expected, result"
+      }
+    elseif h.table_contains({"abs", "reduce"}, case.property) then
+      lines = {
+        "result = rational." .. case.property .. " " .. h.int_list(case.input.r),
+        "assert.are.same " .. h.int_list(case.expected) .. ", result"
+      }
+    elseif case.property == "exprational" then
+      lines = {
+        "result = rational." .. case.property .. " " .. h.int_list(case.input.r) .. ", " .. case.input.n,
+        "assert.are.same " .. h.int_list(case.expected) .. ", result"
+      }
+    elseif case.property == "expreal" then
+      lines = {
+        "result = rational." .. case.property .. " " .. case.input.x .. ", " .. h.int_list(case.input.r),
+        "assert.is.near " .. case.expected .. ", result, 1e-6"
+      }
+    end
+    for i = 1, #lines do
+      lines[i] = h.indent(lines[i], level + 1)
+    end
+    return t .. table.concat(lines, "\n") .. "\n"
+  end
+
+  local function render_spec(cases, level)
+    if cases.cases then
+      local result = h.indent("describe " .. h.quote(cases.description .. ':') .. ', ->', level)
+      return result .. "\n" .. render_spec(cases.cases, level)
+    else
+      local result = {}
+      for i, node in ipairs(cases) do
+        if node.uuid then
+          result[i] = render_case(node, level + 1)
+        else
+          result[i] = render_spec(node, level + 1)
+        end
+      end
+      return table.concat(result, "\n")
+    end
+  end
+-%>
+
+describe '<%= slug.kebab %>:', ->
+<%- render_spec(data.cases, 0):gsub('BACKSLASH', string.char(92)) %>

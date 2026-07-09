@@ -1,0 +1,31 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do
+     if group.cases then -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%     for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%       if type(case.expected) == 'table' and case.expected.error then -%>
+      assert.has.errors -> Grains.<%=case.property %> <%= case.input.square %>, <%- h.quote(case.expected.error) %>
+<%       else
+         -- use float formatting because Lua prints large ints with scientific notation
+         -- > 9223372036854775808 ==> 9.2233720368548e+18
+-%>
+      assert.are.equal <%= string.format('%.0f', case.expected) %>, Grains.<%= case.property %> <%= case.input.square %>
+<%       end -%>
+
+<%     end -%>
+<%   else -%>
+  <%= test_cmd(false) %> <%- h.quote(group.description) %>, ->
+<%  --[[ Lua can't represent this number exactly, so hardcode it.
+          > n = 18446744073709551615
+          > string.format('%.0f', n)
+          18446744073709551616
+          > 18446744073709551615 ~= 18446744073709551616
+          false
+--]] -%>
+    assert.are.equal 18446744073709551615, Grains.<%= group.property %>!
+
+<%   end -%>
+<% end -%>

@@ -52,3 +52,4 @@ For want of a soldier the battle was lost.
 And all for the want of a pin.
 ]]
     assert.are.equal expected, result
+

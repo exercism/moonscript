@@ -24,3 +24,4 @@ describe 'rna-transcription:', ->
   pending 'RNA complement', ->
     result = to_rna 'ACGTGGTCTTAA'
     assert.are.equal 'UGCACCAGAAUU', result
+

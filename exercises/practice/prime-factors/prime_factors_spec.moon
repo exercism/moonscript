@@ -60,3 +60,4 @@ describe 'prime-factors:', ->
     result = factors 93819012551
     expected = {11, 9539, 894119}
     assert.are.same expected, result
+

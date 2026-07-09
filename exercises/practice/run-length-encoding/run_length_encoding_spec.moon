@@ -56,3 +56,4 @@ describe 'run-length-encoding:', ->
       encoded = encode 'zzz ZZ  zZ'
       decoded = decode encoded
       assert.are.equal 'zzz ZZ  zZ', decoded
+

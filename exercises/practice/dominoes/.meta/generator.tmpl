@@ -1,0 +1,9 @@
+import canChain from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    dominoes = <%- h.int_lists(case.input.dominoes, 2) %>
+    assert.is.<%= tostring(case.expected) %> canChain dominoes
+
+<% end -%>

@@ -311,3 +311,4 @@ describe 'intergalactic-transmission:', ->
         '0x84',
       }
       assert.has.error f, 'wrong parity'
+

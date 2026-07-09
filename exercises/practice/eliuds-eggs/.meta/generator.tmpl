@@ -1,0 +1,9 @@
+count_eggs = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = count_eggs <%= case.input.number %>
+    assert.are.equal <%= case.expected %>, result
+
+<% end -%>

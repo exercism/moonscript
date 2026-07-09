@@ -90,3 +90,4 @@ describe 'save-the-cow:', ->
     game = SaveTheCow 'loot'
     f = -> game\guess {'t', 'o', 'l', 'l'}
     assert.has.error f, 'cannot guess after the game is won'
+

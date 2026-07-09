@@ -1,0 +1,9 @@
+Yacht = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = Yacht.<%= case.property %> <%- h.quote(case.input.category) %>, <%- h.int_list(case.input.dice) %>
+    assert.is.equal <%= case.expected %>, result
+
+<% end -%>

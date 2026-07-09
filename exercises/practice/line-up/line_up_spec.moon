@@ -95,3 +95,4 @@ describe 'line-up:', ->
     result = LineUp.format 'Yma', 123
     expected = 'Yma, you are the 123rd customer we serve today. Thank you!'
     assert.are.equal expected, result
+

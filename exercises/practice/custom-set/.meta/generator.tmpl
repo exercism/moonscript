@@ -1,0 +1,52 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j ==1) %> <%- h.quote(case.description) %>, ->
+<%     if case.property == 'empty' then -%>
+      set = <%= slug.pascal %> <%= h.int_list(case.input.set) %>
+      assert.is_<%= case.expected %> set\is_empty!
+
+<%     elseif case.property == 'contains' then -%>
+      set = <%= slug.pascal %> <%= h.int_list(case.input.set) %>
+      assert.is_<%= case.expected %> set\contains <%= case.input.element %>
+
+<%     elseif case.property == 'subset' or case.property == 'disjoint' or  case.property == 'equal' then -%>
+      set1 = <%= slug.pascal %> <%= h.int_list(case.input.set1) %>
+      set2 = <%= slug.pascal %> <%= h.int_list(case.input.set2) %>
+      assert.is_<%= case.expected %> set1\is_<%= case.property %> set2
+
+<%     elseif case.property == 'add' then -%>
+      set = <%= slug.pascal %> <%= h.int_list(case.input.set) %>
+      set\add <%= case.input.element %>
+      expected = <%= slug.pascal %> <%= h.int_list(case.expected) %>
+      assert.is_true set\is_equal expected
+
+<%     elseif case.property == 'intersection' or case.property == 'difference' or  case.property == 'union' then -%>
+      set1 = <%= slug.pascal %> <%= h.int_list(case.input.set1) %>
+      set2 = <%= slug.pascal %> <%= h.int_list(case.input.set2) %>
+      result = set1\<%= case.property %> set2
+      expected = <%= slug.pascal %> <%= h.int_list(case.expected) %>
+      assert.is_true result\is_equal expected
+
+<%     end -%>
+<%   end -%>
+<% end -%>
+
+  -- The next tests are optional.
+  -- Set the environment variable BONUS_TESTS to run them:
+  -- For example, in bash run:  BONUS_TESTS=true busted
+
+  if os.getenv('BONUS_TESTS') == 'true'
+    describe 'Bonus tests', ->
+      pending 'use the equal operator, are equal', ->
+        set1 = CustomSet {1, 2, 3, 4}
+        set2 = CustomSet {4, 3, 1, 2}
+        assert.is.true set1 == set2
+
+      pending 'use the equal operator, not equal', ->
+        set1 = CustomSet {1, 2, 3, 4}
+        set2 = CustomSet {4, 3, 1, 20}
+        assert.is.true set1 != set2

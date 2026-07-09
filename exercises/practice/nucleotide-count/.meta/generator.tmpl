@@ -1,0 +1,15 @@
+nucleotide_count = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if not case.expected.error then -%>
+    result = nucleotide_count <%- h.quote(case.input.strand) %>
+    expected = <%- h.table_tostring_ordered(case.expected, {'A','C','G','T'}) %>
+    assert.are.same expected, result
+<%   else -%>
+    f = -> nucleotide_count <%- h.quote(case.input.strand) %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

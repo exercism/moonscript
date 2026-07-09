@@ -308,3 +308,4 @@ describe 'camicia:', ->
     }
     result = Camicia.simulateGame playerA, playerB
     assert.are.same expected, result
+

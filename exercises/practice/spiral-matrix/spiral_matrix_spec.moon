@@ -48,3 +48,4 @@ describe 'spiral-matrix:', ->
       {13, 12, 11, 10, 9},
     }
     assert.are.same expected, result
+

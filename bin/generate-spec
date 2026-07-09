@@ -2,19 +2,19 @@
 -- ref: https://github.com/exercism/lua/blob/main/bin/generate-spec
 
 require 'moonscript'
+package.moonpath = "./lib/?.moon;#{package.moonpath}"
+
 json = (require 'dkjson').use_lpeg!
 path = require 'pl.path'
 file = require 'pl.file'
+etlua = require 'etlua'
+spec_helpers = require 'spec_helpers'
 -- import p from require 'moon'
-
-package.moonpath = "./lib/?.moon;#{package.moonpath}"
-import indent, quote, table_contains from require 'spec_helpers'
 
 die = (msg) ->
   io.stderr\write msg
   os.exit 1
 
--- ----------------------------------------------------------
 included_tests_from_toml = (path) ->
   included = {}
   local last_uuid
@@ -29,49 +29,27 @@ included_tests_from_toml = (path) ->
 
   included
 
--- ----------------------------------------------------------
--- forward declarations
-local exercise_name, exercise_directory, spec_generator, included_tests
-
-test_cmd = 'it'
-
-process = (node, level=0) ->
-  -- exclude the test cases in this node?
-  for exclusion in *(spec_generator.exclusions or {})
-    if node[exclusion.key]
-      if exclusion.op == 'contains'
-        return '' if table_contains node[exclusion.key], exclusion.value
-      else
-        return '' if node[exclusion.key] == exclusion.value
-
-  if not node.cases
-    test = "#{test_cmd} #{quote node.description}, ->\n#{spec_generator.generate_test(node, level + 1)}\n"
-    test_cmd = 'pending'
-    return indent test, level
-  else
-    output = {}
-
-    if node.description
-      table.insert output, indent("describe #{quote(node.description .. ':')}, ->", level)
-    else
-      table.insert output, indent("describe '#{exercise_name}:', ->", level)
-      if spec_generator.test_helpers
-        table.insert output, spec_generator.test_helpers
-
-    cases = {}
-    for case in *node.cases
-      if not case.uuid or included_tests[case.uuid]
-        table.insert cases, process(case, level + 1)
-
-    table.insert output, table.concat(cases, '\n')
-
-    return table.concat output, '\n'
+filter_cases = (canonical_data, included_tests) ->
+  filter_group = (group) -> 
+    filtered = {}
+    for case in *group.cases
+      if case.cases
+        -- this is a nested group, recurse into it
+        filter_group case
+        if #case.cases > 0
+          filtered[#filtered + 1] = case
+      elseif included_tests[case.uuid]
+        -- this is a leaf case, keep it if uuid matches
+        filtered[#filtered + 1] = case
+    group.cases = filtered
+  filter_group canonical_data
 
 -- ----------------------------------------------------------
 -- "main"
 -- ----------------------------------------------------------
 exercise_name = arg[1]
 snake_name = exercise_name\gsub("-", "_")
+pascal_name = "-#{exercise_name}"\gsub("-(%a)", (c) -> c\upper!)
 
 -- to differentiate from the lua rock "say" required by busted.
 if snake_name == 'say'
@@ -81,9 +59,11 @@ exercise_directory = 'exercises/practice/' .. exercise_name
 if not path.exists(exercise_directory)
   die "no such directory: #{exercise_directory}\n"
 
+template_file = "#{exercise_directory}/.meta/generator.tmpl"
+
 -- can't generate what's not there
-if not path.exists("#{exercise_directory}/.meta/spec_generator.moon")
-  die "#{exercise_name} does not have a spec_generator module.\n"
+if not path.exists(template_file)
+  die "#{exercise_name} does not have a generator template.\n"
 
 canonical_data_path = "canonical-data/#{exercise_name}.json"
 
@@ -97,34 +77,21 @@ canonical_data = json.decode file.read(canonical_data_path, false), 1, json.null
 
 tests_toml_path = exercise_directory .. '/.meta/tests.toml'
 included_tests = included_tests_from_toml tests_toml_path
+filter_cases canonical_data, included_tests
 
-package.moonpath = "#{exercise_directory}/.meta/?.moon;./lib/?.moon;#{package.moonpath}"
-spec_generator = require 'spec_generator'
+template_text = file.read template_file
+tmpl, err = etlua.compile template_text
+assert tmpl, "could not compile the template: #{err}"
 
-local spec
-if spec_generator.module_name
-  spec = "#{spec_generator.module_name} = require '#{snake_name}'"
-elseif spec_generator.module_imports
-  spec = "import #{table.concat spec_generator.module_imports, ', '} from require '#{snake_name}'"
-else
-  die 'spec_generator is missing both "module_name" and "module_imports"'
-
-spec ..= "\n\n" .. process(canonical_data)
-
-if spec_generator.bonus
-  spec ..= [[
-
-
-  -- The next tests are optional.
-  -- Set the environment variable BONUS_TESTS to run them:
-  -- For example, in bash run:  BONUS_TESTS=true busted
-
-  if os.getenv('BONUS_TESTS') == 'true'
-    describe 'Bonus tests', ->
-]]
-  spec ..= spec_generator.bonus
+test_cmd = (is_first) -> is_first and "it" or "pending"
+spec = tmpl {
+  data: canonical_data,
+  slug: {kebab: exercise_name, snake: snake_name, pascal: pascal_name},
+  h: spec_helpers,
+  :test_cmd,
+}
 
 spec_path = exercise_directory .. '/' .. snake_name .. '_spec.moon'
 file.write spec_path, spec, false
-
+print spec
 print "Created #{spec_path}"

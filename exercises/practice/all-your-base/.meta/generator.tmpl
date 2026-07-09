@@ -1,0 +1,15 @@
+import rebase from require '<%= slug.snake %>'
+
+describe '<%= slug.kebab %>:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<% if not case.expected.error then -%>
+    result = rebase in_base: <%= case.input.inputBase %>, out_base: <%= case.input.outputBase %>, digits: <%= h.int_list(case.input.digits) %>
+    expected = <%= h.int_list(case.expected) %>
+    assert.are.same expected, result
+<% else -%>
+    f = -> rebase in_base: <%= case.input.inputBase %>, out_base: <%= case.input.outputBase %>, digits: <%= h.int_list(case.input.digits) %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<% end -%>
+
+<% end -%>

@@ -148,3 +148,4 @@ describe 'protein-translation:', ->
     result = proteins 'UUCUUCUAAUGGU'
     expected = {'Phenylalanine', 'Phenylalanine'}
     assert.are.same expected, result
+

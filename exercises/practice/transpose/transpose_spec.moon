@@ -188,3 +188,4 @@ describe 'transpose:', ->
       '    5',
     }
     assert.are.same expected, transpose input
+

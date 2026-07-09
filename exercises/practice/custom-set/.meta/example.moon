@@ -10,7 +10,7 @@ class CustomSet
     not next @data
 
   contains: (item) =>
-    @data[item]
+    @data[item] or false
 
   is_subset: (other) =>
     for item, _ in pairs @data

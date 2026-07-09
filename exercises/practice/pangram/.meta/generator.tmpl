@@ -1,0 +1,9 @@
+is_pangram = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = is_pangram <%- h.quote(case.input.sentence) %>
+    assert.is_<%- tostring(case.expected) %> result
+
+<% end -%>

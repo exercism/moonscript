@@ -36,3 +36,4 @@ describe 'space-age:', ->
   pending 'invalid planet causes error', ->
     f = -> SpaceAge.age 'Sun', 680804807
     assert.has.errors f, 'not a planet'
+

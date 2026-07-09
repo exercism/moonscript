@@ -40,3 +40,4 @@ describe 'pangram:', ->
   pending 'a-m and A-M are 26 different characters but not a pangram', ->
     result = is_pangram 'abcdefghijklm ABCDEFGHIJKLM'
     assert.is_false result
+

@@ -100,3 +100,4 @@ describe 'grade-school:', ->
     result = grade {{'Franklin', 5}, {'Bradley', 5}, {'Jeff', 1}}, 5
     expected = {'Bradley', 'Franklin'}
     assert.are.same expected, result
+

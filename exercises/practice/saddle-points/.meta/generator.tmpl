@@ -1,0 +1,28 @@
+<%
+  local function result_obj(obj)
+    return "{row: " .. obj.row .. ", column: " .. obj.column .. "}"
+  end
+  local function result_list(list)
+    local items = {}
+    for _, obj in ipairs(list) do
+      table.insert(items, result_obj(obj))
+    end
+    return "{" .. table.concat(items, ", ") .. "}"
+  end
+-%>
+import saddle_points from require 'saddle_points'
+
+compare_saddle_points = (a, b) ->
+  a.row < b.row or (a.row == b.row and a.column < b.column)
+
+describe 'saddle-points:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    matrix = <%- h.int_lists(case.input.matrix, 2) %>
+    result = saddle_points matrix
+    expected = <%- result_list(case.expected) %>
+    table.sort result, compare_saddle_points
+    table.sort expected, compare_saddle_points
+    assert.are.same expected, result
+
+<% end -%>

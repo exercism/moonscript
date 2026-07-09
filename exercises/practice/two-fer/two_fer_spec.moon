@@ -12,3 +12,4 @@ describe 'two-fer', ->
   pending 'another name given', ->
     result = TwoFer.two_fer 'Bob'
     assert.equal 'One for Bob, one for me.', result
+

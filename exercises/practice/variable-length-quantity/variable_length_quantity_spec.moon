@@ -155,3 +155,4 @@ describe 'variable-length-quantity:', ->
       result = VariableLengthQuantity.decode {192, 0, 200, 232, 86, 255, 255, 255, 127, 0, 255, 127, 129, 128, 0}
       expected = {8192, 1193046, 268435455, 0, 16383, 16384}
       assert.are.same expected, result
+

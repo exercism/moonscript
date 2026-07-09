@@ -1,0 +1,9 @@
+import rectangles from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    input = <%- h.string_list(case.input.strings, 2, {inline=1}) %>
+    assert.are.equal <%= case.expected %>, rectangles input
+
+<% end -%>

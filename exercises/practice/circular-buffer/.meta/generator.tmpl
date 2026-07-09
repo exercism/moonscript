@@ -1,0 +1,24 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    buffer = CircularBuffer <%= case.input.capacity %>
+<%   for _, op in ipairs(case.input.operations) do -%>
+<%     if op.operation == 'read' then -%>
+    value, ok = buffer\read!
+    assert.is_<%= op.should_succeed %> ok
+<%       if op.should_succeed then -%>
+    assert.are.equal <%= op.expected %>, value
+<%       end -%>
+<%     elseif op.operation == 'write' then -%>
+    ok = buffer\write <%= op.item %>
+    assert.is_<%= op.should_succeed %> ok
+<%     elseif op.operation == 'clear' then -%>
+    buffer\clear!
+<%     elseif op.operation == 'overwrite' then -%>
+    buffer\write <%= op.item %>, overwrite: true
+<%     end -%>
+<%   end -%>
+
+<% end -%>

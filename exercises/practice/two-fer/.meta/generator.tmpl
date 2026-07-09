@@ -1,0 +1,10 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab) %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+<%   local no_name = case.input.name == nil or h.is_json_null(case.input.name) -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= slug.pascal %>.two_fer<%- no_name and "!" or " " .. h.quote(case.input.name) %>
+    assert.equal <%- h.quote(case.expected) %>, result
+
+<% end -%>

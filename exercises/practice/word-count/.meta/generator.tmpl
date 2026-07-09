@@ -1,0 +1,10 @@
+import count_words from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = count_words <%- h.json_string(case.input.sentence) %>
+    expected = <%- h.kv_table(case.expected, 2, {sort_keys=true}) %>
+    assert.are.same result, expected
+
+<% end -%>

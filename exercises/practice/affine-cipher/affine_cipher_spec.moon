@@ -80,3 +80,4 @@ describe 'affine-cipher:', ->
     pending 'decode with a not coprime to m', ->
       f = -> decode 'Test', {a: 13, b: 5}
       assert.has.error f, 'a and m must be coprime.'
+

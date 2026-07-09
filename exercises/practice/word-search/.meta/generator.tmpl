@@ -1,0 +1,21 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+assert\set_parameter "TableFormatLevel", 3
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%
+    local expected = case.expected
+    for word, position in pairs(case.expected) do
+      if h.is_json_null(position) then
+        expected[word] = nil
+      end
+    end
+-%>
+    grid = <%- h.string_list(case.input.grid, 2, {inline=1}) %>
+    words = <%- h.string_list(case.input.wordsToSearchFor, 2, {inline=1}) %>
+    expected = <%- h.table_dump(case.expected, 2, {sort_keys=true}) %>
+    assert.are.same expected, <%= slug.pascal %>(grid)\find(words)
+
+<% end -%>

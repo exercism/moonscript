@@ -1,0 +1,17 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    list = LinkedList!
+<%   for _, op in ipairs(case.input.operations) do
+       if op.value ~= nil then -%>
+    list\<%= op.operation %> <%= op.value %>
+<%     elseif op.expected ~= nil then -%>
+    assert.are.equal <%= op.expected %>, list\<%= op.operation %>!
+<%     else -%>
+    list\<%= op.operation %>!
+<%     end
+     end -%>
+
+<% end -%>

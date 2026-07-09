@@ -64,3 +64,4 @@ describe 'sum-of-multiples:', ->
   pending 'solutions using include-exclude must extend to cardinality greater than 3', ->
     result = SumOfMultiples.sum {2, 3, 5, 7, 11}, 10000
     assert.are.equal 39614537, result
+

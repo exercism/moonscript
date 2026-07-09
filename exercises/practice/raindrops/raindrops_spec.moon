@@ -72,3 +72,4 @@ describe 'raindrops:', ->
   pending 'the sound for 3125 is Plang as it has a factor 5', ->
     result = raindrops 3125
     assert.are.equal 'Plang', result
+

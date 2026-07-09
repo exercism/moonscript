@@ -1,0 +1,10 @@
+import encode from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = encode <%- h.quote(case.input.plaintext) %>
+    expected = <%- h.quote(case.expected) %>
+    assert.are.equal expected, result
+
+<% end -%>

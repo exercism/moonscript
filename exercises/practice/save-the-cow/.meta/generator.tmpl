@@ -1,0 +1,20 @@
+SaveTheCow = require 'save_the_cow'
+
+describe 'save-the-cow:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    game = SaveTheCow <%- h.quote(case.input.word) %>
+<% if case.expected.error then -%>
+    f = -> game\guess <%- h.word_list(case.input.guesses) %>
+    assert.has.error f, <%- h.quote(case.expected.error) %>
+<% else -%>
+    result = game\guess <%- h.word_list(case.input.guesses) %>
+    expected = {
+      remainingFailures: <%= case.expected.remainingFailures %>
+      state: <%- h.quote(case.expected.state) %>
+      maskedWord: <%- h.quote(case.expected.maskedWord) %>
+    }
+    assert.are.same expected, result
+<% end -%>
+
+<% end -%>

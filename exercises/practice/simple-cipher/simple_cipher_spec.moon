@@ -69,3 +69,4 @@ describe 'simple-cipher:', ->
       cipher = SimpleCipher 'abc'
       result = cipher\decode 'iboaqcnecbfcr'
       assert.are.equal 'iamapandabear', result
+

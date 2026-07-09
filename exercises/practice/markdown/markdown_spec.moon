@@ -85,3 +85,4 @@ describe 'markdown:', ->
     result = Markdown.parse "# Start a list\n* Item 1\n* Item 2\nEnd a list"
     expected = '<h1>Start a list</h1><ul><li>Item 1</li><li>Item 2</li></ul><p>End a list</p>'
     assert.are.equal expected, result
+

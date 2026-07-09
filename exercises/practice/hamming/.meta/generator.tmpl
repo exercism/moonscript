@@ -1,0 +1,14 @@
+<%= slug.snake %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'table' and case.expected.error then -%>
+    f = -> hamming.<%= case.property %> <%- h.quote(case.input.strand1) %>, <%- h.quote(case.input.strand2) %>
+    assert.has.error f, <%- h.quote(case.expected.error) %>
+<%   else -%>
+    result = hamming.<%= case.property %> <%- h.quote(case.input.strand1) %>, <%- h.quote(case.input.strand2) %>
+    assert.are.equal <%= case.expected %>, result
+<%   end -%>
+
+<% end -%>

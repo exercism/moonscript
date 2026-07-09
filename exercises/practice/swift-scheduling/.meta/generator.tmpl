@@ -1,0 +1,10 @@
+import delivery_date from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = delivery_date <%- h.quote(case.input.description) %>, <%- h.quote(case.input.meetingStart) %>
+    expected = <%- h.quote(case.expected) %>
+    assert.are.equal expected, result
+
+<% end -%>

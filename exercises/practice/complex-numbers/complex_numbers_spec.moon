@@ -1,10 +1,10 @@
 import ComplexNumber, add, sub, mul, div from require 'complex_numbers'
 
-describe 'complex-numbers:', ->
-  pi = math.pi
-  e  = math.exp(1)
-  ln = math.log
+pi = math.pi
+e  = math.exp(1)
+ln = math.log
 
+describe 'complex-numbers:', ->
   describe 'Real part:', ->
     it 'Real part of a purely real number', ->
       c = ComplexNumber(1, 0)
@@ -249,3 +249,4 @@ describe 'complex-numbers:', ->
       result = div 5, ComplexNumber(1, 1)
       expected = ComplexNumber(2.5, -2.5)
       assert.are.equal expected, result
+

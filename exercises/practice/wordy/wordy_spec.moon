@@ -108,3 +108,4 @@ describe 'wordy:', ->
   pending 'reject prefix notation', ->
     fn = -> Wordy.answer 'What is plus 1 2?'
     assert.has.error fn, 'syntax error'
+

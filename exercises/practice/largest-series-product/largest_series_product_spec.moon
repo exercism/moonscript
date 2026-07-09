@@ -74,3 +74,4 @@ describe 'largest-series-product:', ->
   pending 'rejects negative span', ->
     f = -> largest_product '12345', -1
     assert.has.errors f, 'span must not be negative'
+

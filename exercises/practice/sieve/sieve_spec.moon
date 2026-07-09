@@ -37,3 +37,4 @@ describe 'sieve:', ->
       919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997
     }
     assert.are.same expected, result
+

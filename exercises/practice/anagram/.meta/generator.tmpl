@@ -1,0 +1,10 @@
+find_anagrams = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = find_anagrams <%- h.quote(case.input.subject) %>, <%- h.word_list(case.input.candidates) %>
+    expected = <%- h.word_list(case.expected) %>
+    assert.are.same expected, result
+
+<% end -%>

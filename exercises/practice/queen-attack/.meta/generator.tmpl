@@ -1,0 +1,27 @@
+Queen = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+  -- Valid values for rows and columns are: 0 to 7 inclusive.
+
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%     if case.property == 'create' then -%>
+<%       if type(case.expected) == 'number' then -%>
+      queen = Queen <%= case.input.queen.position.row %>, <%= case.input.queen.position.column %>
+      assert.is.truthy queen
+
+<%       else -%>
+      f = -> Queen <%= case.input.queen.position.row %>, <%= case.input.queen.position.column %>
+      assert.has.errors f, 'invalid position'
+
+<%       end -%>
+<%     elseif case.property == 'canAttack' then -%>
+      black_queen = Queen <%= case.input.black_queen.position.row %>, <%= case.input.black_queen.position.column %>
+      white_queen = Queen <%= case.input.white_queen.position.row %>, <%= case.input.white_queen.position.column %>
+      assert.is_<%= tostring(case.expected) %> black_queen\can_attack white_queen
+
+<%     end -%>
+<%   end -%>
+<% end -%>

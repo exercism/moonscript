@@ -63,3 +63,4 @@ describe 'isbn-verifier:', ->
 
   pending 'input is too long but contains a valid isbn', ->
     assert.is_false Isbn10.is_valid '98245726788'
+

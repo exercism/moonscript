@@ -48,3 +48,4 @@ describe 'micro-blog:', ->
   pending 'Royal Flush?', ->
     result = MicroBlog.truncate '🃎🂸🃅🃋🃍🃁🃊'
     assert.are.equal '🃎🂸🃅🃋🃍', result
+

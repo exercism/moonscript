@@ -116,3 +116,4 @@ describe 'yacht:', ->
   pending 'Yacht as choice', ->
     result = Yacht.score 'choice', {2, 2, 2, 2, 2}
     assert.is.equal 10, result
+

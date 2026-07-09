@@ -1,0 +1,8 @@
+RomanNumerals = require 'roman_numerals'
+
+describe 'roman-numerals:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    assert.are.equal <%- h.quote(case.expected) %>, RomanNumerals.to_roman <%= case.input.number %>
+
+<% end -%>

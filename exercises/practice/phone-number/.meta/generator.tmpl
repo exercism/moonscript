@@ -1,0 +1,14 @@
+import clean from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'string' then -%>
+    result = clean <%- h.quote(case.input.phrase) %>
+    assert.are.equal <%- h.quote(case.expected) %>, result
+<%   else -%>
+    f = -> clean <%- h.quote(case.input.phrase) %>
+    assert.has.error f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

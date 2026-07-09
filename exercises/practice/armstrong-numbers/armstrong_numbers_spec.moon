@@ -36,3 +36,4 @@ describe 'armstrong-numbers:', ->
   pending 'Seven-digit number that is not an Armstrong number', ->
     result = ArmstrongNumbers.is_armstrong 9926314
     assert.is_false result
+

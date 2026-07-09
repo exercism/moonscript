@@ -224,3 +224,4 @@ describe 'state-of-tic-tac-toe:', ->
       }
       f = -> gamestate board
       assert.has.error f, 'Impossible board: game should have ended after the game was won'
+

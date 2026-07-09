@@ -24,7 +24,7 @@
 - **Ensure that the feature or change is discussed on the [forum][forum].**
   Only start adding the feature or change when there is agreement on whether (and how) it should be added or changed.
 
-- Add the feature or change and [submit a Pull Request][pr-guide] to this repository.
+- Fork the exercism/moonscript repo, add the feature or change in your clone, and [submit a Pull Request][pr-guide] to this repository.
 
 - Ensure the PR description clearly describes the problem and solution.
   Include a link to the bug's corresponding forum conversation.
@@ -51,24 +51,22 @@
 
     - The test, stub and example files are empty.
     - The canonical data from problem-specifications gets added into your local `canonical-data` directory.
-    - A stub test generator is created: `exercises/practice/${slug_name}/.meta/spec_generator.moon`
+    - A test generator template is created: `exercises/practice/${slug_name}/.meta/generator.tmpl`
 
 1. Review the canonical data and decide if there are any tests cases to exclude.
 
    If there are, add `include = false` properties in the exercise's `.meta/tests.toml` file.
 
-   If there are whole test groups to exclude, add an "exclusions" property to the spec_generator module (see below).
-
 1. Considering the canonical data, decide if this exercise makes sense to use a test generator.
 
     - If no:
-        - **delete the stubbed .meta/spec_generator** and create the test suite manually.
+        - delete the stubbed .meta/generator.tmpl and create the test suite manually.
         - Use the file `canonical-data/${slug_name}.json` to create the tests.
         - Remember, this track uses TDD, so the first test uses `it` and all the rest use `pending`.
 
     - If yes:
 
-        1. Edit the spec_generator -- see below for more details.
+        1. Edit `.meta/generator.tmpl` -- see below for more details.
 
         2. Run the generator script and review the new test suite.
 
@@ -99,33 +97,80 @@
 
 1. Run `bin/configlet lint` to ensure that the new exercise conforms to Exercism standards.
 
-### The spec_generator
+### The test generator template
 
-The spec_generator.moon file is a MoonScript module containing the functions necessary to generate the test suite for practice exercises.
+The generator.tmpl file is an ERB style template.
+We use the [`etlua`][etlua] module to render the template into the spec file.
 
 It is located in `exercises/practice/${slug_name}/.meta/` directory.
 
-It's a module that returns a table.
+#### Template syntax
 
-#### Elements of returned table
+This is a pretty simple templating engine.
+There are 3 tags:
 
-- (required) _one_ of the following
-    - `module_name`: (string) this is the left-hand side of `${module_name} = require '${slug_name}'` in the test file
-    - `module_imports`: (list of strings) this is the list of names that appear in `import ${names} from require '${slug_name}'` in the test file
-- (required) `generate_test`: this is a function that creates the body of each test case. It takes 2 parameters:
-    - `case` is the Lua object for one test case taken from the canonical data.
-    - `level`, default value 2, is the indentation level of the body.
-      MoonScript is a whitespace-sensitive language, so we need to be careful about indenting the test functions properly.
-- (optional) `test_helpers`: (string) a block of code that gets added at the top of the top-level `describe` block.
-  This might include required modules used in the tests, or helper functions, or (more interstingly) custom assertions, or even just helpful comments for students.
-- (optional) `exclusions`: (list of tables) identifies things from the canonical data to exclude.
-  Normally, setting `include = false` in the tests.toml file is the preferred way to exclude individual tests, but sometimes you want to exclude a whole block of tests.
-    - Examples: [`simple-linked-list`][simple-linked-list], [`gigasecond`][gigasecond]
-- (optional) `bonus`: (string) bonus tests to add to the spec file as extra challenge for the students.
-  These tests are not executed by the test runner.
-    - Examples: [`robot-name`][robot-name], [`custom-set`][custom-set]
+- `<% lua statements %>` allow you to add control structures into the template: looping and conditionals
+- `<%= lua expression %>` replaces the tag with the result of the expression
+- `<%- lua expression %>` is the same as above, except the result does _not_ undergo HTML entity replacements. Use this for anything with quoted strings.
 
-##### Helper functions
+And the end tag can be `-%>` in order to suppress a trailing newline following the tag.
+Otherwise, there will be a lot of blank lines in the resulting file.
+
+Note that **Lua** syntax is required here, not MoonScript syntax.
+You need parentheses for function calls.
+You need a `do` for each `for`, and a `then` for each `if` or `elseif`.
+For loops, you'll need `ipairs` (or `pairs`) not MoonScript's `*` generator operator.
+
+Because anything outside of a tag is literal text, we're stuck with mostly putting control statements at the start of lines with no indentation. 
+This can make it tricky to ensure that you have an `end` statement for each `if` or `for`.
+To mitigate this, add some indentation inside the tag:
+
+```
+<% for i, case in ipairs(data.cases) do -%>
+  ...
+<%   if case.property == 'foo' then -%>
+    ...
+<%   else if case.property == 'bar' then -%>
+    ...
+<%   end -%>
+<% end -%>
+```
+
+#### Template environment
+
+The spec file is generated like this:
+
+```moonscript
+tmpl = etlua.compile template_text
+spec = tmpl {
+  data: canonical_data,
+  slug: {kebab: exercise_name, snake: snake_name, pascal: pascal_name},
+  h: spec_helpers,
+  :test_cmd,
+}
+```
+
+- The canonical data is provided to the template as the `data` variable.
+- The exercise slug is provided in three formats.
+- `h` is the `spec_helpers` module table. See below.
+- `test_cmd` is a function to return "it" or "pending" as appropriate.
+
+If the template fails to compile, you'll see a message like
+
+```
+$ bin/generate-spec allergies
+moon: bin/generate-spec:85: (77) compiled template is nil!
+stack traceback:
+        [C]: in function 'assert'
+        bin/generate-spec:85: (77) in upvalue 'moonscript_chunk'
+```
+
+It's tricky to debug this. 
+Look in the code tags to find a missing end-quote or end-bracket.
+Ensure all your if's and for's and end's are in the right place.
+Check the canonical data: do you have to deal with nested cases arrays?
+
+#### Helper functions
 
 We have a library of helper functions, useful for generating pretty tables mostly.
 
@@ -135,24 +180,23 @@ We have a library of helper functions, useful for generating pretty tables mostl
 
 **Look in [`lib/spec_helpers.moon`][spec-helpers].**
 
-Example:
+Example usage in the template (recall that `h` holds the spec_helpers table)
 
-```moonscript
-import indent, int_list, string_list from require 'spec_helpers'
-...
-{
-  generate_test: (case, level) ->
-    lines = {
-      "input = #{int_list case.input.numbers}"
-      "expected = #{string_list case.expected, level}"
-      "assert.are.same expected, someFunc input"
-    }
-    table.concat [indent line for line in *lines], "\n"
+```etlua
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= case.property %> <%= h.int_list(case.input.numbers) %>
+    expected = <%= h.int_list(case.expected) %>
+    assert.are.same expected, result
+
+<% end -%>
 ```
 
-##### Custom Assertions
+Note the blank line before the "end" to separate tests.
 
-Custom assertions are stored in [`lib/spec_handlers/assertions.moon][assertions].
+#### Custom Assertions
+
+Custom assertions are stored in in the generator template.
 Currently there is only one:
 
 - [`dnd-character`][dnd-character] -- `assert.is.between value, min, max`
@@ -166,15 +210,17 @@ I used to have some more, but the [luassert][luassert] library is quite complete
     - see the lua [string.find][string-find] and [string.match][string-match] docs.
     - luassert uses string.match, or string.find if "plain" is true.
 
-##### Comparing tables deeply
+#### Comparing tables deeply
 
 The `assert.are.same t1, t2` assertion is used to compare tables deeply.
 
-<details><summary>
 However when they don't match, by default busted does not show the whole object, which makes it hard for the student to see the difference.
+
+<details><summary>
+Click this sentence to see an example:
 </summary>
 
-Consider this `busted` output where something is different in the `...more` sections.
+Consider this `busted` output where something is different in the `...more` sections, but we are not shown what the difference is.
 
 ```none
 Failure → ./rest_api_spec.moon @ 251
@@ -207,16 +253,15 @@ Expected:
       [owed_by] = { }
      *[owes] = { ... more } } } }
 ```
+
+---
 </details>
 
 The solution here is to configure the `assert` object,.
-In the spec_generator.moon module, add this:
+In the generator.tmpl file, add this in the preamble:
 
 ```none
-  -- we have deep tables to compare, display it all when not the same
-  test_helpers: [[
-  assert\set_parameter "TableFormatLevel", 4
-]]
+assert\set_parameter "TableFormatLevel", 4
 ```
 
 Here, the value `4` was chosen to reflect the max depth of the expected value:
@@ -234,8 +279,33 @@ Here, the value `4` was chosen to reflect the max depth of the expected value:
             name: "Adam"
         }, 
         ...
-``` 
+```
 
+### Bonus tests
+
+It might be interesting to add some non-canonical tests for some exercises.
+This might be to reveal an interesting aspect of MoonScript/Lua capabilities, or it might be a very time-consuming test that you want the test-runner to avoid.
+
+Add bonus tests after the generated canonical tests in `generator.tmpl` like this
+
+```
+-- preamble
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  canonical test generation here ...
+<% end %>
+
+  -- The next tests are optional.
+  -- Set the environment variable BONUS_TESTS to run them:
+  -- For example, in bash run:  BONUS_TESTS=true busted
+
+  if os.getenv('BONUS_TESTS') == 'true'
+    describe 'Bonus tests', ->
+      pending 'bonus test 1', -> ...
+      pending 'bonus test 2', -> ...
+```
+You must keep the _"-- The next tests are optional."_ comment, the test runner relies on it.
+`custom-set` has bonus tests.
 
 [forum]: https://forum.exercism.org/c/programming/moonscript
 [forum-new-topic]: https://forum.exercism.org/new-topic?category=moonscript
@@ -248,13 +318,7 @@ Here, the value `4` was chosen to reflect the max depth of the expected value:
 [string-find]: https://www.lua.org/manual/5.4/manual.html#pdf-string.find
 [string-match]: https://www.lua.org/manual/5.4/manual.html#pdf-string.match
 [style]: ./STYLE.md
-[generate-spec-exported]: ./bin/generate-spec#L51
 [spec-helpers]: ./lib/spec_helpers.moon
 [assertions]: ./lib/spec_helpers/assertions.moon
-[space-age]: ./exercises/practice/space-age/.meta/spec_generator.moon
-[alphametics]: ./exercises/practice/alphametics/.meta/spec_generator.moon
-[dnd-character]: ./exercises/practice/dnd-character/.meta/spec_generator.moon
-[gigasecond]: ./exercises/practice/gigasecond/.meta/spec_generator.moon
-[simple-linked-list]: ./exercises/practice/simple-linked-list/.meta/spec_generator.moon
-[custom-set]: ./exercises/practice/custom-set/.meta/spec_generator.moon#L42
-[robot-name]: ./exercises/practice/robot-name/robot_name_spec.moon#L59
+[dnd-character]: ./exercises/practice/dnd-character/dnd_character_spec.moon
+[etlua]: https://luarocks.org/modules/leafo/etlua

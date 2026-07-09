@@ -40,3 +40,4 @@ describe 'resistor-color-trio:', ->
   pending 'Ignore extra colors', ->
     result = ResistorColorTrio.label 'blue', 'green', 'yellow', 'orange'
     assert.are.equal '650 kiloohms', result
+

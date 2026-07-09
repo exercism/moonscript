@@ -1,0 +1,13 @@
+import meetup from require <%- h.quote(slug.snake) %>
+<%
+    local keys = {'year', 'month', 'week', 'dayofweek'}
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = meetup <%- h.table_tostring_ordered(case.input, keys) %>
+    expected = <%- h.quote(case.expected) %>
+    assert.are.equal expected, result
+
+<% end -%>

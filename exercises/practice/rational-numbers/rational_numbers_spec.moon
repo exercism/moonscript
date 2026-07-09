@@ -199,3 +199,4 @@ describe 'rational-numbers:', ->
     pending 'Reduce one to lowest terms', ->
       result = rational.reduce {13, 13}
       assert.are.same {1, 1}, result
+

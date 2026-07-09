@@ -24,3 +24,4 @@ describe 'square-root:', ->
   pending 'root of 65025', ->
     result = SquareRoot.sqrt 65025
     assert.are.equal 255, result
+

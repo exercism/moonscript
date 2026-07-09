@@ -1,0 +1,9 @@
+reverse = require 'reverse_string'
+
+describe 'reverse-string:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = reverse <%- h.quote(case.input.value) %>
+    assert.are.equal <%- h.quote(case.expected) %>, result
+
+<% end -%>

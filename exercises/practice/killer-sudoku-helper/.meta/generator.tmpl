@@ -1,0 +1,21 @@
+import combinations from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, item in ipairs(data.cases) do
+     if item.cases then -%>
+  describe <%- h.quote(item.description .. ':') %>, ->
+<%     for j, case in ipairs(item.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+      result = combinations sum: <%= case.input.cage.sum %>, size: <%= case.input.cage.size %>, exclude: <%- h.int_list(case.input.cage.exclude) %>
+      expected = <%- h.int_lists(case.expected, 3) %>
+      assert.are.same expected, result
+
+<%     end -%>
+<%   else -%>
+  <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(item.description) %>, ->
+    result = combinations sum: <%= item.input.cage.sum %>, size: <%= item.input.cage.size %>, exclude: <%- h.int_list(item.input.cage.exclude) %>
+    expected = <%- h.int_lists(item.expected, 2) %>
+    assert.are.same expected, result
+
+<%   end -%>
+<% end -%>

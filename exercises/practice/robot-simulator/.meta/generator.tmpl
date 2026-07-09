@@ -1,0 +1,17 @@
+Robot = require 'robot_simulator'
+
+describe 'robot-simulator:', ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+      robot = Robot x: <%= case.input.position.x %>, y: <%= case.input.position.y %>, direction: <%- h.quote(case.input.direction) %>
+<% if case.property == 'move' then -%>
+      robot\move <%- h.quote(case.input.instructions) %>
+<% end -%>
+      assert.are.equal <%= case.expected.position.x %>, robot\x!
+      assert.are.equal <%= case.expected.position.y %>, robot\y!
+      assert.are.equal <%- h.quote(case.expected.direction) %>, robot\direction!
+
+<%   end -%>
+<% end -%>

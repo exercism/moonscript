@@ -1,0 +1,17 @@
+tournament = require <%- h.quote(slug.snake) %>
+
+write_file = (filename, lines) ->
+  with io.open filename, 'w'
+    \write table.concat lines, '\n'
+    \close!
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->  
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    write_file 'tournament.dsv', <%- h.string_list(case.input.rows, 2, {inline=0}) %>
+    result = tournament.tally 'tournament.dsv'
+    os.remove 'tournament.dsv'
+    expected = <%- h.string_list(case.expected, 2, {inline=0}) %>
+    assert.are.same expected, result
+
+<% end -%>

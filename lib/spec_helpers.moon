@@ -99,17 +99,19 @@ is_json_null = (value) ->
 
 --- -----------------------------------------------------------------------
 --- Key-Value list
-kv_table = (tbl, level) ->
+kv_table = (tbl, level, options = {sort_keys: false}) ->
   error 'Provide a level for `kv_table`', 2 if not level
   lines = {'{'}
-  for k, v in pairs tbl
+  keys = [k for k,_ in pairs tbl]
+  table.sort keys if options.sort_keys
+  for k in *keys
     key = if math.type(k) == "integer"
       "[#{k}]"
     elseif k\match('^%a%w*$') 
       k
     else
       quote k
-    table.insert lines, indent "#{key}: #{v},", level + 1
+    table.insert lines, indent "#{key}: #{tbl[k]},", level + 1
   table.insert lines, indent '}', level
   table.concat lines, '\n'
 
@@ -160,7 +162,7 @@ is_empty = (t) -> not next t
 
 -- mostly taken from:
 -- https://github.com/leafo/moonscript/blob/7b7899741c6c1e971e436d36c9aabb56f51dc3d5/moonscript/util.moon#L58
-table_dump = (what, level = 0) ->
+table_dump = (what, level = 0, options = {sort_keys: false}) ->
   seen = {}
   _dump = (what, depth = 0) ->
     t = type what
@@ -176,7 +178,12 @@ table_dump = (what, level = 0) ->
         return "{" .. table.concat([table_dump(v, level + depth + 1) for v in *what], ", ") .. "}"
 
       depth += 1
-      lines = for k,v in pairs what do
+      keys = [k for k, _ in pairs what]
+      if options.sort_keys
+        table.sort keys
+
+      lines = for k in *keys do
+        v = what[k]
         key = if type(k) == 'number' then "[#{k}]" else k
         (' ')\rep(depth * 2) .. "#{key}: " .. _dump(v, depth)
       seen[what] = false

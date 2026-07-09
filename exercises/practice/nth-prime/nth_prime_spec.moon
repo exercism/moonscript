@@ -14,4 +14,6 @@ describe 'nth-prime:', ->
     assert.are.equal 104743, prime 10001
 
   pending 'there is no zeroth prime', ->
-    assert.has.errors (-> prime 0), 'there is no zeroth prime'
+    f = -> prime 0
+    assert.has.errors f, 'there is no zeroth prime'
+

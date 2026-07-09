@@ -1,0 +1,19 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+-- Remember, Lua (and MoonScript) use 1-based indexing.
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    list = <%= h.int_list(case.input.array) %>
+<%   if type(case.expected) == 'number' then 
+      -- the success tests are expecting zero-based indexing; adjust.
+-%>
+    index = BinarySearch.find list, <%= case.input.value %>
+    assert.are.equal <%= case.expected + 1 %>, index
+<%   else -%>
+    f = -> BinarySearch.find list, <%= case.input.value %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<%   end -%>
+
+<% end -%>

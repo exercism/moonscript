@@ -95,12 +95,7 @@ github="https://raw.githubusercontent.com/exercism/problem-specifications/refs/h
 
 curl -s -o "canonical-data/${slug}.json" "$github"
 
-
-camel_slug=$(perl -pe 's/(?:^|-)([a-z])/\u$1/g' <<< "$slug")
-template=$(< exercises/shared/templates/spec_generator.moon)
-template=${template//'${camel_slug}'/"${camel_slug}"}
-echo "$template" > exercises/practice/${slug}/.meta/spec_generator.moon
-
+cp exercises/shared/templates/generator.tmpl exercises/practice/${slug}/.meta/
 
 cat << NEXT_STEPS
 
@@ -108,7 +103,7 @@ Your next steps are:
 
 1.  Create the test suite ==>  $(jq -r '.test' <<< "${files}")
 
-    - A stub test generator awaits you -->  'exercises/practice/${slug}/.meta/spec_generator.moon'
+    - A stub test generator template eawaits you -->  'exercises/practice/${slug}/.meta/generator.tmpl'
         - If you don't want it, delete it.
         - Otherwise, populate it and run it -->  $ bin/generate-spec ${slug}
 

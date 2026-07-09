@@ -36,3 +36,4 @@ describe 'hamming:', ->
   pending 'disallow empty second strand', ->
     f = -> hamming.distance 'G', ''
     assert.has.error f, 'strands must be of equal length'
+

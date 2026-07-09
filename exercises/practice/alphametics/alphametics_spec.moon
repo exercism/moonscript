@@ -56,3 +56,4 @@ describe 'alphametics:', ->
     result = solve puzzle
     expected = {A: 1, E: 0, F: 5, H: 8, I: 7, L: 2, O: 6, R: 3, S: 4, T: 9}
     assert.are.same result, expected
+

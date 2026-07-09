@@ -1,0 +1,10 @@
+SecretHandshake = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = SecretHandshake.<%= case.property %> <%= case.input.number %>
+    expected = <%- h.word_list(case.expected) %>
+    assert.are.same expected, result
+
+<% end -%>

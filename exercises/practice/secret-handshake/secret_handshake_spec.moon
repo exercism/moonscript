@@ -55,3 +55,4 @@ describe 'secret-handshake:', ->
     result = SecretHandshake.commands 0
     expected = {}
     assert.are.same expected, result
+

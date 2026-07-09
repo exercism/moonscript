@@ -1,0 +1,33 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+<%
+    local function format_expected(val)
+      if type(val) == 'table' then
+        return h.word_list(val)
+      end
+      return h.quote(val)
+    end
+    
+    local function camel_case(str)
+      return str:gsub("_(%l)", string.upper)
+    end
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    stopwatch = <%=slug.pascal %>.Stopwatch!
+<%   for i = 2, #case.input.commands do
+       local cmd = case.input.commands[i]
+       local name = camel_case(cmd.command)
+       local action = "stopwatch" .. string.char(92) .. name .. (cmd.by and " " .. h.quote(cmd.by) or "!")
+-%>
+<%     if cmd.expected and cmd.expected.error then -%>
+    assert.has.error (-> <%- action %>), <%- h.quote(cmd.expected.error) %>
+<%     elseif cmd.expected ~= nil then -%>
+    assert.are.same <%- format_expected(cmd.expected) %>, <%- action %>
+<%     else -%>
+    <%- action %>
+<%     end -%>
+<%   end -%>
+
+<% end -%>

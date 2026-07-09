@@ -1,0 +1,10 @@
+import sublist from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    listOne = <%- h.int_list(case.input.listOne) %>
+    listTwo = <%- h.int_list(case.input.listTwo) %>
+    assert.are.equal <%- h.quote(case.expected) %>, sublist listOne, listTwo
+
+<% end -%>

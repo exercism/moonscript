@@ -1,0 +1,15 @@
+import measure from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   local cmd = "measure bucketOne: " .. case.input.bucketOne .. ", bucketTwo: " .. case.input.bucketTwo .. ", goal: " .. case.input.goal .. ", startBucket: " .. h.quote(case.input.startBucket) -%>
+<%   if case.expected.error then -%>
+    assert.has.errors -> <%- cmd %>
+<%   else -%>
+    result = <%- cmd %>
+    expected = moves: <%= case.expected.moves %>, goalBucket: <%- h.quote(case.expected.goalBucket) %>, otherBucket: <%= case.expected.otherBucket %>
+    assert.are.same expected, result
+<%   end -%>
+
+<% end -%>

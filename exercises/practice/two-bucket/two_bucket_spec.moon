@@ -51,3 +51,4 @@ describe 'two-bucket:', ->
 
   pending 'Goal larger than both buckets is impossible', ->
     assert.has.errors -> measure bucketOne: 5, bucketTwo: 7, goal: 8, startBucket: 'one'
+

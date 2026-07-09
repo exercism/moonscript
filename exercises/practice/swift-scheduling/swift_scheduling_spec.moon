@@ -80,3 +80,4 @@ describe 'swift-scheduling:', ->
     result = delivery_date 'Q3', '2022-10-06T11:00:00'
     expected = '2023-09-29T08:00:00'
     assert.are.equal expected, result
+

@@ -3,14 +3,14 @@ Poker = require 'poker'
 -- ----------------------------------------------------------
 -- assert that two lists have the same elements, regardless of order
 same_elements = (state, arguments) ->
-{ list1, list2 } = arguments
+  { list1, list2 } = arguments
   return false if #list1 != #list2
   for elem in *list1
     found = false
     for elem2 in *list2
-    if elem == elem2
-      found = true
-      break
+      if elem == elem2
+        found = true
+        break
     return false if not found
   true
 

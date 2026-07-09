@@ -117,3 +117,4 @@ describe 'rectangles:', ->
       '+-+ +-+',
     }
     assert.are.equal 5, rectangles input
+

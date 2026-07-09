@@ -1,0 +1,10 @@
+import transpose from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    input = <%- h.string_list(case.input.lines, 2) %>
+    expected = <%- h.string_list(case.expected, 2) %>
+    assert.are.same expected, transpose input
+
+<% end -%>

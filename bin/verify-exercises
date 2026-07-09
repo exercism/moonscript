@@ -6,9 +6,11 @@ Synopsis:
 Verify that each exercise's example/exemplar solution passes the tests.
 You can either verify all exercises or a single exercise.
 
-Usage: $0 [-h] [-t] [exercise_slug]
+Usage: $0 [-h] [-t] [-e] [exercise_slug]
 
-Where: -t = use TAP output for busted
+Where:
+    -e = early exit for failed tests (default is test all exercises)
+    -t = use TAP output for busted
 
 Example: verify all exercises: $ bin/verify-exercises
 
@@ -75,7 +77,9 @@ verify_exercises() {
     count=0
     for exercise_dir in ./exercises/{concept,practice}/${exercise_slug}/; do
         if [[ -d "${exercise_dir}" ]]; then
-            verify_exercise "${exercise_dir}" || ((++errs))
+            if ! verify_exercise "${exercise_dir}"; then
+                $early_exit && die || ((++errs))
+            fi
             ((++count))
         fi
     done
@@ -92,12 +96,14 @@ required_tool busted
 
 cd "$(dirname "$(realpath "$0")")/.."
 
+early_exit=false
 busted_opts=( --verbose )
-while getopts ':ht' opt; do
+while getopts ':hte' opt; do
     case $opt in
         h) usage
            exit ;;
         t) busted_opts+=( --output=TAP ) ;;
+        e) early_exit=true ;;
         *) echo "invalid option: -$OPTARG" >&2
            usage
            exit 2 ;;

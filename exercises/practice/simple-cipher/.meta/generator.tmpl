@@ -1,0 +1,56 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+<%
+    -- This one has some individual cases, but I didn't 
+    -- want to branch on the uuids assuming they will be
+    -- reimplemented eventually.
+-%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%     if h.table_contains(case.scenarios or {}, 'random') then -%>
+<%       if type(case.expected) == 'table' and case.expected.match then -%>
+<%    --[[uuid defc0050-e87d-4840-85e4-51a1ab9dd6aa]] -%>
+      cipher = SimpleCipher!
+      key = cipher\key!
+      assert.is.truthy key\match(<%- h.quote(case.expected.match) %>)
+<%       elseif case.input.plaintext and case.input.ciphertext then -%>
+<%    --[[uuid 8143c684-6df6-46ba-bd1f-dea8fcb5d265]] -%>
+      cipher = SimpleCipher!
+      plaintext = <%- h.quote(case.input.plaintext) %>
+      ciphertext = cipher\encode plaintext
+      decoded = cipher\decode ciphertext
+      assert.are.equal plaintext, decoded
+<%       elseif case.input.plaintext then -%>
+<%    --[[uuid b8bdfbe1-bea3-41bb-a999-b41403f2b15d]] -%>
+      cipher = SimpleCipher!
+      plaintext = <%- h.quote(case.input.plaintext) %>
+      encoded = cipher\encode plaintext
+      expected = cipher\key!\sub(1, #plaintext)
+      assert.are.equal expected, encoded
+<%       else -%>
+<%    --[[uuid 3dff7f36-75db-46b4-ab70-644b3f38b81c]] -%>
+      cipher = SimpleCipher!
+      expected = <%- h.quote(case.expected) %>
+      ciphertext = cipher\key!\sub(1, #expected)
+      decoded = cipher\decode ciphertext
+      assert.are.equal expected, decoded
+<%       end -%>
+<%     else --[[scenario:random]] -%>
+      cipher = SimpleCipher <%- h.quote(case.input.key) %>
+<%       if case.input.plaintext and case.input.ciphertext then -%>
+<%  --[[uuid 70a16473-7339-43df-902d-93408c69e9d1]] -%>
+      ciphertext = cipher\encode <%- h.quote(case.input.plaintext) %>
+      result = cipher\decode ciphertext
+<%       elseif case.property == 'encode' then -%>
+      result = cipher\encode <%- h.quote(case.input.plaintext) %>
+<%       else -%>
+      result = cipher\decode <%- h.quote(case.input.ciphertext) %>
+<%       end -%>
+      assert.are.equal <%- h.quote(case.expected) %>, result
+<%     end -%>
+
+<%   end -%>
+<% end -%>

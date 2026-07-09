@@ -1,15 +1,16 @@
 Strain = require 'strain'
 
+-- a couple of helper functions
+starts_with = (str, prefix) ->
+  str\sub(1, #prefix) == prefix
+
+contains = (list, element) ->
+  for item in *list
+    if item == element
+      return true
+  false
+
 describe 'strain:', ->
-  starts_with = (str, prefix) ->
-    str\sub(1, #prefix) == prefix
-
-  contains = (list, element) ->
-    for item in *list
-      if item == element
-        return true
-    false
-
   it 'keep on empty list returns empty list', ->
     result = Strain.keep {}, (_) -> true
     expected = {}
@@ -104,3 +105,4 @@ describe 'strain:', ->
       {2, 2, 1}
     }
     assert.are.same expected, result
+

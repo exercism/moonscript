@@ -28,3 +28,4 @@ describe 'reverse-string:', ->
   pending 'wide characters', ->
     result = reverse '子猫'
     assert.are.equal '猫子', result
+

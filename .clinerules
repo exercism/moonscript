@@ -1,0 +1,157 @@
+# MoonScript Track — AI Instructions
+
+## Skill: Convert spec_generator.moon to generator.tmpl
+
+**When to use:** When asked to "convert an exercise to a template", "migrate spec_generator.moon", "create a generator.tmpl", or similar.
+
+**Objective:** Migrate an exercise from `.meta/spec_generator.moon` to the `etlua`-based `.meta/generator.tmpl` approach.
+
+### Steps
+
+1. **Read the existing spec file** `exercises/practice/<slug>/<snake>_spec.moon` to understand the expected output format.
+
+2. **Read the existing `spec_generator.moon`** to understand what inputs are used and how the test body is constructed.
+
+3. **Fetch or read canonical data:**
+   - Check `canonical-data/<slug>.json` first (may already be cached).
+   - If `$XDG_CACHE_HOME/exercism/configlet/problem-specifications/exercises/<slug>/canonical_data.json` exists, copy it to `canonical-data/<slug>.json`
+   - Otherwise fetch: `curl -s https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/<slug>/canonical-data.json`
+   - Note the structure: flat `cases` array, or nested groups with `cases` inside each group.
+
+4. **Create `.meta/generator.tmpl`** using the patterns below.
+
+5. **Run the generator** and verify output matches the existing spec:
+   ```sh
+   bin/generate-spec <slug>
+   ```
+
+6. **Verify tests pass:**
+   ```sh
+   bin/verify-exercises <slug>
+   ```
+
+7. **Delete the old `spec_generator.moon`:**
+   ```sh
+   rm exercises/practice/<slug>/.meta/spec_generator.moon
+   ```
+
+---
+
+### Template Syntax
+
+The template uses `etlua` tags:
+- `<% lua statements %>` — control flow (loops, conditionals)
+- `<%= lua expression %>` — output (HTML-escaped)
+- `<%- lua expression %>` — output (raw, no escaping) — **use for quoted strings**
+- `-%>` — suppress trailing newline after the tag
+
+**Use Lua syntax inside tags (not MoonScript):**
+- `function()` not `->`, parentheses required for calls
+- `for k, v in ipairs(t) do ... end` not `for k, v in *t`
+- `if ... then ... end`
+
+### Template Environment Variables
+
+| Variable | Description |
+|---|---|
+| `data` | Parsed canonical data (the full JSON object) |
+| `data.cases` | Array of test cases (flat or nested groups) |
+| `slug.kebab` | Exercise name as-is, e.g. `difference-of-squares` |
+| `slug.snake` | Snake case, e.g. `difference_of_squares` |
+| `slug.pascal` | Pascal case, e.g. `DifferenceOfSquares` |
+| `h` | The `spec_helpers` module (see `lib/spec_helpers.moon`) |
+| `test_cmd` | Function: `test_cmd(bool)` returns `"it"` or `"pending"` |
+
+### Helper Functions (`h.*`)
+
+| Function | Description |
+|---|---|
+| `h.quote(str)` | Safely quote a string (uses `'` or `"` as needed) |
+| `h.int_list(list)` | Format a list of ints: `{1, 2, 3}` |
+| `h.int_lists(list, level)` | Format a list of int-pairs (e.g. dominoes), multi-line if > 2 items |
+| `h.string_list(list, level)` | Format a list of strings, multi-line if > 2 items |
+| `h.word_list(list)` | Format a list of strings inline: `{'a', 'b'}` |
+| `h.bool_list(list)` | Format a list of booleans |
+
+### Template Patterns
+
+**Pattern 1: Flat cases, snake_case module** (e.g. `darts`, `dominoes`)
+```etlua
+<%= slug.snake %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= slug.snake %>.<%= case.property %> ...inputs...
+    assert.are.equal <%= case.expected %>, result
+
+<% end -%>
+```
+
+**Pattern 2: Flat cases, PascalCase module** (e.g. `Diamond`, `Bob`)
+```etlua
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = <%= slug.pascal %>.<%= case.property %> ...inputs...
+    assert.are.equal <%= case.expected %>, result
+
+<% end -%>
+```
+
+**Pattern 3: Nested groups** (e.g. `difference-of-squares`, `custom-set`)
+Use `i == 1 and j == 1` to mark only the very first test as `it`.
+```etlua
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+      ...test body...
+
+<%   end -%>
+<% end -%>
+```
+
+**Pattern 4: camelCase property → snake_case method name**
+Define a `snakify` helper at the top of the template:
+```etlua
+<%
+  local function snakify(s)
+    return s:gsub("%f[A-Z].", function(c) return "_" .. c:lower() end)
+  end
+-%>
+```
+Then use: `<%= snakify(case.property) %>`
+
+**Pattern 5: Import syntax** (when spec uses `import funcName from require 'module'`)
+```etlua
+import funcName from require <%- h.quote(slug.snake) %>
+```
+
+**Pattern 6: Boolean expected values**
+```etlua
+assert.is.<%= tostring(case.expected) %> funcName args
+```
+
+**Pattern 7: String list expected values**
+```etlua
+expected = <%- h.string_list(case.expected, 2) %>
+assert.are.same expected, result
+```
+
+**Pattern 8: List of int-pairs**
+```etlua
+dominoes = <%- h.int_lists(case.input.dominoes, 2) %>
+```
+
+### Formatting Rules
+
+- Always put a blank line between test cases (before the `<% end -%>` of the inner loop).
+- Use `-%>` on `end` tags to suppress blank lines from control structures.
+- Use `<%- ... %>` (with dash) for any output containing quoted strings to avoid HTML escaping.
+- The `level` parameter for `string_list`, `int_lists`, etc. refers to indentation level: 2 = inside `describe`, 3 = inside nested `describe`.

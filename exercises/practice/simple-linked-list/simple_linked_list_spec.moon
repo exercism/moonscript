@@ -121,7 +121,6 @@ describe 'simple-linked-list:', ->
       result = list\peek!
       assert.are.equal 3, result
 
-
   describe 'toList FIFO:', ->
     pending 'Empty linked list to list is empty', ->
       list = SimpleLinkedList {}
@@ -179,3 +178,4 @@ describe 'simple-linked-list:', ->
       assert.are.equal 2, result
       result = list\pop!
       assert.are.equal 1, result
+

@@ -1,0 +1,31 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+<%     if case.input.initialValues then -%>
+      list = <%= slug.pascal %> <%= h.int_list(case.input.initialValues) %>
+<%     else -%>
+      list = <%= slug.pascal %>!
+<%     end -%>
+<%     for _, op in ipairs(case.input.operations) do -%>
+<%       if op.value then -%>
+      list\<%= op.operation %> <%= op.value %>
+<%       elseif not op.expected then -%>
+      list\<%= op.operation %>!
+<%       elseif type(op.expected) ~= 'table' then -%>
+      result = list\<%= op.operation %>!
+      assert.are.equal <%= op.expected %>, result
+<%       elseif not op.expected.error then -%>
+      result = list\<%= op.operation %>!
+      assert.are.same <%= h.int_list(op.expected) %>, result
+<%       else -%>
+      f = -> list\<%= op.operation %>!
+      assert.has.error f, <%- h.quote(op.expected.error) %>
+<%       end -%>
+<%     end -%>
+
+<%   end -%>
+<% end -%>

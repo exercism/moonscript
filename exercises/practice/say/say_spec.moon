@@ -88,8 +88,9 @@ describe 'say:', ->
 
   pending 'numbers below zero are out of range', ->
     f = -> Say.in_english -1
-    assert.has.error f,'input out of range'
+    assert.has.error f, 'input out of range'
 
   pending 'numbers above 999,999,999,999 are out of range', ->
     f = -> Say.in_english 1000000000000
-    assert.has.error f,'input out of range'
+    assert.has.error f, 'input out of range'
+

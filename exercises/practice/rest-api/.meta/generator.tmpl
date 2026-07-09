@@ -1,0 +1,19 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+assert\set_parameter "TableFormatLevel", 4
+<% local call, payload -%>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, group in ipairs(data.cases) do -%>
+  describe <%- h.quote(group.description .. ':') %>, ->
+<%   for j, case in ipairs(group.cases) do -%>
+  <%= test_cmd(i == 1 and j == 1) %> <%- h.quote(case.description) %>, ->
+    database = <%- h.table_dump(case.input.database, 2, {sort_keys = true}) %>
+    api = RestApi database
+    <%- case.input.payload and "payload = " .. h.table_dump(case.input.payload, 2, {sort_keys = true}) or '' %>
+    result = api\<%- case.property:upper() %> <%- h.quote(case.input.url) %><%= case.input.payload and ", payload" or "" %>
+    expected = <%- h.table_dump(case.expected, 2, {sort_keys = true}) %>
+    assert.are.same expected, result
+
+<%   end -%>
+<% end -%>

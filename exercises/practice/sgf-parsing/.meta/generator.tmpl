@@ -1,0 +1,17 @@
+SGFParser = require <%- h.quote(slug.snake) %>
+
+assert\set_parameter "TableFormatLevel", 5
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if case.expected.error then -%>
+    f = -> SGFParser.<%= case.property %> <%- h.json_string(case.input.encoded) %>
+    assert.has.error f, <%- h.quote(case.expected.error) %>
+<%   else -%>
+    result = SGFParser.<%= case.property %> <%- h.json_string(case.input.encoded) %>
+    expected = <%- h.table_dump(case.expected, 2, {sort_keys=true}) %>
+    assert.are.same expected, result
+<%   end -%>
+
+<% end -%>

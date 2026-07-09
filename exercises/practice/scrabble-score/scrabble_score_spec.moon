@@ -44,3 +44,4 @@ describe 'scrabble-score:', ->
   pending 'entire alphabet available', ->
     result = Scrabble.score 'abcdefghijklmnopqrstuvwxyz'
     assert.are.equal 87, result
+

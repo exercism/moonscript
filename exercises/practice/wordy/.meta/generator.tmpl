@@ -1,0 +1,16 @@
+Wordy = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+<% if type(case.expected) == "table" then -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    fn = -> Wordy.<%= case.property %> <%- h.quote(case.input.question) %>
+    assert.has.error fn, <%- h.quote(case.expected.error) %>
+
+<% else -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = Wordy.<%= case.property %> <%- h.quote(case.input.question) %>
+    assert.are.equal <%= case.expected %>, result
+
+<% end -%>
+<% end -%>

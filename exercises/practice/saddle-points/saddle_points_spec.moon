@@ -1,9 +1,9 @@
 import saddle_points from require 'saddle_points'
 
-describe 'saddle-points:', ->
-  compare_saddle_points = (a, b) ->
-    a.row < b.row or (a.row == b.row and a.column < b.column)
+compare_saddle_points = (a, b) ->
+  a.row < b.row or (a.row == b.row and a.column < b.column)
 
+describe 'saddle-points:', ->
   it 'Can identify single saddle point', ->
     matrix = {
       {9, 8, 7},
@@ -103,3 +103,4 @@ describe 'saddle-points:', ->
     table.sort result, compare_saddle_points
     table.sort expected, compare_saddle_points
     assert.are.same expected, result
+

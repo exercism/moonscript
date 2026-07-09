@@ -66,3 +66,4 @@ describe 'triangle:', ->
 
     pending 'sides may be floats', ->
       assert.is_true is_scalene(0.5, 0.4, 0.6)
+

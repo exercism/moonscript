@@ -1,0 +1,9 @@
+to_rna = require 'rna_transcription'
+
+describe 'rna-transcription:', ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    result = to_rna <%- h.quote(case.input.dna) %>
+    assert.are.equal <%- h.quote(case.expected) %>, result
+
+<% end -%>

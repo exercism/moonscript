@@ -99,17 +99,19 @@ is_json_null = (value) ->
 
 --- -----------------------------------------------------------------------
 --- Key-Value list
-kv_table = (tbl, level) ->
+kv_table = (tbl, level, options = {sort_keys: false}) ->
   error 'Provide a level for `kv_table`', 2 if not level
   lines = {'{'}
-  for k, v in pairs tbl
+  keys = [k for k,_ in pairs tbl]
+  table.sort keys if options.sort_keys
+  for k in *keys
     key = if math.type(k) == "integer"
       "[#{k}]"
     elseif k\match('^%a%w*$') 
       k
     else
       quote k
-    table.insert lines, indent "#{key}: #{v},", level + 1
+    table.insert lines, indent "#{key}: #{tbl[k]},", level + 1
   table.insert lines, indent '}', level
   table.concat lines, '\n'
 

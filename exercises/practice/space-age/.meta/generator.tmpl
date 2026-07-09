@@ -1,0 +1,14 @@
+<%= slug.pascal %> = require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+<%   if type(case.expected) == 'table' then -%>
+    f = -> <%= slug.pascal %>.age <%- h.quote(case.input.planet) %>, <%= case.input.seconds %>
+    assert.has.errors f, <%- h.quote(case.expected.error) %>
+<%   else -%>
+    result = <%= slug.pascal %>.age <%- h.quote(case.input.planet) %>, <%= case.input.seconds %>
+    assert.is.near <%= case.expected %>, result, 0.01
+<%   end -%>
+
+<% end -%>

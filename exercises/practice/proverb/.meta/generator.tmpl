@@ -4,8 +4,8 @@ describe <%- h.quote(slug.kebab .. ':') %>, ->
 <% for i, case in ipairs(data.cases) do -%>
   <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
     result = recite <%- h.word_list(case.input.strings) %>
-<%   if #case.expected <= 1 then -%>
-    expected = <%- h.quote(case.expected[1] or '') %>
+<%   if #case.expected == 0 then -%>
+    expected = ''
 <%   else -%>
     expected = [[
 <%- table.concat(case.expected, '\n') %>

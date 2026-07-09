@@ -1,0 +1,11 @@
+import degreeOfSeparation from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, case in ipairs(data.cases) do -%>
+  <%= test_cmd(i == 1) %> <%- h.quote(case.description) %>, ->
+    familyTree = <%- h.table_dump(case.input.familyTree, 2) %>
+    result = <%= case.property %> familyTree, <%- h.quote(case.input.personA) %>, <%- h.quote(case.input.personB) %>
+    expected = <%= not h.is_json_null(case.expected) and case.expected or "nil" %>
+    assert.are.equal expected, result
+
+<% end -%>

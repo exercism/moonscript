@@ -55,7 +55,7 @@ describe 'simple-linked-list:', ->
 
   describe 'push:', ->
     pending 'Can push to an empty list', ->
-      list = SimpleLinkedList!
+      list = SimpleLinkedList {}
       list\push 1
 
     pending 'Can push to a non-empty list', ->

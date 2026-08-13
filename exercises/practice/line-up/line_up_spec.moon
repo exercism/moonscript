@@ -71,9 +71,34 @@ describe 'line-up:', ->
     expected = 'Washi, you are the 21st customer we serve today. Thank you!'
     assert.are.equal expected, result
 
+  pending 'format exceptional ordinal numeral 22 ending in nd even though it is a multiple of 11', ->
+    result = LineUp.format 'Ingrid', 22
+    expected = 'Ingrid, you are the 22nd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
+  pending 'format exceptional ordinal numeral 33 ending in rd even though it is a multiple of 11', ->
+    result = LineUp.format 'Mario', 33
+    expected = 'Mario, you are the 33rd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
+  pending 'format exceptional ordinal numeral 52 ending in nd even though it is a multiple of 13', ->
+    result = LineUp.format 'Quentin', 52
+    expected = 'Quentin, you are the 52nd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
   pending 'format exceptional ordinal numeral 62', ->
     result = LineUp.format 'Nayra', 62
     expected = 'Nayra, you are the 62nd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
+  pending 'format non-exceptional ordinal numeral 72 ending in nd even though it is a multiple of 12', ->
+    result = LineUp.format 'Ugo', 72
+    expected = 'Ugo, you are the 72nd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
+  pending 'format exceptional ordinal numeral 91 ending in st even though it is a multiple of 13', ->
+    result = LineUp.format 'Boris', 91
+    expected = 'Boris, you are the 91st customer we serve today. Thank you!'
     assert.are.equal expected, result
 
   pending 'format exceptional ordinal numeral 100', ->
@@ -94,5 +119,10 @@ describe 'line-up:', ->
   pending 'format exceptional ordinal numeral 123', ->
     result = LineUp.format 'Yma', 123
     expected = 'Yma, you are the 123rd customer we serve today. Thank you!'
+    assert.are.equal expected, result
+
+  pending 'format large number 972 ending in nd even though it is a multiple of 12', ->
+    result = LineUp.format 'Elias', 972
+    expected = 'Elias, you are the 972nd customer we serve today. Thank you!'
     assert.are.equal expected, result
 

@@ -21,4 +21,4 @@ For those familiar with Lua, the transition is often smooth, as MoonScript's syn
 [lua]: https://exercism.org/tracks/lua/about
 [moon]: https://moonscript.org
 [github]: https://github.com/leafo/moonscript
-[discord]: https://discord.gg/Y75ZXrD
+[discord]: https://discord.gg/invite/Y75ZXrD

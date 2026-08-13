@@ -31,14 +31,14 @@ state = (player, board) ->
     x = state 'X', board
     o = state 'O', board
 
-    if x.won and o.won
+    if (x.won and o.n >= x.n) or (o.won and x.n >= o.n + 1)
       error 'Impossible board: game should have ended after the game was won'
+    elseif x.won or o.won
+      'win'
     elseif x.n > o.n + 1
       error 'Wrong turn order: X went twice'
     elseif o.n > x.n
       error 'Wrong turn order: O started'
-    elseif x.won or o.won
-      'win'
     elseif x.n + o.n == 9
       'draw'
     else

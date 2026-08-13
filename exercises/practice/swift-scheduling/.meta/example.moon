@@ -45,7 +45,7 @@ month = (spec, m) ->
     .isdst = nil
 
 quarter = (spec, q) ->
-  current_quarter = 1 + spec.month // 3
+  current_quarter = (spec.month - 1) // 3 + 1
   spec = {
     year: spec.year + (current_quarter > q and 1 or 0)
     month: QUARTER_END[q].month

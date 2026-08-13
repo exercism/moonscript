@@ -81,3 +81,8 @@ describe 'swift-scheduling:', ->
     expected = '2023-09-29T08:00:00'
     assert.are.equal expected, result
 
+  pending 'Q2 starting in the last month of the second quarter translates to the last workday of the second quarter of this year', ->
+    result = delivery_date 'Q2', '2019-06-15T09:50:00'
+    expected = '2019-06-28T08:00:00'
+    assert.are.equal expected, result
+

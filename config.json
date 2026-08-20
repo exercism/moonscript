@@ -243,6 +243,14 @@
         "difficulty": 3
       },
       {
+        "slug": "bottle-song",
+        "name": "Bottle Song",
+        "uuid": "b1d58dbf-127f-4997-a1d8-09d0c5a16c8f",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 3
+      },
+      {
         "slug": "clock",
         "name": "Clock",
         "uuid": "adaba938-9589-431c-a27a-2da6571b9cd2",

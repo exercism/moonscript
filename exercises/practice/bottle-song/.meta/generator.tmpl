@@ -1,0 +1,18 @@
+import recite from require <%- h.quote(slug.snake) %>
+
+describe <%- h.quote(slug.kebab .. ':') %>, ->
+<% for i, g1 in ipairs(data.cases) do -%>
+<%   for j, g2 in ipairs(g1.cases) do -%>
+  describe <%- h.quote(g2.description) %>, ->
+<%     for k, case in ipairs(g2.cases) do -%>
+    <%= test_cmd(i == 1 and j == 1 and k == 1) %> <%- h.quote(case.description) %>, ->
+<%       if not case.expected.error then -%>
+      expected = [[
+<%- table.concat(case.expected, '\n') %>]]
+      result = <%= case.property %> <%= case.input.startBottles %>, <%= case.input.takeDown %>
+      assert.are.same expected, result
+<%       end -%>
+
+<%     end -%>
+<%   end -%>
+<% end -%>

@@ -109,9 +109,14 @@ describe 'list-ops:', ->
       expected = {}
       assert.are.same expected, result
 
-    pending 'non-empty list', ->
+    pending 'non-empty even-length list', ->
       result = ListOps.reverse {1, 3, 5, 7}
       expected = {7, 5, 3, 1}
+      assert.are.same expected, result
+
+    pending 'non-empty odd-length list', ->
+      result = ListOps.reverse {1, 3, 5, 7, 9, 11, 13}
+      expected = {13, 11, 9, 7, 5, 3, 1}
       assert.are.same expected, result
 
     pending 'list of lists is not flattened', ->

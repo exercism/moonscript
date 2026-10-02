@@ -7,4 +7,4 @@ on:
 
 jobs:
   call-gha-workflow:
-    uses: exercism/github-actions/.github/workflow/link-checker.yml@main
+    uses: exercism/github-actions/.github/workflows/link-checker.yml@main

@@ -96,6 +96,6 @@ describe 'pig-latin:', ->
 
   describe 'phrases are translated:', ->
     pending 'a whole phrase', ->
-      result = translate 'quick fast run'
-      assert.are.equal 'ickquay astfay unray', result
+      result = translate 'why do squids enjoy xrays'
+      assert.are.equal 'ywhay oday idssquay enjoyay xraysay', result
 

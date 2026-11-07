@@ -1,0 +1,8 @@
+most_common_word = (text) ->
+  counts = {}
+  best = ""
+  for word in text\lower!\gmatch "%S+"
+    counts[word] = (counts[word] or 0) + 1
+    if counts[word] > (counts[best] or 0)
+      best = word
+  "\"#{best}\" appears #{counts[best]} times"

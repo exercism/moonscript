@@ -1,5 +1,13 @@
 # Testing on the MoonScript Track
 
+## The tests are the requirements
+
+Each exercise contains a test file.
+Because Exercism promotes [Test-Driven Development][tdd], the tests *are* the requirements.
+Make sure to read the tests to understand how your code will be invoked, and what output is expected.
+
+## Testing
+
 Testing on the MoonScript track is exactly like [testing on the Lua track][lua-tests].
 From an exercise directory, enter:
 

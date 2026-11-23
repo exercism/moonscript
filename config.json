@@ -924,8 +924,18 @@
       },
       {
         "slug": "say",
-        "name": "Say",
+        "name": "Say (Deprecated)",
         "uuid": "c1c9b94f-abbb-4356-b35b-8cff366e9415",
+        "practices": [],
+        "prerequisites": [],
+        "difficulty": 6,
+        "status": "deprecated"
+      },
+      {
+        "slug": "say-numbers",
+        "name": "Say",
+        "problem_specifications_slug": "say",
+        "uuid": "d3922d48-1949-48d9-9b73-801286f1f485",
         "practices": [],
         "prerequisites": [],
         "difficulty": 6

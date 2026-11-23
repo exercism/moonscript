@@ -44,16 +44,19 @@ filter_cases = (canonical_data, included_tests) ->
     group.cases = filtered
   filter_group canonical_data
 
+get_problem_specs_name = (slug) ->
+  config_json = json.decode file.read('config.json', false), 1, json.null
+  exercise_config = [c for c in *config_json.exercises.practice when c.slug == slug]
+  assert #exercise_config == 1, "zero or multiple exercises found in config.json with slug '#{slug}'"
+  return exercise_config[1]['problem_specifications_slug'] or slug
+
 -- ----------------------------------------------------------
 -- "main"
 -- ----------------------------------------------------------
 exercise_name = arg[1]
 snake_name = exercise_name\gsub("-", "_")
 pascal_name = "-#{exercise_name}"\gsub("-(%a)", (c) -> c\upper!)
-
--- to differentiate from the lua rock "say" required by busted.
-if snake_name == 'say'
-  snake_name = './say'
+spec_name = get_problem_specs_name exercise_name
 
 exercise_directory = 'exercises/practice/' .. exercise_name
 if not path.exists(exercise_directory)
@@ -65,10 +68,9 @@ template_file = "#{exercise_directory}/.meta/generator.tmpl"
 if not path.exists(template_file)
   die "#{exercise_name} does not have a generator template.\n"
 
-canonical_data_path = "canonical-data/#{exercise_name}.json"
-
+canonical_data_path = "canonical-data/#{spec_name}.json"
 if not path.exists canonical_data_path
-  canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{exercise_name}/canonical-data.json"
+  canonical_data_url = "https://raw.githubusercontent.com/exercism/problem-specifications/main/exercises/#{spec_name}/canonical-data.json"
   assert os.execute('mkdir -p "$(dirname "' .. canonical_data_path .. '")"')
   assert os.execute('curl "' .. canonical_data_url .. '" -s -o "' .. canonical_data_path .. '"')
 
